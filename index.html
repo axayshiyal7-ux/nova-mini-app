@@ -66,7 +66,6 @@
   .connect-box h1 { font-size: 24px; margin-bottom: 8px; color: #ffc83c; }
   .connect-box p { font-size: 13px; color: #7a7fa8; margin-bottom: 24px; line-height: 1.6; }
   .connect-box .retry { display: inline-block; margin-top: 12px; padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(255,200,60,.4); background: rgba(255,200,60,.1); color: #ffc83c; font-size: 13px; font-weight: 700; cursor: pointer; }
-  /* Admin styles */
   .wd-item { padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; margin-bottom: 10px; }
   .wd-item .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
   .wd-item .amount { font-size: 16px; font-weight: 800; color: #ffc83c; }
@@ -103,14 +102,12 @@
         </div>
       </div>
     </div>
-
     <div class="balance-section">
       <div class="balance-amount" id="balanceBig">0</div>
       <div class="balance-token">NOVA TOKEN</div>
       <div class="price-tag">≈ $0.0001</div>
       <div class="price-sub">1 NOVA = $0.0001</div>
     </div>
-
     <div class="action-wrap">
       <button class="big-btn" id="watchBtn">▶️ Watch Ad &nbsp;·&nbsp; +0.015 NOVA</button>
       <div style="margin-top:16px;"></div>
@@ -120,7 +117,6 @@
       </div>
       <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
     </div>
-
     <div style="padding: 0 20px;">
       <div class="menu-card" onclick="go('referral')">
         <div class="menu-icon gold">👥</div>
@@ -188,10 +184,9 @@
     <button class="btn-secondary" id="copyRefBtn">📋 Copy Link</button>
   </div>
 
-  <!-- ADMIN PANEL -->
   <div id="page-admin" class="page">
     <div class="section-title">⚙️ Admin Panel</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Withdrawal requests. Approve and send NOVA manually, or reject to refund user.</div>
+    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Withdrawal requests. Approve & send NOVA manually, or reject to refund user.</div>
     <button class="btn-secondary" id="refreshWdBtn" style="margin-bottom:12px;">🔄 Refresh</button>
     <div id="wdList"><div class="empty"><span class="loader"></span> Loading...</div></div>
   </div>
@@ -449,7 +444,7 @@ document.getElementById("copyRefBtn").onclick = async () => {
   catch { i.select(); document.execCommand("copy"); toast("📋 Link copied!"); }
 };
 
-// ---------- ADMIN ----------
+// ---------- ADMIN: Withdrawals ----------
 async function loadWithdrawals() {
   const box = document.getElementById("wdList");
   box.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
@@ -483,4 +478,19 @@ async function loadWithdrawals() {
         reject.className = "btn-reject"; reject.textContent = "❌ Reject & Refund";
         reject.onclick = async () => {
           try { await api("admin_mark_withdrawal", { id: w.id, status: "rejected" }); toast("Rejected & refunded"); loadWithdrawals(); }
-          catch (e) { toast(e
+          catch (e) { toast(e.message, true); }
+        };
+        actions.append(approve, reject);
+        el.append(actions);
+      }
+      box.append(el);
+    });
+  } catch (e) { box.innerHTML = `<div class="empty">${e.message}</div>`; }
+}
+document.getElementById("refreshWdBtn").onclick = loadWithdrawals;
+
+// ---------- Start ----------
+connect();
+</script>
+</body>
+</html>
