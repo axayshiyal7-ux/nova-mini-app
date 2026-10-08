@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>NOVA Earn</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: -apple-system, "SF Pro Display", "Segoe UI", Roboto, sans-serif; }
   body { background: #0b0d1a; color: #fff; min-height: 100vh; overflow-x: hidden; padding-bottom: 90px; }
@@ -41,6 +42,7 @@
   .nav-item .ic { font-size: 20px; display: block; margin-bottom: 3px; filter: grayscale(1) brightness(.6); transition: filter .2s; }
   .nav-item.active { color: #ffc83c; }
   .nav-item.active .ic { filter: none; }
+  .nav-item.hidden { display: none; }
   .page { display: none; padding: 0 20px 20px; }
   .page.active { display: block; animation: fade .25s; }
   @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -64,6 +66,19 @@
   .connect-box h1 { font-size: 24px; margin-bottom: 8px; color: #ffc83c; }
   .connect-box p { font-size: 13px; color: #7a7fa8; margin-bottom: 24px; line-height: 1.6; }
   .connect-box .retry { display: inline-block; margin-top: 12px; padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(255,200,60,.4); background: rgba(255,200,60,.1); color: #ffc83c; font-size: 13px; font-weight: 700; cursor: pointer; }
+  /* Admin styles */
+  .wd-item { padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; margin-bottom: 10px; }
+  .wd-item .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .wd-item .amount { font-size: 16px; font-weight: 800; color: #ffc83c; }
+  .wd-item .meta { font-size: 11px; color: #7a7fa8; margin-bottom: 4px; word-break: break-all; }
+  .wd-item .status { padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+  .status-pending { background: rgba(255,200,60,.15); color: #ffc83c; }
+  .status-paid { background: rgba(74,222,128,.15); color: #4ade80; }
+  .status-rejected { background: rgba(255,77,109,.15); color: #ff4d6d; }
+  .wd-actions { display: flex; gap: 8px; margin-top: 10px; }
+  .wd-actions button { flex: 1; padding: 9px; border-radius: 10px; border: none; font-size: 12px; font-weight: 800; cursor: pointer; }
+  .btn-approve { background: linear-gradient(135deg, #4ade80, #22c55e); color: #052e16; }
+  .btn-reject { background: linear-gradient(135deg, #ff4d6d, #dc2626); color: #fff; }
 </style>
 </head>
 <body>
@@ -86,9 +101,6 @@
           <div class="name" id="userName">Loading...</div>
           <div class="username" id="userHandle"></div>
         </div>
-      </div>
-      <div style="background:rgba(255,200,60,.12);border:1px solid rgba(255,200,60,.35);color:#ffc83c;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;">
-        🏆 Leaderboard
       </div>
     </div>
 
@@ -130,13 +142,13 @@
 
   <div id="page-tasks" class="page">
     <div class="section-title">📋 Tasks</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Join channel aur 1 NOVA kamao. Ek task sirf ek baar.</div>
+    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Join channel and earn 1 NOVA. Each task only once.</div>
     <div id="tasksList"><div class="empty"><span class="loader"></span> Loading tasks...</div></div>
   </div>
 
   <div id="page-mining" class="page">
     <div class="section-title">⛏️ Mining</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">60 min mining → 0.1 NOVA. Collect karte waqt ad dekhna zaroori.</div>
+    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">60 min mining → 0.1 NOVA. Ad required to collect.</div>
     <div class="menu-card" style="cursor:default;">
       <div class="menu-text">
         <div class="t">Status: <span id="mineStatus">Idle</span></div>
@@ -164,7 +176,7 @@
 
   <div id="page-referral" class="page">
     <div class="section-title">👥 Invite Friends</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Referral 10 ads complete kare → tumhe 10 NOVA milega.</div>
+    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Referral completes 10 ads → you get 10 NOVA.</div>
     <div class="menu-card" style="cursor:default;">
       <div class="menu-text">
         <div class="t">Total Referrals</div>
@@ -176,33 +188,61 @@
     <button class="btn-secondary" id="copyRefBtn">📋 Copy Link</button>
   </div>
 
-  <div class="nav">
+  <!-- ADMIN PANEL -->
+  <div id="page-admin" class="page">
+    <div class="section-title">⚙️ Admin Panel</div>
+    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Withdrawal requests. Approve and send NOVA manually, or reject to refund user.</div>
+    <button class="btn-secondary" id="refreshWdBtn" style="margin-bottom:12px;">🔄 Refresh</button>
+    <div id="wdList"><div class="empty"><span class="loader"></span> Loading...</div></div>
+  </div>
+
+  <div class="nav" id="mainNav">
     <div class="nav-item active" data-page="home"><span class="ic">🏠</span>Home</div>
     <div class="nav-item" data-page="tasks"><span class="ic">📋</span>Tasks</div>
     <div class="nav-item" data-page="mining"><span class="ic">⛏️</span>Mining</div>
     <div class="nav-item" data-page="withdraw"><span class="ic">💸</span>Withdraw</div>
     <div class="nav-item" data-page="referral"><span class="ic">👥</span>Referral</div>
+    <div class="nav-item hidden" id="adminNav" data-page="admin"><span class="ic">⚙️</span>Admin</div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* =========================================================
-   NOVA Mini App — Complete Single File
-   ========================================================= */
-
 const API_URL = "https://ggxcsxwvfntynersipax.supabase.co/functions/v1/nova-api";
 const tg = window.Telegram?.WebApp;
 
-/* ---------- Connect ---------- */
+// ============ ADSGRAM ============
+const ADSGRAM_BLOCK_ID = "52111";
+let adController = null;
+
+window.addEventListener("load", () => {
+  if (window.Adsgram) {
+    try {
+      adController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
+      console.log("✅ AdsGram initialized with block", ADSGRAM_BLOCK_ID);
+    } catch (e) {
+      console.error("AdsGram init failed:", e);
+    }
+  }
+});
+
+async function showRewardedAd() {
+  if (!adController) throw new Error("Ad SDK not loaded. Please retry.");
+  const result = await adController.show();
+  return result && result.done === true;
+}
+
+let isAdmin = false;
+
+// ---------- Connect ----------
 async function connect() {
   const msg = document.getElementById("connectMsg");
   const retry = document.getElementById("retryBtn");
   retry.style.display = "none";
 
   if (!tg || !tg.initData) {
-    msg.innerHTML = "⚠️ Ye app sirf Telegram ke andar khulti hai.<br><br><small style='font-size:11px'>Bot ke menu button se kholo.</small>";
+    msg.innerHTML = "⚠️ This app only works inside Telegram.<br><br><small style='font-size:11px'>Open from the bot menu button.</small>";
     msg.style.color = "#ff4d6d";
     return;
   }
@@ -221,11 +261,17 @@ async function connect() {
   }
 
   try {
-    msg.textContent = "Syncing with NOVA...";
+    msg.textContent = "Syncing...";
     const d = await api("dashboard");
     msg.textContent = "✅ Connected!";
     document.getElementById("connectBox").style.display = "none";
     document.getElementById("mainApp").style.display = "block";
+
+    isAdmin = d.is_admin === true;
+    if (isAdmin) {
+      document.getElementById("adminNav").classList.remove("hidden");
+    }
+
     renderDash(d);
   } catch (e) {
     msg.innerHTML = "❌ Connection error<br><small style='color:#ff4d6d;font-size:11px'>" + e.message + "</small>";
@@ -234,7 +280,6 @@ async function connect() {
   }
 }
 
-/* ---------- Toast ---------- */
 function toast(m, err = false) {
   const t = document.getElementById("toast");
   t.textContent = m;
@@ -243,7 +288,6 @@ function toast(m, err = false) {
   window._tt = setTimeout(() => t.className = "toast", 2600);
 }
 
-/* ---------- API ---------- */
 async function api(action, payload = {}) {
   const r = await fetch(API_URL, {
     method: "POST",
@@ -255,7 +299,6 @@ async function api(action, payload = {}) {
   return d;
 }
 
-/* ---------- Navigation ---------- */
 function go(page) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
@@ -266,10 +309,10 @@ function go(page) {
   if (page === "mining") loadMining();
   if (page === "withdraw") loadWithdraw();
   if (page === "referral") loadReferral();
+  if (page === "admin") loadWithdrawals();
 }
 document.querySelectorAll(".nav-item").forEach(el => el.onclick = () => go(el.dataset.page));
 
-/* ---------- Dashboard ---------- */
 function renderDash(d) {
   const b = Number(d.user.balance || 0);
   document.getElementById("balanceBig").textContent = b.toFixed(2);
@@ -278,29 +321,28 @@ function renderDash(d) {
 }
 async function loadDash() { try { renderDash(await api("dashboard")); } catch (e) { toast(e.message, true); } }
 
-/* ---------- Watch Ad ---------- */
+// ---------- Watch Ad ----------
 document.getElementById("watchBtn").onclick = async () => {
   const btn = document.getElementById("watchBtn");
   btn.disabled = true; btn.textContent = "Loading ad...";
   try {
-    // ⚠️ Yahan apna ad SDK call karo (Monetag/Adsgram). Abhi demo 3s wait:
-    const rewarded = await new Promise(res => setTimeout(() => res(true), 3000));
-    if (!rewarded) { toast("Ad not available, try again later", true); return; }
+    const rewarded = await showRewardedAd();
+    if (!rewarded) { toast("Ad not completed, try again", true); return; }
     const r = await api("ad_reward", { ad_token: "tkn_" + Date.now() });
     toast("✅ +0.015 NOVA added!");
-    if (r.referral_bonus_paid) toast("🎉 Aapke referrer ko 10 NOVA mil gaye!");
+    if (r.referral_bonus_paid) toast("🎉 Your referrer earned 10 NOVA!");
     loadDash();
-  } catch (e) { toast(e.message || "Ad not available, try again later", true); }
+  } catch (e) { toast(e.message || "Ad not available", true); }
   finally { btn.disabled = false; btn.textContent = "▶️ Watch Ad  ·  +0.015 NOVA"; }
 };
 
-/* ---------- Tasks ---------- */
+// ---------- Tasks ----------
 async function loadTasks() {
   const list = document.getElementById("tasksList");
   list.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
   try {
     const d = await api("tasks_list");
-    if (!d.tasks.length) { list.innerHTML = `<div class="empty">Abhi koi task nahi hai</div>`; return; }
+    if (!d.tasks.length) { list.innerHTML = `<div class="empty">No tasks available yet</div>`; return; }
     list.innerHTML = "";
     d.tasks.forEach(t => {
       const done = d.completed.includes(t.id);
@@ -325,7 +367,7 @@ async function loadTasks() {
   } catch (e) { list.innerHTML = `<div class="empty">${e.message}</div>`; }
 }
 
-/* ---------- Mining ---------- */
+// ---------- Mining ----------
 let mTimer = null;
 async function loadMining() { try { renderMining(await api("mining_status")); } catch (e) { toast(e.message, true); } }
 function renderMining(d) {
@@ -358,15 +400,15 @@ async function startMining() {
 async function collectMining() {
   const b = document.getElementById("mineBtn"); b.disabled = true; b.textContent = "Loading ad...";
   try {
-    const rewarded = await new Promise(res => setTimeout(() => res(true), 3000));
-    if (!rewarded) { toast("Ad not available, try again later", true); return loadMining(); }
+    const rewarded = await showRewardedAd();
+    if (!rewarded) { toast("Ad not completed", true); return loadMining(); }
     const r = await api("mining_collect", { ad_token: "m_" + Date.now() });
     toast(`💎 +${r.reward} NOVA collected!`);
     loadMining(); loadDash();
   } catch (e) { toast(e.message, true); loadMining(); }
 }
 
-/* ---------- Withdraw ---------- */
+// ---------- Withdraw ----------
 async function loadWithdraw() {
   try {
     const d = await api("withdraw_info");
@@ -379,20 +421,20 @@ async function loadWithdraw() {
 }
 document.getElementById("saveWalletBtn").onclick = async () => {
   const w = document.getElementById("walletInput").value.trim();
-  if (w.length < 10) return toast("Valid wallet daalo", true);
+  if (w.length < 10) return toast("Enter a valid wallet address", true);
   try { await api("set_wallet", { wallet: w }); toast("✅ Wallet saved"); } catch (e) { toast(e.message, true); }
 };
 document.getElementById("withdrawBtn").onclick = async () => {
   const w = document.getElementById("walletInput").value.trim();
-  if (w.length < 10) return toast("Pehle wallet save karo", true);
+  if (w.length < 10) return toast("Save your wallet first", true);
   try {
     await api("withdraw_request", { wallet: w });
-    toast("✅ Withdraw request submitted!");
+    toast("✅ Withdrawal request submitted!");
     loadWithdraw(); loadDash();
   } catch (e) { toast(e.message, true); }
 };
 
-/* ---------- Referral ---------- */
+// ---------- Referral ----------
 async function loadReferral() {
   try {
     const d = await api("referral_info");
@@ -407,8 +449,38 @@ document.getElementById("copyRefBtn").onclick = async () => {
   catch { i.select(); document.execCommand("copy"); toast("📋 Link copied!"); }
 };
 
-/* ---------- Start ---------- */
-connect();
-</script>
-</body>
-</html>
+// ---------- ADMIN ----------
+async function loadWithdrawals() {
+  const box = document.getElementById("wdList");
+  box.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
+  try {
+    const d = await api("admin_list_withdrawals");
+    const list = d.withdrawals || [];
+    if (!list.length) { box.innerHTML = `<div class="empty">No withdrawal requests yet</div>`; return; }
+    box.innerHTML = "";
+    list.forEach(w => {
+      const el = document.createElement("div");
+      el.className = "wd-item";
+      el.innerHTML = `
+        <div class="row">
+          <span class="amount">${Number(w.amount).toFixed(2)} NOVA</span>
+          <span class="status status-${w.status}">${w.status}</span>
+        </div>
+        <div class="meta">User ID: ${w.telegram_id}${w.username ? ' · @' + w.username : ''}</div>
+        <div class="meta">Wallet: ${w.wallet}</div>
+        <div class="meta">Date: ${new Date(w.created_at).toLocaleString()}</div>
+      `;
+      if (w.status === "pending") {
+        const actions = document.createElement("div");
+        actions.className = "wd-actions";
+        const approve = document.createElement("button");
+        approve.className = "btn-approve"; approve.textContent = "✅ Mark Paid";
+        approve.onclick = async () => {
+          try { await api("admin_mark_withdrawal", { id: w.id, status: "paid" }); toast("Marked as paid"); loadWithdrawals(); }
+          catch (e) { toast(e.message, true); }
+        };
+        const reject = document.createElement("button");
+        reject.className = "btn-reject"; reject.textContent = "❌ Reject & Refund";
+        reject.onclick = async () => {
+          try { await api("admin_mark_withdrawal", { id: w.id, status: "rejected" }); toast("Rejected & refunded"); loadWithdrawals(); }
+          catch (e) { toast(e
