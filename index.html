@@ -465,4 +465,65 @@ document.getElementById("withdrawBtn").onclick = async () => {
 // ---------- Referral ----------
 async function loadReferral() {
   try {
-   
+    const d = await api("referral_info");
+    document.getElementById("refLink").value = d.link;
+    document.getElementById("refCount").textContent = d.count || 0;
+  } catch (e) { toast(e.message, true); }
+}
+document.getElementById("copyRefBtn").onclick = async () => {
+  const i = document.getElementById("refLink");
+  if (!i.value) return;
+  try { await navigator.clipboard.writeText(i.value); toast("📋 Link copied!"); }
+  catch { i.select(); document.execCommand("copy"); toast("📋 Link copied!"); }
+};
+
+// ---------- ADMIN: Withdrawals ----------
+async function loadWithdrawals() {
+  const box = document.getElementById("wdList");
+  box.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
+  try {
+    const d = await api("admin_list_withdrawals");
+    const list = d.withdrawals || [];
+    if (!list.length) { box.innerHTML = `<div class="empty">No withdrawal requests yet</div>`; return; }
+    box.innerHTML = "";
+    list.forEach(w => {
+      const el = document.createElement("div");
+      el.className = "wd-item";
+      el.innerHTML = `
+        <div class="row">
+          <span class="amount">${Number(w.amount).toFixed(2)} NOVA</span>
+          <span class="status status-${w.status}">${w.status}</span>
+        </div>
+        <div class="meta">User ID: ${w.telegram_id}${w.username ? ' · @' + w.username : ''}</div>
+        <div class="meta">Wallet: ${w.wallet}</div>
+        <div class="meta">Date: ${new Date(w.created_at).toLocaleString()}</div>
+      `;
+      if (w.status === "pending") {
+        const actions = document.createElement("div");
+        actions.className = "wd-actions";
+        const approve = document.createElement("button");
+        approve.className = "btn-approve"; approve.textContent = "✅ Mark Paid";
+        approve.onclick = async () => {
+          try { await api("admin_mark_withdrawal", { id: w.id, status: "paid" }); toast("Marked as paid"); loadWithdrawals(); }
+          catch (e) { toast(e.message, true); }
+        };
+        const reject = document.createElement("button");
+        reject.className = "btn-reject"; reject.textContent = "❌ Reject & Refund";
+        reject.onclick = async () => {
+          try { await api("admin_mark_withdrawal", { id: w.id, status: "rejected" }); toast("Rejected & refunded"); loadWithdrawals(); }
+          catch (e) { toast(e.message, true); }
+        };
+        actions.append(approve, reject);
+        el.append(actions);
+      }
+      box.append(el);
+    });
+  } catch (e) { box.innerHTML = `<div class="empty">${e.message}</div>`; }
+}
+document.getElementById("refreshWdBtn").onclick = loadWithdrawals;
+
+// ---------- Start ----------
+connect();
+</script>
+</body>
+</html>
