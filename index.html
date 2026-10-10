@@ -141,8 +141,6 @@
   <div id="page-tasks" class="page">
     <div class="section-title">📋 Tasks</div>
     <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Join channel and earn 1 NOVA. Each task only once.</div>
-
-    <!-- ADMIN: Add Task Form (only visible to admin) -->
     <div id="adminTaskBox" class="admin-box" style="display:none;">
       <h3>⚙️ Admin: Add Task</h3>
       <input class="input" id="taskTitle" placeholder="Task title (e.g., Join our channel)">
@@ -150,7 +148,6 @@
       <input class="input" id="taskReward" type="number" step="0.1" placeholder="Reward in NOVA (default 1)" value="1">
       <button class="btn-secondary" id="addTaskBtn">➕ Publish Task</button>
     </div>
-
     <div id="tasksList"><div class="empty"><span class="loader"></span> Loading tasks...</div></div>
   </div>
 
@@ -217,18 +214,18 @@
 
 <script>
 const API_URL = "https://ggxcsxwvfntynersipax.supabase.co/functions/v1/nova-api";
-const BOT_USERNAME = "NovaAirdropEarn_bot";   // ✅ Sahi bot username
+const BOT_USERNAME = "NovaAirdropEarn_bot";
 const tg = window.Telegram?.WebApp;
 
 // ============ ADSGRAM ============
-const ADSGRAM_BLOCK_ID = "52111";
+const ADSGRAM_BLOCK_ID = "53039";
 let adController = null;
 
 window.addEventListener("load", () => {
   if (window.Adsgram) {
     try {
       adController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
-      console.log("✅ AdsGram initialized");
+      console.log("✅ AdsGram initialized with block", ADSGRAM_BLOCK_ID);
     } catch (e) { console.error("AdsGram init failed:", e); }
   }
 });
@@ -373,7 +370,6 @@ async function loadTasks() {
   } catch (e) { list.innerHTML = `<div class="empty">${e.message}</div>`; }
 }
 
-// Admin: Add Task
 document.getElementById("addTaskBtn").onclick = async () => {
   const title = document.getElementById("taskTitle").value.trim();
   const link = document.getElementById("taskLink").value.trim();
