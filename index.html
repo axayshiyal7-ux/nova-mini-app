@@ -7,79 +7,303 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: -apple-system, "SF Pro Display", "Segoe UI", Roboto, sans-serif; }
-  body { background: #0b0d1a; color: #fff; min-height: 100vh; overflow-x: hidden; padding-bottom: 90px; }
-  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px 10px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: -apple-system, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif; }
+  :root {
+    --bg: #07080f;
+    --bg2: #0d0f1c;
+    --card: rgba(255,255,255,.035);
+    --card-border: rgba(255,255,255,.07);
+    --gold: #ffc83c;
+    --gold2: #ff9a2b;
+    --green: #4ade80;
+    --muted: #7a7fa8;
+    --muted2: #5a5e7a;
+  }
+  body {
+    background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,200,60,.15), transparent 60%), var(--bg);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* TOP BAR */
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 20px 12px; }
   .user-info { display: flex; align-items: center; gap: 12px; }
-  .avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #2a2d4a, #1a1c30); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #ffc83c; border: 2px solid rgba(255,200,60,.25); overflow: hidden; flex-shrink: 0; }
+  .avatar-wrap { position: relative; }
+  .avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, #2a2d4a, #1a1c30);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: var(--gold);
+    border: 2px solid rgba(255,200,60,.3);
+    overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(255,200,60,.08), 0 4px 12px rgba(0,0,0,.4);
+  }
   .avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .user-text .label { font-size: 11px; color: #7a7fa8; margin-bottom: 2px; }
-  .user-text .name { font-size: 15px; font-weight: 700; color: #fff; }
-  .user-text .username { font-size: 11px; color: #7a7fa8; margin-top: 2px; }
-  .balance-section { text-align: center; padding: 24px 20px 20px; }
-  .balance-amount { font-size: 64px; font-weight: 800; color: #ffc83c; line-height: 1; margin-bottom: 8px; letter-spacing: -2px; }
-  .balance-token { font-size: 14px; letter-spacing: 4px; color: #7a7fa8; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
-  .price-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #4ade80; background: rgba(74,222,128,.08); padding: 4px 12px; border-radius: 20px; margin-bottom: 4px; }
-  .price-sub { font-size: 11px; color: #5a5e7a; margin-top: 4px; }
-  .action-wrap { padding: 12px 20px 20px; }
-  .big-btn { width: 100%; padding: 20px; border: none; border-radius: 20px; background: linear-gradient(135deg, #ffc83c, #ff9a2b); color: #1a1200; font-size: 17px; font-weight: 800; letter-spacing: .3px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 30px rgba(255,180,50,.35); transition: transform .15s; }
-  .big-btn:active { transform: scale(.97); }
-  .big-btn:disabled { opacity: .5; box-shadow: none; }
-  .progress-row { display: flex; justify-content: space-between; padding: 0 4px; font-size: 12px; color: #7a7fa8; margin-bottom: 8px; }
-  .progress-row b { color: #fff; }
-  .progress-bar { height: 6px; background: rgba(255,255,255,.06); border-radius: 6px; overflow: hidden; margin-bottom: 24px; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, #ffc83c, #ff9a2b); border-radius: 6px; transition: width .4s; width: 0%; }
-  .menu-card { display: flex; align-items: center; gap: 14px; padding: 18px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 18px; margin-bottom: 12px; cursor: pointer; transition: background .2s; }
-  .menu-card:active { background: rgba(255,255,255,.06); }
-  .menu-icon { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #2a2d4a, #1a1c30); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.06); }
-  .menu-icon.gold { background: linear-gradient(135deg, rgba(255,200,60,.25), rgba(255,150,40,.15)); border-color: rgba(255,200,60,.3); }
+  .user-text .label { font-size: 10.5px; color: var(--muted); letter-spacing: .3px; text-transform: uppercase; font-weight: 600; margin-bottom: 3px; }
+  .user-text .name { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.2; }
+  .user-text .username { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .status-dot {
+    position: absolute; bottom: 1px; right: 1px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--green); border: 2px solid var(--bg);
+    box-shadow: 0 0 8px var(--green);
+  }
+
+  /* BALANCE */
+  .balance-section { text-align: center; padding: 30px 20px 24px; position: relative; }
+  .balance-amount {
+    font-size: 72px; font-weight: 800; color: var(--gold);
+    line-height: 1; margin-bottom: 10px; letter-spacing: -3px;
+    text-shadow: 0 0 40px rgba(255,200,60,.4), 0 4px 20px rgba(255,150,40,.2);
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 30px rgba(255,200,60,.35), 0 4px 20px rgba(255,150,40,.15); }
+    to { text-shadow: 0 0 50px rgba(255,200,60,.55), 0 4px 25px rgba(255,150,40,.3); }
+  }
+  .balance-token { font-size: 12px; letter-spacing: 6px; color: var(--muted); font-weight: 700; margin-bottom: 14px; }
+  .price-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; color: var(--green);
+    background: rgba(74,222,128,.08);
+    border: 1px solid rgba(74,222,128,.2);
+    padding: 5px 14px; border-radius: 20px;
+  }
+  .price-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+  /* WATCH BTN */
+  .action-wrap { padding: 8px 20px 24px; }
+  .big-btn {
+    width: 100%; padding: 22px; border: none; border-radius: 22px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #1a1200; font-size: 17px; font-weight: 800; letter-spacing: .3px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 10px 40px rgba(255,180,50,.4), inset 0 1px 0 rgba(255,255,255,.3);
+    transition: all .2s ease;
+    position: relative; overflow: hidden;
+  }
+  .big-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,.3), transparent);
+    transform: translateX(-100%);
+    animation: shine 3s infinite;
+  }
+  @keyframes shine { 0% { transform: translateX(-100%); } 50%, 100% { transform: translateX(200%); } }
+  .big-btn:active { transform: scale(.97); box-shadow: 0 6px 25px rgba(255,180,50,.3); }
+  .big-btn:disabled { opacity: .6; box-shadow: none; }
+
+  .progress-row { display: flex; justify-content: space-between; padding: 0 4px; font-size: 11.5px; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
+  .progress-row b { color: var(--gold); }
+  .progress-bar { height: 5px; background: rgba(255,255,255,.05); border-radius: 6px; overflow: hidden; margin-bottom: 4px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 6px; transition: width .5s ease; box-shadow: 0 0 10px rgba(255,200,60,.5); }
+
+  /* MENU CARD */
+  .menu-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 20px; margin-bottom: 12px;
+    cursor: pointer; transition: all .25s ease;
+    backdrop-filter: blur(10px);
+  }
+  .menu-card:active { background: rgba(255,255,255,.06); transform: scale(.99); }
+  .menu-icon {
+    width: 50px; height: 50px; border-radius: 16px;
+    background: linear-gradient(135deg, #2a2d4a, #1a1c30);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+  .menu-icon.gold {
+    background: linear-gradient(135deg, rgba(255,200,60,.25), rgba(255,150,40,.12));
+    border-color: rgba(255,200,60,.35);
+    box-shadow: 0 4px 16px rgba(255,180,50,.2);
+  }
   .menu-text { flex: 1; }
-  .menu-text .t { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-  .menu-text .s { font-size: 12px; color: #7a7fa8; }
-  .menu-arrow { color: #4a4e6a; font-size: 20px; }
-  .nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15,17,30,.98); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,.05); display: flex; padding: 10px 4px 14px; z-index: 100; }
-  .nav-item { flex: 1; text-align: center; font-size: 10px; color: #5a5e7a; font-weight: 600; cursor: pointer; transition: color .2s; }
-  .nav-item .ic { font-size: 20px; display: block; margin-bottom: 3px; filter: grayscale(1) brightness(.6); transition: filter .2s; }
-  .nav-item.active { color: #ffc83c; }
-  .nav-item.active .ic { filter: none; }
+  .menu-text .t { font-size: 14.5px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .menu-text .s { font-size: 12px; color: var(--muted); }
+  .menu-arrow { color: var(--muted2); font-size: 22px; }
+
+  /* NAV */
+  .nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(10,12,22,.95);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-top: 1px solid rgba(255,255,255,.06);
+    display: flex; padding: 10px 4px 16px; z-index: 100;
+  }
+  .nav-item {
+    flex: 1; text-align: center; font-size: 10px;
+    color: var(--muted2); font-weight: 600;
+    cursor: pointer; transition: all .2s;
+    position: relative;
+  }
+  .nav-item .ic {
+    font-size: 22px; display: block; margin-bottom: 4px;
+    filter: grayscale(1) brightness(.5);
+    transition: all .2s;
+  }
+  .nav-item.active { color: var(--gold); }
+  .nav-item.active .ic { filter: none; transform: translateY(-2px); text-shadow: 0 0 12px rgba(255,200,60,.6); }
+  .nav-item.active::after {
+    content: ''; position: absolute; top: -10px; left: 50%;
+    transform: translateX(-50%); width: 24px; height: 3px;
+    background: var(--gold); border-radius: 0 0 4px 4px;
+    box-shadow: 0 0 10px var(--gold);
+  }
   .nav-item.hidden { display: none; }
+
+  /* PAGE */
   .page { display: none; padding: 0 20px 20px; }
-  .page.active { display: block; animation: fade .25s; }
-  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .section-title { font-size: 16px; font-weight: 700; color: #fff; margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
-  .task-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; margin-bottom: 10px; gap: 10px; }
-  .task-item .tt { font-size: 13px; font-weight: 700; color: #fff; }
-  .task-item .tr { font-size: 12px; color: #4ade80; margin-top: 3px; }
-  .task-item button { padding: 9px 18px; border-radius: 12px; border: none; background: linear-gradient(135deg, #ffc83c, #ff9a2b); color: #1a1200; font-weight: 800; font-size: 12px; cursor: pointer; white-space: nowrap; }
-  .task-item button.done { background: rgba(74,222,128,.15); color: #4ade80; cursor: not-allowed; }
-  .input { width: 100%; padding: 15px 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); color: #fff; font-size: 14px; margin-bottom: 12px; font-family: inherit; }
-  .input:focus { outline: none; border-color: #ffc83c; }
-  .btn-secondary { width: 100%; padding: 15px; border-radius: 14px; border: 1px solid rgba(255,200,60,.3); background: rgba(255,200,60,.08); color: #ffc83c; font-size: 14px; font-weight: 700; cursor: pointer; }
-  .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: rgba(255,200,60,.15); border: 1px solid #ffc83c; color: #fff; padding: 12px 22px; border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 999; transition: transform .3s; backdrop-filter: blur(10px); max-width: 90vw; text-align: center; }
+  .page.active { display: block; animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .section-title {
+    font-size: 20px; font-weight: 800; color: #fff;
+    margin: 24px 0 6px; display: flex; align-items: center; gap: 10px;
+    letter-spacing: -.3px;
+  }
+  .section-sub { font-size: 12.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.5; }
+
+  /* TASK ITEM */
+  .task-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 18px; margin-bottom: 10px; gap: 12px;
+    backdrop-filter: blur(10px);
+  }
+  .task-item .tt { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .task-item .tr { font-size: 12px; color: var(--green); font-weight: 700; }
+  .task-item button {
+    padding: 10px 18px; border-radius: 12px; border: none;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #1a1200; font-weight: 800; font-size: 12px;
+    cursor: pointer; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(255,180,50,.3);
+    transition: transform .15s;
+  }
+  .task-item button:active { transform: scale(.95); }
+  .task-item button.done {
+    background: rgba(74,222,128,.15); color: var(--green);
+    cursor: not-allowed; box-shadow: none;
+  }
+
+  /* INPUTS */
+  .input {
+    width: 100%; padding: 16px;
+    border-radius: 16px; border: 1.5px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.03);
+    color: #fff; font-size: 14px; margin-bottom: 12px;
+    font-family: inherit; transition: all .2s;
+  }
+  .input:focus { outline: none; border-color: var(--gold); background: rgba(255,200,60,.05); box-shadow: 0 0 0 3px rgba(255,200,60,.1); }
+  .input::placeholder { color: var(--muted2); }
+
+  .btn-secondary {
+    width: 100%; padding: 16px;
+    border-radius: 16px;
+    border: 1.5px solid rgba(255,200,60,.3);
+    background: rgba(255,200,60,.08);
+    color: var(--gold); font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all .2s;
+    letter-spacing: .3px;
+  }
+  .btn-secondary:active { background: rgba(255,200,60,.15); transform: scale(.98); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; top: 20px; left: 50%;
+    transform: translateX(-50%) translateY(-120px);
+    background: rgba(20,22,38,.98);
+    border: 1.5px solid var(--gold);
+    color: #fff; padding: 14px 24px;
+    border-radius: 16px; font-size: 13px; font-weight: 600;
+    z-index: 999; transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+    backdrop-filter: blur(20px); max-width: 90vw; text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5), 0 0 30px rgba(255,200,60,.15);
+  }
   .toast.show { transform: translateX(-50%) translateY(0); }
-  .toast.error { border-color: #ff4d6d; background: rgba(255,77,109,.2); }
-  .loader { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,200,60,.3); border-top-color: #ffc83c; border-radius: 50%; animation: spin .7s linear infinite; margin-right: 6px; vertical-align: middle; }
+  .toast.error { border-color: #ff4d6d; box-shadow: 0 10px 40px rgba(0,0,0,.5), 0 0 30px rgba(255,77,109,.2); }
+
+  /* LOADER */
+  .loader {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(255,200,60,.3);
+    border-top-color: var(--gold);
+    border-radius: 50%; animation: spin .7s linear infinite;
+    margin-right: 6px; vertical-align: middle;
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .empty { text-align: center; padding: 30px 10px; color: #5a5e7a; font-size: 13px; }
-  .connect-box { text-align: center; padding: 60px 30px; }
-  .connect-box .logo-big { font-size: 60px; margin-bottom: 16px; }
-  .connect-box h1 { font-size: 24px; margin-bottom: 8px; color: #ffc83c; }
-  .connect-box p { font-size: 13px; color: #7a7fa8; margin-bottom: 24px; line-height: 1.6; }
-  .connect-box .retry { display: inline-block; margin-top: 12px; padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(255,200,60,.4); background: rgba(255,200,60,.1); color: #ffc83c; font-size: 13px; font-weight: 700; cursor: pointer; }
-  .wd-item { padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; margin-bottom: 10px; }
-  .wd-item .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .wd-item .amount { font-size: 16px; font-weight: 800; color: #ffc83c; }
-  .wd-item .meta { font-size: 11px; color: #7a7fa8; margin-bottom: 4px; word-break: break-all; }
-  .wd-item .status { padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
-  .status-pending { background: rgba(255,200,60,.15); color: #ffc83c; }
-  .status-paid { background: rgba(74,222,128,.15); color: #4ade80; }
+
+  .empty { text-align: center; padding: 40px 10px; color: var(--muted2); font-size: 13px; }
+
+  /* CONNECT BOX */
+  .connect-box { text-align: center; padding: 80px 30px; }
+  .connect-box .logo-big {
+    font-size: 70px; margin-bottom: 20px;
+    animation: float 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 10px 30px rgba(255,200,60,.5));
+  }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .connect-box h1 {
+    font-size: 28px; margin-bottom: 10px; color: var(--gold);
+    text-shadow: 0 0 30px rgba(255,200,60,.4); font-weight: 800;
+    letter-spacing: -.5px;
+  }
+  .connect-box p { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+  .connect-box .retry {
+    display: inline-block; margin-top: 16px; padding: 14px 28px;
+    border-radius: 14px; border: 1.5px solid rgba(255,200,60,.4);
+    background: rgba(255,200,60,.1); color: var(--gold);
+    font-size: 13px; font-weight: 700; cursor: pointer;
+  }
+
+  /* WITHDRAWAL ITEM */
+  .wd-item {
+    padding: 16px; background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; margin-bottom: 10px;
+    backdrop-filter: blur(10px);
+  }
+  .wd-item .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .wd-item .amount { font-size: 17px; font-weight: 800; color: var(--gold); }
+  .wd-item .meta { font-size: 11.5px; color: var(--muted); margin-bottom: 5px; word-break: break-all; }
+  .wd-item .status {
+    padding: 4px 12px; border-radius: 99px; font-size: 10px;
+    font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .status-pending { background: rgba(255,200,60,.15); color: var(--gold); }
+  .status-paid { background: rgba(74,222,128,.15); color: var(--green); }
   .status-rejected { background: rgba(255,77,109,.15); color: #ff4d6d; }
-  .wd-actions { display: flex; gap: 8px; margin-top: 10px; }
-  .wd-actions button { flex: 1; padding: 9px; border-radius: 10px; border: none; font-size: 12px; font-weight: 800; cursor: pointer; }
-  .btn-approve { background: linear-gradient(135deg, #4ade80, #22c55e); color: #052e16; }
+  .wd-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .wd-actions button {
+    flex: 1; padding: 11px; border-radius: 12px;
+    border: none; font-size: 12px; font-weight: 800;
+    cursor: pointer; transition: transform .15s;
+  }
+  .wd-actions button:active { transform: scale(.97); }
+  .btn-approve { background: linear-gradient(135deg, var(--green), #22c55e); color: #052e16; }
   .btn-reject { background: linear-gradient(135deg, #ff4d6d, #dc2626); color: #fff; }
-  .admin-box { padding: 16px; background: rgba(255,200,60,.05); border: 1px solid rgba(255,200,60,.25); border-radius: 16px; margin-bottom: 16px; }
-  .admin-box h3 { font-size: 14px; color: #ffc83c; margin-bottom: 12px; }
+
+  .admin-box {
+    padding: 18px;
+    background: linear-gradient(135deg, rgba(255,200,60,.08), rgba(255,200,60,.03));
+    border: 1.5px solid rgba(255,200,60,.25);
+    border-radius: 18px; margin-bottom: 18px;
+  }
+  .admin-box h3 {
+    font-size: 14px; color: var(--gold);
+    margin-bottom: 14px; font-weight: 800;
+    display: flex; align-items: center; gap: 8px;
+  }
 </style>
 </head>
 <body>
@@ -96,33 +320,37 @@
   <div id="page-home" class="page active">
     <div class="topbar">
       <div class="user-info">
-        <div class="avatar" id="avatar">👤</div>
+        <div class="avatar-wrap">
+          <div class="avatar" id="avatar">👤</div>
+          <div class="status-dot"></div>
+        </div>
         <div class="user-text">
-          <div class="label">Your balance</div>
+          <div class="label">Your Balance</div>
           <div class="name" id="userName">Loading...</div>
           <div class="username" id="userHandle"></div>
         </div>
       </div>
     </div>
+
     <div class="balance-section">
       <div class="balance-amount" id="balanceBig">0</div>
       <div class="balance-token">NOVA TOKEN</div>
-      <div class="price-tag">≈ $0.0001</div>
-      <div class="price-sub">1 NOVA = $0.0001</div>
+      <div class="price-pill"><span class="dot"></span>≈ $0.0001 · 1 NOVA</div>
     </div>
+
     <div class="action-wrap">
       <button class="big-btn" id="watchBtn">▶️ Watch Ad &nbsp;·&nbsp; +0.015 NOVA</button>
-      <div style="margin-top:16px;"></div>
       <div class="progress-row">
-        <span>Ads today: <b id="adsToday">0</b>/20</span>
-        <span>0.015 NOVA per ad</span>
+        <span>Ads watched today</span>
+        <span><b id="adsToday">0</b>/20</span>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
     </div>
+
     <div style="padding: 0 20px;">
       <div class="menu-card" onclick="go('referral')">
         <div class="menu-icon gold">👥</div>
-        <div class="menu-text"><div class="t">Referral</div><div class="s">Invite friends — 10 NOVA per referral</div></div>
+        <div class="menu-text"><div class="t">Referral</div><div class="s">Invite friends — Earn 10 NOVA each</div></div>
         <div class="menu-arrow">›</div>
       </div>
       <div class="menu-card" onclick="go('tasks')">
@@ -132,7 +360,7 @@
       </div>
       <div class="menu-card" onclick="go('mining')">
         <div class="menu-icon">⛏️</div>
-        <div class="menu-text"><div class="t">Mining</div><div class="s">Mine 0.1 NOVA per hour</div></div>
+        <div class="menu-text"><div class="t">Mining</div><div class="s">Mine 0.1 NOVA every hour</div></div>
         <div class="menu-arrow">›</div>
       </div>
     </div>
@@ -140,7 +368,7 @@
 
   <div id="page-tasks" class="page">
     <div class="section-title">📋 Tasks</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Join channel and earn 1 NOVA. Each task only once.</div>
+    <div class="section-sub">Join channel and earn 1 NOVA. Each task can be claimed once.</div>
     <div id="adminTaskBox" class="admin-box" style="display:none;">
       <h3>⚙️ Admin: Add Task</h3>
       <input class="input" id="taskTitle" placeholder="Task title (e.g., Join our channel)">
@@ -153,50 +381,55 @@
 
   <div id="page-mining" class="page">
     <div class="section-title">⛏️ Mining</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">60 min mining → 0.1 NOVA. Ad required to collect.</div>
+    <div class="section-sub">60 min mining → 0.1 NOVA. Watch an ad to collect.</div>
     <div class="menu-card" style="cursor:default;">
+      <div class="menu-icon gold">⛏️</div>
       <div class="menu-text">
         <div class="t">Status: <span id="mineStatus">Idle</span></div>
         <div class="s">Time left: <span id="mineTime">--:--</span></div>
       </div>
     </div>
-    <button class="big-btn" id="mineBtn" style="margin-top:12px;">⛏️ Start Mining</button>
+    <button class="big-btn" id="mineBtn" style="margin-top:16px;">⛏️ Start Mining</button>
   </div>
 
   <div id="page-withdraw" class="page">
     <div class="section-title">💸 Withdraw</div>
+    <div class="section-sub">Minimum 100 NOVA · Polygon (POL)</div>
     <div class="menu-card" style="cursor:default;">
+      <div class="menu-icon gold">💰</div>
       <div class="menu-text">
-        <div class="t">Balance: <span id="wBalance" style="color:#ffc83c;">0.0000</span></div>
-        <div class="s">Minimum: 100 NOVA · Polygon (POL)</div>
+        <div class="t">Balance: <span id="wBalance" style="color:var(--gold);">0.0000</span> NOVA</div>
+        <div class="s">Withdrawable balance</div>
       </div>
     </div>
-    <div class="section-title" style="font-size:14px;">👛 Wallet Address</div>
+    <div style="margin-top: 20px;"></div>
+    <div class="section-title" style="font-size:15px;">👛 Wallet Address</div>
     <input class="input" id="walletInput" placeholder="0x... (Polygon address)">
     <button class="btn-secondary" id="saveWalletBtn" style="margin-bottom:12px;">💾 Save Wallet</button>
     <button class="big-btn" id="withdrawBtn">📤 Request Withdraw</button>
-    <div class="section-title" style="font-size:14px;">📜 History</div>
+    <div class="section-title" style="font-size:15px;">📜 History</div>
     <div id="withdrawHistory"><div class="empty">No withdrawals yet</div></div>
   </div>
 
   <div id="page-referral" class="page">
     <div class="section-title">👥 Invite Friends</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Referral completes 10 ads → you get 10 NOVA.</div>
+    <div class="section-sub">Referral completes 10 ads → you earn 10 NOVA.</div>
     <div class="menu-card" style="cursor:default;">
+      <div class="menu-icon gold">🏆</div>
       <div class="menu-text">
         <div class="t">Total Referrals</div>
-        <div class="s" id="refCount" style="color:#ffc83c;font-size:20px;font-weight:800;margin-top:4px;">0</div>
+        <div class="s" id="refCount" style="color:var(--gold);font-size:24px;font-weight:800;margin-top:6px;">0</div>
       </div>
     </div>
-    <div class="section-title" style="font-size:14px;">🔗 Your Link</div>
+    <div class="section-title" style="font-size:15px;">🔗 Your Referral Link</div>
     <input class="input" id="refLink" readonly placeholder="Loading...">
     <button class="btn-secondary" id="copyRefBtn">📋 Copy Link</button>
   </div>
 
   <div id="page-admin" class="page">
     <div class="section-title">⚙️ Admin Panel</div>
-    <div style="font-size:12px;color:#7a7fa8;margin-bottom:16px;">Withdrawal requests. Approve & send NOVA manually, or reject to refund user.</div>
-    <button class="btn-secondary" id="refreshWdBtn" style="margin-bottom:12px;">🔄 Refresh</button>
+    <div class="section-sub">Withdrawal requests. Approve after sending NOVA manually, or reject to refund user.</div>
+    <button class="btn-secondary" id="refreshWdBtn" style="margin-bottom:16px;">🔄 Refresh Requests</button>
     <div id="wdList"><div class="empty"><span class="loader"></span> Loading...</div></div>
   </div>
 
@@ -245,7 +478,7 @@ async function connect() {
   retry.style.display = "none";
 
   if (!tg || !tg.initData) {
-    msg.innerHTML = "⚠️ This app only works inside Telegram.<br><br><small style='font-size:11px'>Open from the bot menu button.</small>";
+    msg.innerHTML = "⚠️ This app only works inside Telegram.<br><br><small style='font-size:11px;opacity:.7'>Open from the bot menu button.</small>";
     msg.style.color = "#ff4d6d";
     return;
   }
@@ -440,7 +673,7 @@ async function loadWithdraw() {
     if (d.wallet) document.getElementById("walletInput").value = d.wallet;
     const h = document.getElementById("withdrawHistory");
     h.innerHTML = !d.history?.length ? `<div class="empty">No withdrawals yet</div>`
-      : d.history.map(w => `<div class="menu-card" style="cursor:default;padding:12px;"><div class="menu-text"><div class="t">${Number(w.amount).toFixed(2)} NOVA</div><div class="s">${new Date(w.created_at).toLocaleDateString()} · ${w.status}</div></div></div>`).join("");
+      : d.history.map(w => `<div class="menu-card" style="cursor:default;padding:14px;"><div class="menu-text"><div class="t">${Number(w.amount).toFixed(2)} NOVA</div><div class="s">${new Date(w.created_at).toLocaleDateString()} · ${w.status}</div></div></div>`).join("");
   } catch (e) { toast(e.message, true); }
 }
 document.getElementById("saveWalletBtn").onclick = async () => {
@@ -473,7 +706,7 @@ document.getElementById("copyRefBtn").onclick = async () => {
   catch { i.select(); document.execCommand("copy"); toast("📋 Link copied!"); }
 };
 
-// ---------- ADMIN: Withdrawals ----------
+// ---------- ADMIN ----------
 async function loadWithdrawals() {
   const box = document.getElementById("wdList");
   box.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
