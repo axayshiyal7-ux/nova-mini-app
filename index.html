@@ -110,22 +110,16 @@
   .mini-stat .info .lbl { font-size: 11.5px; color: var(--text-dim); font-weight: 600; margin-bottom: 3px; }
   .mini-stat .info .val { font-size: 17px; color: #fff; font-weight: 800; }
   .mini-stat .info .val.highlight { background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-
-  /* STATS GRID */
   .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
   .stat-box { padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 18px; backdrop-filter: blur(20px); }
   .stat-box .lbl { font-size: 10.5px; color: var(--text-dim); font-weight: 700; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 8px; }
   .stat-box .val { font-size: 22px; font-weight: 900; background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -.5px; }
   .stat-box .val.warn { background: linear-gradient(135deg, #ef4444, #f97316); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .stat-box .val.green { background: linear-gradient(135deg, #22c55e, #4ade80); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-
-  /* CHART */
   .chart { display: flex; align-items: flex-end; justify-content: space-between; gap: 6px; height: 120px; padding: 12px 0; margin-bottom: 8px; }
   .chart-bar { flex: 1; background: linear-gradient(180deg, var(--purple), var(--pink)); border-radius: 6px 6px 0 0; min-height: 4px; position: relative; transition: height .5s ease; }
   .chart-bar .bar-lbl { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 9px; color: var(--text-dim); font-weight: 700; white-space: nowrap; }
   .chart-bar .bar-val { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 9.5px; color: #fff; font-weight: 800; white-space: nowrap; }
-
-  /* TOP EARNERS */
   .rank-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 8px; }
   .rank-item.gold-rank { border-color: rgba(251,191,36,.5); background: linear-gradient(135deg, rgba(251,191,36,.1), transparent); }
   .rank-item.silver-rank { border-color: rgba(203,213,225,.5); background: linear-gradient(135deg, rgba(203,213,225,.08), transparent); }
@@ -154,7 +148,6 @@
 
 <div id="mainApp" style="display:none;">
 
-  <!-- HOME -->
   <div id="page-home" class="page active">
     <div class="topbar">
       <div class="user-info">
@@ -178,7 +171,7 @@
     </div>
 
     <div class="action-section">
-      <button class="watch-btn" id="watchBtn">▶️ Watch Ad &nbsp;·&nbsp; +0.015 NOVA</button>
+      <button class="watch-btn" id="watchBtn">▶️ Watch Ad &nbsp;·&nbsp; +1 NOVA</button>
       <div class="progress-wrap">
         <div class="progress-info">
           <span>Ads watched today</span>
@@ -217,28 +210,16 @@
     </div>
   </div>
 
-  <!-- LEADERBOARD -->
   <div id="page-leaderboard" class="page">
-    <div class="section-header">
-      <div class="section-title">🏆 Leaderboard</div>
-    </div>
+    <div class="section-header"><div class="section-title">🏆 Leaderboard</div></div>
     <div class="section-sub">Top 20 earners of all time. Keep earning to climb higher!</div>
-
-    <div class="my-rank">
-      <div class="lbl">Your Rank</div>
-      <div class="val" id="myRankVal">#--</div>
-    </div>
-
+    <div class="my-rank"><div class="lbl">Your Rank</div><div class="val" id="myRankVal">#--</div></div>
     <div id="leaderboardList"><div class="empty"><span class="loader"></span> Loading...</div></div>
   </div>
 
-  <!-- TASKS -->
   <div id="page-tasks" class="page">
-    <div class="section-header">
-      <div class="section-title">📋 Tasks</div>
-    </div>
+    <div class="section-header"><div class="section-title">📋 Tasks</div></div>
     <div class="section-sub">Join channels and earn NOVA. Each task can only be claimed once.</div>
-
     <div id="adminTaskBox" class="admin-box" style="display:none;">
       <h3>⚙️ Admin: Add Task</h3>
       <input class="input" id="taskTitle" placeholder="Task title (e.g., Join our channel)">
@@ -246,145 +227,68 @@
       <input class="input" id="taskReward" type="number" step="0.1" placeholder="Reward in NOVA" value="1">
       <button class="btn-secondary" id="addTaskBtn">➕ Publish Task</button>
     </div>
-
     <div id="tasksList"><div class="empty"><span class="loader"></span> Loading tasks...</div></div>
   </div>
 
-  <!-- MINING -->
   <div id="page-mining" class="page">
-    <div class="section-header">
-      <div class="section-title">⛏️ Mining</div>
-    </div>
+    <div class="section-header"><div class="section-title">⛏️ Mining</div></div>
     <div class="section-sub">60 min mining → 0.1 NOVA. Watch an ad to collect your reward.</div>
-
-    <div class="mini-stat">
-      <div class="icon">⛏️</div>
-      <div class="info">
-        <div class="lbl">STATUS</div>
-        <div class="val highlight" id="mineStatus">Idle</div>
-      </div>
-    </div>
-    <div class="mini-stat">
-      <div class="icon">⏱️</div>
-      <div class="info">
-        <div class="lbl">TIME LEFT</div>
-        <div class="val" id="mineTime">--:--</div>
-      </div>
-    </div>
-
+    <div class="mini-stat"><div class="icon">⛏️</div><div class="info"><div class="lbl">STATUS</div><div class="val highlight" id="mineStatus">Idle</div></div></div>
+    <div class="mini-stat"><div class="icon">⏱️</div><div class="info"><div class="lbl">TIME LEFT</div><div class="val" id="mineTime">--:--</div></div></div>
     <button class="watch-btn" id="mineBtn" style="margin-top:20px;">⛏️ Start Mining</button>
   </div>
 
-  <!-- WITHDRAW -->
   <div id="page-withdraw" class="page">
-    <div class="section-header">
-      <div class="section-title">💸 Withdraw</div>
-    </div>
+    <div class="section-header"><div class="section-title">💸 Withdraw</div></div>
     <div class="section-sub">Minimum 100 NOVA · Polygon Network (POL)</div>
-
-    <div class="mini-stat">
-      <div class="icon">💰</div>
-      <div class="info">
-        <div class="lbl">WITHDRAWABLE BALANCE</div>
-        <div class="val highlight"><span id="wBalance">0.0000</span> NOVA</div>
-      </div>
-    </div>
-
-    <div class="section-header" style="margin-top:26px;">
-      <div class="section-title" style="font-size:15px;">👛 Wallet Address</div>
-    </div>
+    <div class="mini-stat"><div class="icon">💰</div><div class="info"><div class="lbl">WITHDRAWABLE BALANCE</div><div class="val highlight"><span id="wBalance">0.0000</span> NOVA</div></div></div>
+    <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">👛 Wallet Address</div></div>
     <input class="input" id="walletInput" placeholder="0x... (Polygon address)">
     <button class="btn-secondary" id="saveWalletBtn" style="margin-bottom:14px;">💾 Save Wallet</button>
     <button class="watch-btn" id="withdrawBtn">📤 Request Withdraw</button>
-
-    <div class="section-header" style="margin-top:26px;">
-      <div class="section-title" style="font-size:15px;">📜 History</div>
-    </div>
+    <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">📜 History</div></div>
     <div id="withdrawHistory"><div class="empty">No withdrawals yet</div></div>
   </div>
 
-  <!-- REFERRAL -->
   <div id="page-referral" class="page">
-    <div class="section-header">
-      <div class="section-title">👥 Invite Friends</div>
-    </div>
+    <div class="section-header"><div class="section-title">👥 Invite Friends</div></div>
     <div class="section-sub">Your referral completes 10 ads → you earn 10 NOVA instantly.</div>
-
-    <div class="mini-stat">
-      <div class="icon">🏆</div>
-      <div class="info">
-        <div class="lbl">TOTAL REFERRALS</div>
-        <div class="val highlight" id="refCount" style="font-size:24px;">0</div>
-      </div>
-    </div>
-
-    <div class="section-header" style="margin-top:26px;">
-      <div class="section-title" style="font-size:15px;">🔗 Your Referral Link</div>
-    </div>
+    <div class="mini-stat"><div class="icon">🏆</div><div class="info"><div class="lbl">TOTAL REFERRALS</div><div class="val highlight" id="refCount" style="font-size:24px;">0</div></div></div>
+    <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">🔗 Your Referral Link</div></div>
     <input class="input" id="refLink" readonly placeholder="Loading...">
     <button class="btn-secondary" id="copyRefBtn">📋 Copy Link</button>
   </div>
 
-  <!-- PROFILE -->
   <div id="page-profile" class="page">
-    <div class="section-header">
-      <div class="section-title">👤 My Profile</div>
-    </div>
+    <div class="section-header"><div class="section-title">👤 My Profile</div></div>
     <div class="section-sub">Your account stats and activity</div>
-
     <div id="flaggedWarning" style="display:none; padding: 16px; background: rgba(239,68,68,.15); border: 1.5px solid rgba(239,68,68,.4); border-radius: 16px; margin-bottom: 16px;">
       <div style="font-size: 13px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">⚠️ Account Flagged</div>
       <div style="font-size: 12px; color: var(--text-dim);" id="flagReasonText">Your account is under review. Contact admin.</div>
     </div>
-
-    <div id="profileStats">
-      <div class="empty"><span class="loader"></span> Loading profile...</div>
-    </div>
-
-    <div class="section-header" style="margin-top:26px;">
-      <div class="section-title" style="font-size:15px;">👥 Your Referrals</div>
-    </div>
+    <div id="profileStats"><div class="empty"><span class="loader"></span> Loading profile...</div></div>
+    <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">👥 Your Referrals</div></div>
     <div id="referralsList"><div class="empty"><span class="loader"></span> Loading...</div></div>
   </div>
 
-  <!-- ADMIN -->
   <div id="page-admin" class="page">
-    <div class="section-header">
-      <div class="section-title">⚙️ Admin Panel</div>
-    </div>
+    <div class="section-header"><div class="section-title">⚙️ Admin Panel</div></div>
     <div class="section-sub">Full control center — stats, withdrawals, flagged users, and security logs</div>
-
-    <!-- Tabs inside admin -->
     <div style="display: flex; gap: 8px; margin-bottom: 18px; overflow-x: auto; padding-bottom: 4px;">
       <button class="btn-secondary" style="width: auto; padding: 10px 16px; font-size: 12px; white-space: nowrap;" onclick="adminTab('stats')">📊 Stats</button>
       <button class="btn-secondary" style="width: auto; padding: 10px 16px; font-size: 12px; white-space: nowrap;" onclick="adminTab('withdrawals')">💸 Withdrawals</button>
       <button class="btn-secondary" style="width: auto; padding: 10px 16px; font-size: 12px; white-space: nowrap;" onclick="adminTab('flagged')">🚩 Flagged</button>
       <button class="btn-secondary" style="width: auto; padding: 10px 16px; font-size: 12px; white-space: nowrap;" onclick="adminTab('logs')">📜 Logs</button>
     </div>
-
-    <!-- Stats Tab -->
-    <div id="adminTab-stats" class="admin-tab">
-      <div id="adminStatsBox"><div class="empty"><span class="loader"></span> Loading...</div></div>
-    </div>
-
-    <!-- Withdrawals Tab -->
+    <div id="adminTab-stats" class="admin-tab"><div id="adminStatsBox"><div class="empty"><span class="loader"></span> Loading...</div></div></div>
     <div id="adminTab-withdrawals" class="admin-tab" style="display:none;">
       <button class="btn-secondary" id="refreshWdBtn" style="margin-bottom:16px;">🔄 Refresh Requests</button>
       <div id="wdList"><div class="empty"><span class="loader"></span> Loading...</div></div>
     </div>
-
-    <!-- Flagged Tab -->
-    <div id="adminTab-flagged" class="admin-tab" style="display:none;">
-      <div id="flaggedList"><div class="empty"><span class="loader"></span> Loading...</div></div>
-    </div>
-
-    <!-- Logs Tab -->
-    <div id="adminTab-logs" class="admin-tab" style="display:none;">
-      <div id="logsList"><div class="empty"><span class="loader"></span> Loading...</div></div>
-    </div>
+    <div id="adminTab-flagged" class="admin-tab" style="display:none;"><div id="flaggedList"><div class="empty"><span class="loader"></span> Loading...</div></div></div>
+    <div id="adminTab-logs" class="admin-tab" style="display:none;"><div id="logsList"><div class="empty"><span class="loader"></span> Loading...</div></div></div>
   </div>
 
-  <!-- NAV -->
   <div class="nav" id="mainNav">
     <div class="nav-item active" data-page="home"><span class="ic">🏠</span>Home</div>
     <div class="nav-item" data-page="tasks"><span class="ic">📋</span>Tasks</div>
@@ -402,20 +306,18 @@ const API_URL = "https://ggxcsxwvfntynersipax.supabase.co/functions/v1/nova-api"
 const BOT_USERNAME = "NovaAirdropEarn_bot";
 const tg = window.Telegram?.WebApp;
 
-// ============ DEVICE FINGERPRINT ============
+// ✅ CHANGED: 1 NOVA per ad
+const AD_REWARD_DISPLAY = "1";
+
 function getDeviceId() {
-  // Browser-based fingerprint (not 100% reliable but good enough)
   const nav = window.navigator;
   const scr = window.screen;
   const raw = [
-    nav.userAgent,
-    nav.language,
-    nav.platform,
+    nav.userAgent, nav.language, nav.platform,
     scr.width, scr.height, scr.colorDepth,
     nav.hardwareConcurrency || 0,
     Intl.DateTimeFormat().resolvedOptions().timeZone
   ].join("|");
-  // Simple hash
   let hash = 0;
   for (let i = 0; i < raw.length; i++) {
     const c = raw.charCodeAt(i);
@@ -426,7 +328,6 @@ function getDeviceId() {
 }
 const DEVICE_ID = getDeviceId();
 
-// ============ ADSGRAM ============
 const ADSGRAM_BLOCK_ID = "53039";
 let adController = null;
 
@@ -447,7 +348,6 @@ async function showRewardedAd() {
 const isDesktop = !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 let isAdmin = false;
 
-// ---------- Connect ----------
 async function connect() {
   const msg = document.getElementById("connectMsg");
   const retry = document.getElementById("retryBtn");
@@ -537,7 +437,7 @@ function renderDash(d) {
 }
 async function loadDash() { try { renderDash(await api("dashboard")); } catch (e) { toast(e.message, true); } }
 
-// ---------- Watch Ad ----------
+// Watch Ad — ✅ 1 NOVA per ad
 document.getElementById("watchBtn").onclick = async () => {
   if (isDesktop) { toast("⚠️ Ads work only on mobile Telegram", true); return; }
   const btn = document.getElementById("watchBtn");
@@ -546,14 +446,13 @@ document.getElementById("watchBtn").onclick = async () => {
     const rewarded = await showRewardedAd();
     if (!rewarded) { toast("Ad not completed, try again", true); return; }
     const r = await api("ad_reward", { ad_token: "tkn_" + Date.now() });
-    toast("✅ +0.015 NOVA added!");
+    toast(`✅ +${AD_REWARD_DISPLAY} NOVA added!`);
     if (r.referral_bonus_paid) toast("🎉 Your referrer earned 10 NOVA!");
     loadDash();
   } catch (e) { toast(e.message || "Ad not available", true); }
-  finally { btn.disabled = false; btn.textContent = "▶️ Watch Ad  ·  +0.015 NOVA"; }
+  finally { btn.disabled = false; btn.textContent = `▶️ Watch Ad  ·  +${AD_REWARD_DISPLAY} NOVA`; }
 };
 
-// ---------- Leaderboard ----------
 async function loadLeaderboard() {
   const list = document.getElementById("leaderboardList");
   list.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
@@ -569,20 +468,12 @@ async function loadLeaderboard() {
       const name = [u.first_name, u.username ? "@" + u.username : ""].filter(Boolean).join(" ") || "User";
       const el = document.createElement("div");
       el.className = "rank-item " + cls;
-      el.innerHTML = `
-        <div class="rank-pos">${medal}</div>
-        <div class="rank-info">
-          <div class="name">${name}</div>
-          <div class="uname">${u.ads_watched_total || 0} ads watched</div>
-        </div>
-        <div class="rank-amt">${Number(u.total_earned || 0).toFixed(2)}</div>
-      `;
+      el.innerHTML = `<div class="rank-pos">${medal}</div><div class="rank-info"><div class="name">${name}</div><div class="uname">${u.ads_watched_total || 0} ads watched</div></div><div class="rank-amt">${Number(u.total_earned || 0).toFixed(2)}</div>`;
       list.appendChild(el);
     });
   } catch (e) { list.innerHTML = `<div class="empty">${e.message}</div>`; }
 }
 
-// ---------- Tasks ----------
 async function loadTasks() {
   const list = document.getElementById("tasksList");
   list.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
@@ -632,7 +523,6 @@ document.getElementById("addTaskBtn").onclick = async () => {
   finally { btn.disabled = false; btn.textContent = "➕ Publish Task"; }
 };
 
-// ---------- Mining ----------
 let mTimer = null;
 async function loadMining() { try { renderMining(await api("mining_status")); } catch (e) { toast(e.message, true); } }
 function renderMining(d) {
@@ -674,7 +564,6 @@ async function collectMining() {
   } catch (e) { toast(e.message, true); loadMining(); }
 }
 
-// ---------- Withdraw ----------
 async function loadWithdraw() {
   try {
     const d = await api("withdraw_info");
@@ -700,7 +589,6 @@ document.getElementById("withdrawBtn").onclick = async () => {
   } catch (e) { toast(e.message, true); }
 };
 
-// ---------- Referral ----------
 async function loadReferral() {
   try {
     const d = await api("referral_info");
@@ -715,7 +603,6 @@ document.getElementById("copyRefBtn").onclick = async () => {
   catch { i.select(); document.execCommand("copy"); toast("📋 Link copied!"); }
 };
 
-// ---------- Profile ----------
 async function loadProfile() {
   const stats = document.getElementById("profileStats");
   const refList = document.getElementById("referralsList");
@@ -723,17 +610,13 @@ async function loadProfile() {
   try {
     const d = await api("user_profile");
     const p = d.profile;
-
-    // Flag warning
     if (p.flagged) {
       document.getElementById("flaggedWarning").style.display = "block";
       document.getElementById("flagReasonText").textContent = "Your account is under review. Contact admin for details.";
     } else {
       document.getElementById("flaggedWarning").style.display = "none";
     }
-
     const joinedDate = new Date(p.joined_at).toLocaleDateString();
-
     stats.innerHTML = `
       <div class="stats-grid">
         <div class="stat-box"><div class="lbl">Total Earned</div><div class="val">${Number(p.total_earned || 0).toFixed(2)}</div></div>
@@ -741,23 +624,9 @@ async function loadProfile() {
         <div class="stat-box"><div class="lbl">Ads Watched</div><div class="val green">${p.ads_watched_total || 0}</div></div>
         <div class="stat-box"><div class="lbl">Referrals</div><div class="val">${p.referral_count || 0}</div></div>
       </div>
-      <div class="mini-stat">
-        <div class="icon">📅</div>
-        <div class="info">
-          <div class="lbl">MEMBER SINCE</div>
-          <div class="val">${joinedDate}</div>
-        </div>
-      </div>
-      <div class="mini-stat">
-        <div class="icon">🆔</div>
-        <div class="info">
-          <div class="lbl">TELEGRAM ID</div>
-          <div class="val">${p.telegram_id}</div>
-        </div>
-      </div>
+      <div class="mini-stat"><div class="icon">📅</div><div class="info"><div class="lbl">MEMBER SINCE</div><div class="val">${joinedDate}</div></div></div>
+      <div class="mini-stat"><div class="icon">🆔</div><div class="info"><div class="lbl">TELEGRAM ID</div><div class="val">${p.telegram_id}</div></div></div>
     `;
-
-    // Referrals list
     if (!d.referrals || !d.referrals.length) {
       refList.innerHTML = `<div class="empty"><span class="big-icon">👥</span>No referrals yet. Invite friends!</div>`;
     } else {
@@ -766,13 +635,7 @@ async function loadProfile() {
         const name = [r.first_name, r.username ? "@" + r.username : ""].filter(Boolean).join(" ") || "User";
         const el = document.createElement("div");
         el.className = "mini-stat";
-        el.innerHTML = `
-          <div class="icon">👤</div>
-          <div class="info">
-            <div class="lbl">${name}</div>
-            <div class="val">${r.ads_watched_total || 0} ads watched</div>
-          </div>
-        `;
+        el.innerHTML = `<div class="icon">👤</div><div class="info"><div class="lbl">${name}</div><div class="val">${r.ads_watched_total || 0} ads watched</div></div>`;
         refList.appendChild(el);
       });
     }
@@ -782,7 +645,6 @@ async function loadProfile() {
   }
 }
 
-// ---------- Admin: Tabs ----------
 function adminTab(tab) {
   document.querySelectorAll(".admin-tab").forEach(t => t.style.display = "none");
   document.getElementById("adminTab-" + tab).style.display = "block";
@@ -798,8 +660,6 @@ async function loadAdminStats() {
   try {
     const d = await api("admin_stats");
     const s = d.stats;
-
-    // Build chart
     let chartHtml = "";
     if (d.daily && d.daily.length) {
       const maxVal = Math.max(...d.daily.map(x => x.new_users || 0), 1);
@@ -811,7 +671,6 @@ async function loadAdminStats() {
       });
       chartHtml += `</div><div style="font-size:11px; color:var(--text-dim); text-align:center; margin-top:32px; margin-bottom:18px;">New users · last ${d.daily.length} days</div>`;
     }
-
     box.innerHTML = `
       ${chartHtml}
       <div class="stats-grid">
@@ -822,18 +681,11 @@ async function loadAdminStats() {
         <div class="stat-box"><div class="lbl">Pending WDs</div><div class="val warn">${s.pending_withdrawals}</div></div>
         <div class="stat-box"><div class="lbl">Total Paid</div><div class="val green">${Number(s.total_paid).toFixed(2)}</div></div>
       </div>
-      <div class="mini-stat">
-        <div class="icon">💰</div>
-        <div class="info">
-          <div class="lbl">TOTAL BALANCE HELD (users)</div>
-          <div class="val highlight">${Number(s.total_balance).toFixed(2)} NOVA</div>
-        </div>
-      </div>
+      <div class="mini-stat"><div class="icon">💰</div><div class="info"><div class="lbl">TOTAL BALANCE HELD (users)</div><div class="val highlight">${Number(s.total_balance).toFixed(2)} NOVA</div></div></div>
     `;
   } catch (e) { box.innerHTML = `<div class="empty">${e.message}</div>`; }
 }
 
-// ---------- Admin: Withdrawals ----------
 async function loadWithdrawals() {
   const box = document.getElementById("wdList");
   box.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
@@ -846,13 +698,7 @@ async function loadWithdrawals() {
       const el = document.createElement("div");
       el.className = "wd-item";
       el.innerHTML = `
-        <div class="row">
-          <span class="amount">${Number(w.amount).toFixed(2)} NOVA</span>
-          <span>
-            <span class="status status-${w.status}">${w.status}</span>
-            ${w.flagged ? `<span class="status status-flag">🚩 FLAGGED</span>` : ""}
-          </span>
-        </div>
+        <div class="row"><span class="amount">${Number(w.amount).toFixed(2)} NOVA</span><span><span class="status status-${w.status}">${w.status}</span>${w.flagged ? `<span class="status status-flag">🚩 FLAGGED</span>` : ""}</span></div>
         <div class="meta">User ID: ${w.telegram_id}${w.username ? ' · @' + w.username : ''}</div>
         <div class="meta">Wallet: ${w.wallet}</div>
         <div class="meta">Date: ${new Date(w.created_at).toLocaleString()}</div>
@@ -882,7 +728,6 @@ async function loadWithdrawals() {
 }
 document.getElementById("refreshWdBtn").onclick = loadWithdrawals;
 
-// ---------- Admin: Flagged Users ----------
 async function loadFlagged() {
   const box = document.getElementById("flaggedList");
   box.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
@@ -896,10 +741,7 @@ async function loadFlagged() {
       const el = document.createElement("div");
       el.className = "wd-item";
       el.innerHTML = `
-        <div class="row">
-          <span class="amount" style="font-size:14px;">${name}</span>
-          <span class="status status-flag">🚩 FLAGGED</span>
-        </div>
+        <div class="row"><span class="amount" style="font-size:14px;">${name}</span><span class="status status-flag">🚩 FLAGGED</span></div>
         <div class="meta">User ID: ${u.telegram_id}</div>
         <div class="meta">Balance: ${Number(u.balance || 0).toFixed(2)} NOVA</div>
         <div class="meta">Device: ${(u.device_id || "unknown").slice(0, 30)}...</div>
@@ -921,7 +763,6 @@ async function loadFlagged() {
   } catch (e) { box.innerHTML = `<div class="empty">${e.message}</div>`; }
 }
 
-// ---------- Admin: Security Logs ----------
 async function loadLogs() {
   const box = document.getElementById("logsList");
   box.innerHTML = `<div class="empty"><span class="loader"></span> Loading...</div>`;
@@ -946,7 +787,6 @@ async function loadLogs() {
   } catch (e) { box.innerHTML = `<div class="empty">${e.message}</div>`; }
 }
 
-// ---------- Start ----------
 connect();
 </script>
 </body>
