@@ -8,31 +8,31 @@
 <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: -apple-system, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif; }
-  :root { --bg-dark: #0a0714; --purple: #a855f7; --purple2: #7c3aed; --pink: #ec4899; --pink2: #db2777; --cyan: #22d3ee; --gold: #fbbf24; --green: #22c55e; --red: #ef4444; --text: #ffffff; --text-dim: #b4a8d4; --text-dim2: #6b5f8f; --card: rgba(255,255,255,.04); --card-hover: rgba(255,255,255,.08); --border: rgba(168,85,247,.15); --border-hi: rgba(168,85,247,.35); }
+  :root { --bg-dark: #06101f; --purple: #168bff; --purple2: #1263e8; --pink: #35d0ff; --pink2: #009fe3; --cyan: #58e1ff; --gold: #fbbf24; --green: #22c55e; --red: #ef4444; --text: #ffffff; --text-dim: #b7cbe5; --text-dim2: #6e88a8; --card: rgba(255,255,255,.04); --card-hover: rgba(255,255,255,.08); --border: rgba(22,139,255,.18); --border-hi: rgba(22,139,255,.4); }
   body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overflow-x: hidden; padding-bottom: 110px; -webkit-font-smoothing: antialiased; position: relative; }
-  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 10%, rgba(168,85,247,.25), transparent 40%), radial-gradient(circle at 80% 30%, rgba(236,72,153,.18), transparent 45%), radial-gradient(circle at 50% 90%, rgba(34,211,238,.1), transparent 40%); z-index: -2; animation: bgShift 15s ease-in-out infinite alternate; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 10%, rgba(22,139,255,.25), transparent 40%), radial-gradient(circle at 80% 30%, rgba(53,208,255,.18), transparent 45%), radial-gradient(circle at 50% 90%, rgba(34,211,238,.1), transparent 40%); z-index: -2; animation: bgShift 15s ease-in-out infinite alternate; }
   @keyframes bgShift { 0% { transform: scale(1) rotate(0deg); } 100% { transform: scale(1.1) rotate(3deg); } }
   .topbar { display: flex; justify-content: space-between; align-items: center; padding: 22px 22px 14px; }
   .user-info { display: flex; align-items: center; gap: 14px; }
   .avatar-wrap { position: relative; }
-  .avatar { width: 52px; height: 52px; border-radius: 18px; background: linear-gradient(135deg, var(--purple), var(--pink)); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; color: #fff; border: 2px solid rgba(255,255,255,.15); overflow: hidden; flex-shrink: 0; box-shadow: 0 8px 24px rgba(168,85,247,.4); }
+  .avatar { width: 52px; height: 52px; border-radius: 18px; background: linear-gradient(135deg, var(--purple), var(--pink)); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; color: #fff; border: 2px solid rgba(255,255,255,.15); overflow: hidden; flex-shrink: 0; box-shadow: 0 8px 24px rgba(22,139,255,.4); }
   .avatar img { width: 100%; height: 100%; object-fit: cover; }
   .status-dot { position: absolute; bottom: -2px; right: -2px; width: 14px; height: 14px; border-radius: 50%; background: #22d3ee; border: 3px solid var(--bg-dark); box-shadow: 0 0 12px #22d3ee; animation: statusPulse 2s ease-in-out infinite; }
   @keyframes statusPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.15); opacity: .8; } }
   .user-text .greeting { font-size: 11px; color: var(--text-dim); letter-spacing: .5px; text-transform: uppercase; font-weight: 600; margin-bottom: 3px; }
   .user-text .name { font-size: 16px; font-weight: 800; color: #fff; line-height: 1.2; }
   .user-text .username { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; font-weight: 500; }
-  .balance-card { margin: 20px 22px 26px; padding: 32px 24px; background: linear-gradient(145deg, rgba(168,85,247,.15), rgba(236,72,153,.08)); border: 1px solid var(--border-hi); border-radius: 28px; text-align: center; position: relative; overflow: hidden; backdrop-filter: blur(20px); box-shadow: 0 20px 60px rgba(168,85,247,.2), inset 0 1px 0 rgba(255,255,255,.1); }
-  .balance-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(168,85,247,.15), transparent 30%); animation: rotate 8s linear infinite; z-index: 0; }
+  .balance-card { margin: 20px 22px 26px; padding: 32px 24px; background: linear-gradient(145deg, rgba(22,139,255,.15), rgba(53,208,255,.08)); border: 1px solid var(--border-hi); border-radius: 28px; text-align: center; position: relative; overflow: hidden; backdrop-filter: blur(20px); box-shadow: 0 20px 60px rgba(22,139,255,.2), inset 0 1px 0 rgba(255,255,255,.1); }
+  .balance-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(22,139,255,.15), transparent 30%); animation: rotate 8s linear infinite; z-index: 0; }
   @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .balance-card > * { position: relative; z-index: 1; }
   .balance-label { font-size: 11px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
-  .balance-amount { font-size: 68px; font-weight: 900; line-height: 1; background: linear-gradient(135deg, #fff 0%, var(--purple) 50%, var(--pink) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -3px; margin-bottom: 6px; filter: drop-shadow(0 4px 20px rgba(168,85,247,.5)); }
+  .balance-amount { font-size: 68px; font-weight: 900; line-height: 1; background: linear-gradient(135deg, #fff 0%, var(--purple) 50%, var(--pink) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -3px; margin-bottom: 6px; filter: drop-shadow(0 4px 20px rgba(22,139,255,.5)); }
   .balance-token { font-size: 13px; letter-spacing: 8px; color: var(--text-dim); font-weight: 800; margin-bottom: 18px; }
   .price-chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--cyan); background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.25); padding: 6px 16px; border-radius: 24px; }
   .price-chip .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); animation: statusPulse 1.5s ease-in-out infinite; }
   .action-section { padding: 0 22px 26px; }
-  .watch-btn { width: 100%; padding: 24px; border: none; border-radius: 24px; background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff; font-size: 17px; font-weight: 800; letter-spacing: .3px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 12px 40px rgba(168,85,247,.45), 0 4px 12px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.25); transition: all .25s cubic-bezier(.34,1.56,.64,1); position: relative; overflow: hidden; }
+  .watch-btn { width: 100%; padding: 24px; border: none; border-radius: 24px; background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff; font-size: 17px; font-weight: 800; letter-spacing: .3px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 12px 40px rgba(22,139,255,.45), 0 4px 12px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.25); transition: all .25s cubic-bezier(.34,1.56,.64,1); position: relative; overflow: hidden; }
   .watch-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: shine 3.5s infinite; }
   @keyframes shine { 0% { left: -100%; } 60%, 100% { left: 200%; } }
   .watch-btn:active { transform: scale(.97); }
@@ -41,11 +41,11 @@
   .progress-info { display: flex; justify-content: space-between; padding: 0 4px; font-size: 12px; color: var(--text-dim); margin-bottom: 10px; font-weight: 600; }
   .progress-info b { color: var(--purple); font-weight: 800; }
   .progress-track { height: 6px; background: rgba(255,255,255,.05); border-radius: 99px; overflow: hidden; }
-  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--purple), var(--pink)); border-radius: 99px; transition: width .6s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 0 15px rgba(168,85,247,.6); }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--purple), var(--pink)); border-radius: 99px; transition: width .6s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 0 15px rgba(22,139,255,.6); }
   .menu-list { padding: 0 22px; }
   .menu-card { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--card); border: 1px solid var(--border); border-radius: 22px; margin-bottom: 12px; cursor: pointer; transition: all .3s cubic-bezier(.34,1.56,.64,1); backdrop-filter: blur(20px); position: relative; overflow: hidden; }
   .menu-card:active { background: var(--card-hover); transform: translateX(4px); border-color: var(--border-hi); }
-  .menu-icon { width: 54px; height: 54px; border-radius: 18px; background: linear-gradient(135deg, rgba(168,85,247,.25), rgba(236,72,153,.15)); border: 1px solid rgba(168,85,247,.3); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 6px 20px rgba(168,85,247,.15); }
+  .menu-icon { width: 54px; height: 54px; border-radius: 18px; background: linear-gradient(135deg, rgba(22,139,255,.25), rgba(53,208,255,.15)); border: 1px solid rgba(22,139,255,.3); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 6px 20px rgba(22,139,255,.15); }
   .menu-icon.cyan { background: linear-gradient(135deg, rgba(34,211,238,.25), rgba(34,211,238,.1)); border-color: rgba(34,211,238,.35); }
   .menu-icon.gold { background: linear-gradient(135deg, rgba(251,191,36,.25), rgba(251,191,36,.1)); border-color: rgba(251,191,36,.35); }
   .menu-icon.green { background: linear-gradient(135deg, rgba(34,197,94,.25), rgba(34,197,94,.1)); border-color: rgba(34,197,94,.35); }
@@ -53,11 +53,11 @@
   .menu-text .t { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
   .menu-text .s { font-size: 12px; color: var(--text-dim); font-weight: 500; }
   .menu-arrow { color: var(--text-dim2); font-size: 22px; }
-  .nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,7,20,.9); backdrop-filter: blur(30px) saturate(180%); border-top: 1px solid rgba(168,85,247,.15); display: flex; padding: 12px 4px 18px; z-index: 100; box-shadow: 0 -10px 40px rgba(0,0,0,.5); }
+  .nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,7,20,.9); backdrop-filter: blur(30px) saturate(180%); border-top: 1px solid rgba(22,139,255,.15); display: flex; padding: 12px 4px 18px; z-index: 100; box-shadow: 0 -10px 40px rgba(0,0,0,.5); }
   .nav-item { flex: 1; text-align: center; font-size: 10px; color: var(--text-dim2); font-weight: 700; cursor: pointer; transition: all .3s; position: relative; }
   .nav-item .ic { font-size: 22px; display: block; margin-bottom: 5px; filter: grayscale(1) brightness(.5) opacity(.6); transition: all .3s; }
   .nav-item.active { color: var(--purple); }
-  .nav-item.active .ic { filter: none; transform: translateY(-3px) scale(1.15); text-shadow: 0 0 20px rgba(168,85,247,.8); }
+  .nav-item.active .ic { filter: none; transform: translateY(-3px) scale(1.15); text-shadow: 0 0 20px rgba(22,139,255,.8); }
   .nav-item.active::before { content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 28px; height: 3px; background: linear-gradient(90deg, var(--purple), var(--pink)); border-radius: 0 0 4px 4px; box-shadow: 0 0 15px var(--purple); }
   .nav-item.hidden { display: none; }
   .page { display: none; padding: 0 22px 20px; }
@@ -69,26 +69,27 @@
   .task-item { display: flex; justify-content: space-between; align-items: center; padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 12px; gap: 12px; backdrop-filter: blur(20px); }
   .task-item .tt { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 5px; }
   .task-item .tr { font-size: 12px; color: var(--cyan); font-weight: 800; }
-  .task-item button { padding: 11px 20px; border-radius: 14px; border: none; background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff; font-weight: 800; font-size: 12px; cursor: pointer; white-space: nowrap; box-shadow: 0 6px 20px rgba(168,85,247,.35); }
+  .task-item button { padding: 11px 20px; border-radius: 14px; border: none; background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff; font-weight: 800; font-size: 12px; cursor: pointer; white-space: nowrap; box-shadow: 0 6px 20px rgba(22,139,255,.35); }
   .task-item button.done { background: rgba(34,211,238,.15); color: var(--cyan); cursor: not-allowed; box-shadow: none; border: 1px solid rgba(34,211,238,.3); }
-  .input { width: 100%; padding: 17px 18px; border-radius: 18px; border: 1.5px solid rgba(168,85,247,.15); background: rgba(168,85,247,.03); color: #fff; font-size: 14px; margin-bottom: 14px; font-family: inherit; font-weight: 500; }
-  .input:focus { outline: none; border-color: var(--purple); background: rgba(168,85,247,.08); box-shadow: 0 0 0 4px rgba(168,85,247,.1); }
+  .input { width: 100%; padding: 17px 18px; border-radius: 18px; border: 1.5px solid rgba(22,139,255,.15); background: rgba(22,139,255,.03); color: #fff; font-size: 14px; margin-bottom: 14px; font-family: inherit; font-weight: 500; }
+  .input:focus { outline: none; border-color: var(--purple); background: rgba(22,139,255,.08); box-shadow: 0 0 0 4px rgba(22,139,255,.1); }
   .input::placeholder { color: var(--text-dim2); }
-  .btn-secondary { width: 100%; padding: 17px; border-radius: 18px; border: 1.5px solid var(--border-hi); background: rgba(168,85,247,.08); color: var(--purple); font-size: 14px; font-weight: 800; cursor: pointer; letter-spacing: .3px; }
-  .btn-secondary:active { background: rgba(168,85,247,.15); transform: scale(.98); }
-  .toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-140px); background: linear-gradient(135deg, rgba(168,85,247,.95), rgba(236,72,153,.95)); color: #fff; padding: 16px 26px; border-radius: 20px; font-size: 13.5px; font-weight: 700; z-index: 999; transition: transform .4s cubic-bezier(.34,1.56,.64,1); max-width: 90vw; text-align: center; box-shadow: 0 20px 60px rgba(168,85,247,.5); }
+  .btn-secondary { width: 100%; padding: 17px; border-radius: 18px; border: 1.5px solid var(--border-hi); background: rgba(22,139,255,.08); color: var(--purple); font-size: 14px; font-weight: 800; cursor: pointer; letter-spacing: .3px; }
+  .btn-secondary:active { background: rgba(22,139,255,.15); transform: scale(.98); }
+  .toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-140px); background: linear-gradient(135deg, rgba(22,139,255,.95), rgba(53,208,255,.95)); color: #fff; padding: 16px 26px; border-radius: 20px; font-size: 13.5px; font-weight: 700; z-index: 999; transition: transform .4s cubic-bezier(.34,1.56,.64,1); max-width: 90vw; text-align: center; box-shadow: 0 20px 60px rgba(22,139,255,.5); }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.error { background: linear-gradient(135deg, #ef4444, #dc2626); }
-  .loader { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(168,85,247,.25); border-top-color: var(--purple); border-radius: 50%; animation: spin .7s linear infinite; margin-right: 8px; vertical-align: middle; }
+  .loader { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(22,139,255,.25); border-top-color: var(--purple); border-radius: 50%; animation: spin .7s linear infinite; margin-right: 8px; vertical-align: middle; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .empty { text-align: center; padding: 50px 20px; color: var(--text-dim2); font-size: 13.5px; font-weight: 500; }
   .empty .big-icon { font-size: 48px; display: block; margin-bottom: 12px; opacity: .4; }
   .connect-box { text-align: center; padding: 100px 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-  .connect-box .logo-big { font-size: 80px; margin-bottom: 24px; animation: float 3s ease-in-out infinite; }
+  .connect-box .logo-big { width: 116px; height: 116px; margin: 0 auto 24px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 12px 32px rgba(22,139,255,.45)); }
+  .connect-box .logo-big img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
   @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
   .connect-box h1 { font-size: 32px; margin-bottom: 12px; background: linear-gradient(135deg, #fff, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
   .connect-box p { font-size: 14px; color: var(--text-dim); margin-bottom: 28px; line-height: 1.7; }
-  .connect-box .retry { display: inline-block; padding: 16px 32px; border-radius: 18px; border: none; background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 12px 40px rgba(168,85,247,.5); }
+  .connect-box .retry { display: inline-block; padding: 16px 32px; border-radius: 18px; border: none; background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 12px 40px rgba(22,139,255,.5); }
   .wd-item { padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 12px; }
   .wd-item .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
   .wd-item .amount { font-size: 18px; font-weight: 900; background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -102,10 +103,10 @@
   .wd-actions button { flex: 1; padding: 13px; border-radius: 14px; border: none; font-size: 12px; font-weight: 800; cursor: pointer; }
   .btn-approve { background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #042f2e; box-shadow: 0 6px 20px rgba(34,211,238,.35); }
   .btn-reject { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
-  .admin-box { padding: 22px; background: linear-gradient(145deg, rgba(168,85,247,.1), rgba(236,72,153,.05)); border: 1.5px solid rgba(168,85,247,.3); border-radius: 24px; margin-bottom: 22px; backdrop-filter: blur(20px); }
+  .admin-box { padding: 22px; background: linear-gradient(145deg, rgba(22,139,255,.1), rgba(53,208,255,.05)); border: 1.5px solid rgba(22,139,255,.3); border-radius: 24px; margin-bottom: 22px; backdrop-filter: blur(20px); }
   .admin-box h3 { font-size: 15px; color: var(--purple); margin-bottom: 18px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
   .mini-stat { display: flex; align-items: center; gap: 14px; padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 12px; }
-  .mini-stat .icon { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: linear-gradient(135deg, rgba(168,85,247,.2), rgba(236,72,153,.1)); border: 1px solid rgba(168,85,247,.25); }
+  .mini-stat .icon { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: linear-gradient(135deg, rgba(22,139,255,.2), rgba(53,208,255,.1)); border: 1px solid rgba(22,139,255,.25); }
   .mini-stat .info { flex: 1; }
   .mini-stat .info .lbl { font-size: 11.5px; color: var(--text-dim); font-weight: 600; margin-bottom: 3px; }
   .mini-stat .info .val { font-size: 17px; color: #fff; font-weight: 800; }
@@ -132,7 +133,7 @@
   .rank-info .name { font-size: 13.5px; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .rank-info .uname { font-size: 11px; color: var(--text-dim); }
   .rank-amt { font-size: 13px; font-weight: 900; color: var(--cyan); }
-  .my-rank { padding: 16px; background: linear-gradient(135deg, rgba(168,85,247,.2), rgba(236,72,153,.15)); border: 1.5px solid var(--purple); border-radius: 18px; margin-bottom: 16px; text-align: center; }
+  .my-rank { padding: 16px; background: linear-gradient(135deg, rgba(22,139,255,.2), rgba(53,208,255,.15)); border: 1.5px solid var(--purple); border-radius: 18px; margin-bottom: 16px; text-align: center; }
   .my-rank .lbl { font-size: 11px; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
   .my-rank .val { font-size: 26px; font-weight: 900; color: #fff; }
 </style>
@@ -140,7 +141,7 @@
 <body>
 
 <div id="connectBox" class="connect-box">
-  <div class="logo-big">🚀</div>
+  <div class="logo-big"><img src="logo.png" alt="NOVA"></div>
   <h1>NOVA Earn</h1>
   <p id="connectMsg">Connecting to Telegram...</p>
   <button class="retry" id="retryBtn" style="display:none;" onclick="connect()">🔄 Retry</button>
@@ -167,11 +168,11 @@
       <div class="balance-label">Total Balance</div>
       <div class="balance-amount" id="balanceBig">0</div>
       <div class="balance-token">NOVA TOKEN</div>
-      <div class="price-chip"><span class="live-dot"></span>Live · $0.0001</div>
+      <div class="price-chip"><span class="live-dot"></span>NOVA · Community Rewards</div>
     </div>
 
     <div class="action-section">
-      <button class="watch-btn" id="watchBtn">▶️ Watch Ad &nbsp;·&nbsp; +1 NOVA</button>
+      <button class="watch-btn" id="watchBtn">▶️ Watch Ad &nbsp;·&nbsp; +100 NOVA</button>
       <div class="progress-wrap">
         <div class="progress-info">
           <span>Ads watched today</span>
@@ -189,7 +190,7 @@
       </div>
       <div class="menu-card" onclick="go('referral')">
         <div class="menu-icon gold">👥</div>
-        <div class="menu-text"><div class="t">Referral</div><div class="s">Invite friends · Earn 10 NOVA each</div></div>
+        <div class="menu-text"><div class="t">Referral</div><div class="s">Invite friends · Earn 1,000 NOVA each</div></div>
         <div class="menu-arrow">›</div>
       </div>
       <div class="menu-card" onclick="go('tasks')">
@@ -199,7 +200,12 @@
       </div>
       <div class="menu-card" onclick="go('mining')">
         <div class="menu-icon">⛏️</div>
-        <div class="menu-text"><div class="t">Mining</div><div class="s">Mine 0.1 NOVA every hour</div></div>
+        <div class="menu-text"><div class="t">Mining</div><div class="s">Mine 250 NOVA every hour</div></div>
+        <div class="menu-arrow">›</div>
+      </div>
+      <div class="menu-card" onclick="go('about')">
+        <div class="menu-icon cyan">🔷</div>
+        <div class="menu-text"><div class="t">About NOVA</div><div class="s">Token contract · Total supply</div></div>
         <div class="menu-arrow">›</div>
       </div>
       <div class="menu-card" onclick="go('profile')">
@@ -232,7 +238,7 @@
 
   <div id="page-mining" class="page">
     <div class="section-header"><div class="section-title">⛏️ Mining</div></div>
-    <div class="section-sub">60 min mining → 0.1 NOVA. Watch an ad to collect your reward.</div>
+    <div class="section-sub">60 min mining → 250 NOVA. Watch an ad to collect your reward.</div>
     <div class="mini-stat"><div class="icon">⛏️</div><div class="info"><div class="lbl">STATUS</div><div class="val highlight" id="mineStatus">Idle</div></div></div>
     <div class="mini-stat"><div class="icon">⏱️</div><div class="info"><div class="lbl">TIME LEFT</div><div class="val" id="mineTime">--:--</div></div></div>
     <button class="watch-btn" id="mineBtn" style="margin-top:20px;">⛏️ Start Mining</button>
@@ -240,10 +246,10 @@
 
   <div id="page-withdraw" class="page">
     <div class="section-header"><div class="section-title">💸 Withdraw</div></div>
-    <div class="section-sub">Minimum 100 NOVA · Polygon Network (POL)</div>
+    <div class="section-sub">Minimum 5,000 NOVA · TON Network</div>
     <div class="mini-stat"><div class="icon">💰</div><div class="info"><div class="lbl">WITHDRAWABLE BALANCE</div><div class="val highlight"><span id="wBalance">0.0000</span> NOVA</div></div></div>
     <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">👛 Wallet Address</div></div>
-    <input class="input" id="walletInput" placeholder="0x... (Polygon address)">
+    <input class="input" id="walletInput" placeholder="TON address (EQ… or UQ…)" autocomplete="off" autocapitalize="off" spellcheck="false">
     <button class="btn-secondary" id="saveWalletBtn" style="margin-bottom:14px;">💾 Save Wallet</button>
     <button class="watch-btn" id="withdrawBtn">📤 Request Withdraw</button>
     <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">📜 History</div></div>
@@ -252,11 +258,19 @@
 
   <div id="page-referral" class="page">
     <div class="section-header"><div class="section-title">👥 Invite Friends</div></div>
-    <div class="section-sub">Your referral completes 10 ads → you earn 10 NOVA instantly.</div>
+    <div class="section-sub">When your invited friend completes 10 ads, you earn 1,000 NOVA.</div>
     <div class="mini-stat"><div class="icon">🏆</div><div class="info"><div class="lbl">TOTAL REFERRALS</div><div class="val highlight" id="refCount" style="font-size:24px;">0</div></div></div>
     <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">🔗 Your Referral Link</div></div>
     <input class="input" id="refLink" readonly placeholder="Loading...">
     <button class="btn-secondary" id="copyRefBtn">📋 Copy Link</button>
+  </div>
+
+  <div id="page-about" class="page">
+    <div class="section-header"><div class="section-title">🔷 About NOVA</div></div>
+    <div class="section-sub">NOVA token information</div>
+    <div class="mini-stat"><div class="icon">🪙</div><div class="info"><div class="lbl">TOTAL SUPPLY</div><div class="val highlight">1,000,000,000 NOVA</div></div></div>
+    <div class="section-header" style="margin-top:26px;"><div class="section-title" style="font-size:15px;">📄 Token Contract</div></div>
+    <div class="task-item" style="display:block; overflow-wrap:anywhere;"><div class="tt" style="font-size:12px; line-height:1.7;">EQD5tjWQWjP80qDTSywy_V1lz4s0tFD5AulSgrocUipP3j2x</div></div>
   </div>
 
   <div id="page-profile" class="page">
@@ -307,7 +321,7 @@ const BOT_USERNAME = "NovaAirdropEarn_bot";
 const tg = window.Telegram?.WebApp;
 
 // ✅ CHANGED: 1 NOVA per ad
-const AD_REWARD_DISPLAY = "1";
+const AD_REWARD_DISPLAY = "100";
 
 function getDeviceId() {
   const nav = window.navigator;
@@ -437,7 +451,7 @@ function renderDash(d) {
 }
 async function loadDash() { try { renderDash(await api("dashboard")); } catch (e) { toast(e.message, true); } }
 
-// Watch Ad — ✅ 1 NOVA per ad
+// Watch Ad — reward is granted only after AdsGram confirms completion.
 document.getElementById("watchBtn").onclick = async () => {
   if (isDesktop) { toast("⚠️ Ads work only on mobile Telegram", true); return; }
   const btn = document.getElementById("watchBtn");
@@ -447,7 +461,7 @@ document.getElementById("watchBtn").onclick = async () => {
     if (!rewarded) { toast("Ad not completed, try again", true); return; }
     const r = await api("ad_reward", { ad_token: "tkn_" + Date.now() });
     toast(`✅ +${AD_REWARD_DISPLAY} NOVA added!`);
-    if (r.referral_bonus_paid) toast("🎉 Your referrer earned 10 NOVA!");
+    if (r.referral_bonus_paid) toast("🎉 Your referrer earned 1,000 NOVA!");
     loadDash();
   } catch (e) { toast(e.message || "Ad not available", true); }
   finally { btn.disabled = false; btn.textContent = `▶️ Watch Ad  ·  +${AD_REWARD_DISPLAY} NOVA`; }
@@ -530,7 +544,7 @@ function renderMining(d) {
   clearInterval(mTimer);
   if (d.canCollect) {
     s.textContent = "Ready to collect"; t.textContent = "00:00";
-    b.textContent = "💎 Collect 0.1 NOVA";
+    b.textContent = "💎 Collect 250 NOVA";
     b.disabled = false; b.onclick = collectMining;
   } else if (!d.canStart && d.remaining > 0) {
     s.textContent = "Mining..."; b.textContent = "⛏️ Mining in progress..."; b.disabled = true;
@@ -576,18 +590,22 @@ async function loadWithdraw() {
 }
 document.getElementById("saveWalletBtn").onclick = async () => {
   const w = document.getElementById("walletInput").value.trim();
-  if (w.length < 10) return toast("Enter a valid wallet address", true);
+  if (!isTonAddress(w)) return toast("Enter a valid TON address (EQ… / UQ…)", true);
   try { await api("set_wallet", { wallet: w }); toast("✅ Wallet saved"); } catch (e) { toast(e.message, true); }
 };
 document.getElementById("withdrawBtn").onclick = async () => {
   const w = document.getElementById("walletInput").value.trim();
-  if (w.length < 10) return toast("Save your wallet first", true);
+  if (!isTonAddress(w)) return toast("Enter and save a valid TON wallet address first", true);
   try {
     await api("withdraw_request", { wallet: w });
     toast("✅ Withdrawal request submitted!");
     loadWithdraw(); loadDash();
   } catch (e) { toast(e.message, true); }
 };
+
+function isTonAddress(address) {
+  return /^(?:(?:EQ|UQ)[A-Za-z0-9_-]{46}|0:[A-Fa-f0-9]{64})$/.test(address);
+}
 
 async function loadReferral() {
   try {
@@ -791,3 +809,4 @@ connect();
 </script>
 </body>
 </html>
+
