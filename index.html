@@ -42,6 +42,7 @@
   .progress-info b { color: var(--purple); font-weight: 800; }
   .progress-track { height: 6px; background: rgba(255,255,255,.05); border-radius: 99px; overflow: hidden; }
   .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--purple), var(--pink)); border-radius: 99px; transition: width .6s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 0 15px rgba(22,139,255,.6); }
+  .ads-reset-hint { display: block; min-height: 16px; margin: 9px 4px 0; color: #7f9ab5; font-size: 11px; font-weight: 600; }
   .menu-list { padding: 0 22px; }
   .menu-card { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--card); border: 1px solid var(--border); border-radius: 22px; margin-bottom: 12px; cursor: pointer; transition: all .3s cubic-bezier(.34,1.56,.64,1); backdrop-filter: blur(20px); position: relative; overflow: hidden; }
   .menu-card:active { background: var(--card-hover); transform: translateX(4px); border-color: var(--border-hi); }
@@ -228,10 +229,11 @@
       <button class="watch-btn" id="watchBtn">▶️ Watch Ad &nbsp;·&nbsp; +100 NOVA</button>
       <div class="progress-wrap">
         <div class="progress-info">
-          <span>Ads watched today</span>
+          <span>Ad reward limit</span>
           <span><b id="adsToday">0</b> / 20</span>
         </div>
         <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+        <small class="ads-reset-hint" id="adsResetHint">Limit resets 12 hours after your 20th ad.</small>
       </div>
     </div>
 
@@ -278,12 +280,12 @@
 
   <div id="page-tasks" class="page">
     <div class="section-header"><div class="section-title">📋 Tasks</div></div>
-    <div class="section-sub">Join channels and earn NOVA. Each task can only be claimed once.</div>
+    <div class="section-sub">Complete each task once and earn at least 50 NOVA.</div>
     <div id="adminTaskBox" class="admin-box" style="display:none;">
       <h3>⚙️ Admin: Add Task</h3>
       <input class="input" id="taskTitle" placeholder="Task title (e.g., Join our channel)">
       <input class="input" id="taskLink" placeholder="https://t.me/channelname">
-      <input class="input" id="taskReward" type="number" step="0.1" placeholder="Reward in NOVA" value="1">
+      <input class="input" id="taskReward" type="number" min="50" step="1" placeholder="Reward in NOVA" value="50">
       <button class="btn-secondary" id="addTaskBtn">➕ Publish Task</button>
     </div>
     <div id="tasksList"><div class="empty"><span class="loader"></span> Loading tasks...</div></div>
@@ -379,6 +381,9 @@ const tg = window.Telegram?.WebApp;
 
 // The displayed reward must match AD_REWARD in the deployed API.
 const AD_REWARD_DISPLAY = "100";
+let adsCoolingDown = false;
+let adResetTimer = null;
+let adResetReloading = false;
 
 function getDeviceId() {
   const nav = window.navigator;
@@ -517,9 +522,43 @@ document.querySelectorAll(".nav-item").forEach(el => el.onclick = () => go(el.da
 
 function renderDash(d) {
   const b = Number(d.user.balance || 0);
+  const adCount = Number(d.user.ads_watched_today || 0);
+  const resetAt = d.user.ads_reset_at ? Date.parse(d.user.ads_reset_at) : 0;
+  adsCoolingDown = adCount >= 20 && resetAt > Date.now();
   document.getElementById("balanceBig").textContent = b.toFixed(2);
-  document.getElementById("adsToday").textContent = d.user.ads_watched_today || 0;
-  document.getElementById("progFill").style.width = Math.min(100, ((d.user.ads_watched_today || 0) / 20) * 100) + "%";
+  document.getElementById("adsToday").textContent = adCount;
+  document.getElementById("progFill").style.width = Math.min(100, (adCount / 20) * 100) + "%";
+  const btn = document.getElementById("watchBtn");
+  const hint = document.getElementById("adsResetHint");
+  clearInterval(adResetTimer);
+  const updateCooldown = () => {
+    const msLeft = resetAt - Date.now();
+    if (adCount >= 20 && msLeft > 0) {
+      const hours = Math.floor(msLeft / 3600000);
+      const minutes = Math.floor((msLeft % 3600000) / 60000);
+      hint.textContent = `Limit reached · rewards reset in ${hours}h ${minutes}m.`;
+      btn.disabled = true;
+      btn.textContent = `⏳ Ad limit · ${hours}h ${minutes}m`;
+      return;
+    }
+    if (adCount >= 20) {
+      hint.textContent = "Resetting your ad rewards…";
+      btn.disabled = true;
+      btn.textContent = "⏳ Refreshing ad limit…";
+      if (!adResetReloading) {
+        adResetReloading = true;
+        setTimeout(() => loadDash(), 900);
+      }
+      return;
+    }
+    adResetReloading = false;
+    adsCoolingDown = false;
+    btn.disabled = false;
+    btn.textContent = `▶️ Watch Ad  ·  +${AD_REWARD_DISPLAY} NOVA`;
+    hint.textContent = "Limit resets 12 hours after your 20th ad.";
+  };
+  updateCooldown();
+  if (adCount >= 20 && resetAt > Date.now()) adResetTimer = setInterval(updateCooldown, 60000);
 }
 async function loadDash() { try { renderDash(await api("dashboard")); } catch (e) { toast(e.message, true); } }
 
@@ -536,7 +575,10 @@ document.getElementById("watchBtn").onclick = async () => {
     if (r.referral_bonus_paid) toast("🎉 Your referrer earned 1,000 NOVA!");
     loadDash();
   } catch (e) { toast(e.message || "Ad not available", true); }
-  finally { btn.disabled = false; btn.textContent = `▶️ Watch Ad  ·  +${AD_REWARD_DISPLAY} NOVA`; }
+  finally {
+    btn.disabled = adsCoolingDown;
+    btn.textContent = adsCoolingDown ? "⏳ Ad limit reached" : `▶️ Watch Ad  ·  +${AD_REWARD_DISPLAY} NOVA`;
+  }
 };
 
 async function loadLeaderboard() {
@@ -593,7 +635,7 @@ async function loadTasks() {
 document.getElementById("addTaskBtn").onclick = async () => {
   const title = document.getElementById("taskTitle").value.trim();
   const link = document.getElementById("taskLink").value.trim();
-  const reward = parseFloat(document.getElementById("taskReward").value) || 1;
+  const reward = Math.max(parseFloat(document.getElementById("taskReward").value) || 50, 50);
   if (!title) return toast("Enter task title", true);
   if (!/^https:\/\/t\.me\//i.test(link)) return toast("Enter valid t.me link", true);
   const btn = document.getElementById("addTaskBtn");
@@ -603,7 +645,7 @@ document.getElementById("addTaskBtn").onclick = async () => {
     toast("✅ Task published!");
     document.getElementById("taskTitle").value = "";
     document.getElementById("taskLink").value = "";
-    document.getElementById("taskReward").value = "1";
+    document.getElementById("taskReward").value = "50";
     loadTasks();
   } catch (e) { toast(e.message, true); }
   finally { btn.disabled = false; btn.textContent = "➕ Publish Task"; }
