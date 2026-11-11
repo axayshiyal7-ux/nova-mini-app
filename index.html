@@ -136,6 +136,58 @@
   .my-rank { padding: 16px; background: linear-gradient(135deg, rgba(22,139,255,.2), rgba(53,208,255,.15)); border: 1.5px solid var(--purple); border-radius: 18px; margin-bottom: 16px; text-align: center; }
   .my-rank .lbl { font-size: 11px; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
   .my-rank .val { font-size: 26px; font-weight: 900; color: #fff; }
+
+  /* NOVA signature: deep black, blue edge light, and restrained motion. */
+  body { background: #02060d; }
+  body::before { background: radial-gradient(ellipse at 50% -12%, rgba(0,119,255,.2), transparent 52%), radial-gradient(ellipse at 100% 62%, rgba(0,195,255,.09), transparent 42%); animation: ambientDrift 18s ease-in-out infinite alternate; }
+  body::after { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .18; background-image: radial-gradient(rgba(120,190,255,.55) .7px, transparent .9px); background-size: 36px 36px; mask-image: linear-gradient(to bottom, #000, transparent 80%); }
+  @keyframes ambientDrift { from { transform: scale(1); opacity: .65; } to { transform: scale(1.12) translateY(1%); opacity: 1; } }
+  .topbar { padding-top: max(18px, env(safe-area-inset-top)); }
+  .avatar { border-radius: 50%; border: 2px solid rgba(91,190,255,.55); box-shadow: 0 0 0 5px rgba(22,139,255,.08), 0 0 28px rgba(22,139,255,.3); }
+  .balance-card { background: linear-gradient(145deg, rgba(7,25,48,.96), rgba(3,10,20,.96) 72%); border-color: rgba(50,157,255,.42); border-radius: 30px; box-shadow: 0 24px 70px rgba(0,76,190,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+  .nova-lockup { display: flex; align-items: center; gap: 10px; margin: 0 0 20px; text-align: left; }
+  .nova-lockup img { width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 1px solid rgba(102,204,255,.58); box-shadow: 0 0 22px rgba(0,145,255,.3); }
+  .nova-lockup .wordmark { display: flex; flex-direction: column; gap: 2px; }
+  .nova-lockup strong { font-size: 17px; letter-spacing: 2px; font-weight: 900; color: #f4fbff; }
+  .nova-lockup small { color: #83a9c8; font-size: 9px; letter-spacing: 1.7px; font-weight: 800; }
+  .nova-lockup .brand-live { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; color: #89ddf4; font-size: 9px; font-weight: 800; letter-spacing: 1.3px; border: 1px solid rgba(75,190,255,.2); border-radius: 99px; padding: 7px 10px; background: rgba(0,140,255,.08); }
+  .nova-lockup .brand-live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #50e0ff; box-shadow: 0 0 10px #50e0ff; }
+  .balance-card::before { opacity: .65; }
+  .balance-card::after { content: ''; position: absolute; inset: 1px; border-radius: 29px; pointer-events: none; background: linear-gradient(120deg, rgba(73,182,255,.12), transparent 35%, transparent 70%, rgba(0,195,255,.08)); }
+  .balance-card > * { z-index: 2; }
+  .balance-amount { font-size: clamp(54px, 16vw, 72px); }
+  .price-chip { color: #8feaff; background: rgba(0,177,255,.08); border-color: rgba(63,190,255,.24); }
+  .menu-card { background: linear-gradient(145deg, rgba(10,24,40,.94), rgba(5,13,23,.94)); border-color: rgba(73,151,218,.17); box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 10px 28px rgba(0,0,0,.18); }
+  .menu-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(58,171,255,.045), transparent 72%); opacity: 0; transition: opacity .3s ease; }
+  .menu-card:hover::after, .menu-card:active::after { opacity: 1; }
+  .menu-card:active { transform: translateY(-2px) scale(.99); }
+  .menu-icon, .menu-icon.cyan, .menu-icon.gold, .menu-icon.green { width: 52px; height: 52px; border-radius: 17px; color: #70dfff; background: linear-gradient(145deg, rgba(0,153,255,.17), rgba(0,55,112,.12)); border: 1px solid rgba(69,183,255,.27); box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 0 24px rgba(0,113,255,.08); transition: transform .3s ease, box-shadow .3s ease; }
+  .menu-card:active .menu-icon { transform: scale(1.06) rotate(-3deg); box-shadow: 0 0 24px rgba(0,150,255,.2); }
+  .menu-icon svg, .nav-item .ic svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .menu-text .t { letter-spacing: -.2px; }
+  .nav { background: rgba(2,6,13,.94); border-top-color: rgba(64,157,232,.2); padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+  .nav-item { color: #62758c; }
+  .nav-item .ic { height: 26px; filter: none; color: #61758e; }
+  .nav-item.active { color: #6edbff; }
+  .nav-item.active .ic { color: #6edbff; filter: none; text-shadow: none; }
+  .section-title { letter-spacing: -.35px; }
+  .watch-btn { border-radius: 20px; background: linear-gradient(110deg, #0877ed, #05bce8); box-shadow: 0 14px 36px rgba(0,123,255,.25), inset 0 1px 0 rgba(255,255,255,.24); }
+  .progress-fill { background: linear-gradient(90deg, #0877ed, #42ddff); }
+  .page.active { animation: pageIn .28s ease-out; }
+  .mining-visual { width: 190px; height: 190px; margin: 12px auto 22px; position: relative; display: grid; place-items: center; }
+  .mining-ring { position: absolute; inset: 8px; border: 1px solid rgba(64,182,255,.22); border-radius: 50%; box-shadow: 0 0 35px rgba(0,119,255,.11), inset 0 0 28px rgba(0,119,255,.07); }
+  .mining-ring.r2 { inset: 24px; border-style: dashed; border-color: rgba(73,205,255,.33); animation: orbit 18s linear infinite; }
+  .mining-ring.r3 { inset: 42px; border-color: rgba(22,139,255,.24); animation: orbit 12s linear infinite reverse; }
+  .mining-core { width: 94px; height: 94px; display: grid; place-items: center; border-radius: 30px; color: #a9efff; background: radial-gradient(circle at 35% 25%, rgba(34,172,255,.25), rgba(4,18,34,.96) 70%); border: 1px solid rgba(91,202,255,.38); box-shadow: 0 0 40px rgba(0,133,255,.24), inset 0 0 24px rgba(0,115,255,.12); animation: coreFloat 3.4s ease-in-out infinite; }
+  .mining-core svg { width: 48px; height: 48px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 10px rgba(80,211,255,.6)); }
+  .mining-visual.is-mining .mining-ring.r2 { animation-duration: 5s; }
+  .mining-visual.is-mining .mining-ring.r3 { animation-duration: 4s; }
+  .mining-visual.is-mining .mining-core { animation-duration: 1.1s; box-shadow: 0 0 58px rgba(0,167,255,.42), inset 0 0 28px rgba(0,172,255,.19); }
+  .mining-visual.is-ready .mining-core { color: #d5f9ff; box-shadow: 0 0 52px rgba(59,218,255,.4); }
+  @keyframes orbit { to { transform: rotate(360deg); } }
+  @keyframes coreFloat { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-5px) scale(1.035); } }
+  .mini-stat .icon { filter: grayscale(1) sepia(1) hue-rotate(155deg) saturate(2.6); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
 </style>
 </head>
 <body>
@@ -165,6 +217,7 @@
     </div>
 
     <div class="balance-card">
+      <div class="nova-lockup"><img src="logo.png" alt="NOVA logo"><div class="wordmark"><strong>NOVA</strong><small>COMMUNITY REWARDS</small></div><span class="brand-live">ACTIVE</span></div>
       <div class="balance-label">Total Balance</div>
       <div class="balance-amount" id="balanceBig">0</div>
       <div class="balance-token">NOVA TOKEN</div>
@@ -184,32 +237,32 @@
 
     <div class="menu-list">
       <div class="menu-card" onclick="go('leaderboard')">
-        <div class="menu-icon gold">🏆</div>
+        <div class="menu-icon gold" data-icon="leaderboard" aria-hidden="true"></div>
         <div class="menu-text"><div class="t">Leaderboard</div><div class="s">Top earners this week</div></div>
         <div class="menu-arrow">›</div>
       </div>
       <div class="menu-card" onclick="go('referral')">
-        <div class="menu-icon gold">👥</div>
+        <div class="menu-icon gold" data-icon="referral" aria-hidden="true"></div>
         <div class="menu-text"><div class="t">Referral</div><div class="s">Invite friends · Earn 1,000 NOVA each</div></div>
         <div class="menu-arrow">›</div>
       </div>
+      <div class="menu-card" onclick="go('about')">
+        <div class="menu-icon cyan" data-icon="about" aria-hidden="true"></div>
+        <div class="menu-text"><div class="t">About NOVA</div><div class="s">Token contract · Total supply</div></div>
+        <div class="menu-arrow">›</div>
+      </div>
       <div class="menu-card" onclick="go('tasks')">
-        <div class="menu-icon cyan">📋</div>
+        <div class="menu-icon cyan" data-icon="tasks" aria-hidden="true"></div>
         <div class="menu-text"><div class="t">Tasks</div><div class="s">Complete tasks & earn NOVA</div></div>
         <div class="menu-arrow">›</div>
       </div>
       <div class="menu-card" onclick="go('mining')">
-        <div class="menu-icon">⛏️</div>
+        <div class="menu-icon" data-icon="mining" aria-hidden="true"></div>
         <div class="menu-text"><div class="t">Mining</div><div class="s">Mine 250 NOVA every hour</div></div>
         <div class="menu-arrow">›</div>
       </div>
-      <div class="menu-card" onclick="go('about')">
-        <div class="menu-icon cyan">🔷</div>
-        <div class="menu-text"><div class="t">About NOVA</div><div class="s">Token contract · Total supply</div></div>
-        <div class="menu-arrow">›</div>
-      </div>
       <div class="menu-card" onclick="go('profile')">
-        <div class="menu-icon green">👤</div>
+        <div class="menu-icon green" data-icon="profile" aria-hidden="true"></div>
         <div class="menu-text"><div class="t">My Profile</div><div class="s">View your stats and history</div></div>
         <div class="menu-arrow">›</div>
       </div>
@@ -238,6 +291,10 @@
 
   <div id="page-mining" class="page">
     <div class="section-header"><div class="section-title">⛏️ Mining</div></div>
+    <div class="mining-visual" id="miningVisual" aria-hidden="true">
+      <span class="mining-ring"></span><span class="mining-ring r2"></span><span class="mining-ring r3"></span>
+      <div class="mining-core"><svg viewBox="0 0 48 48"><path d="M8 15 19 8l6 6-8 8-9-7Z"/><path d="m18 22 18 18M30 34l5-5M34 38l5-5"/><path d="M21 11 29 5l8 8-6 6"/></svg></div>
+    </div>
     <div class="section-sub">60 min mining → 250 NOVA. Watch an ad to collect your reward.</div>
     <div class="mini-stat"><div class="icon">⛏️</div><div class="info"><div class="lbl">STATUS</div><div class="val highlight" id="mineStatus">Idle</div></div></div>
     <div class="mini-stat"><div class="icon">⏱️</div><div class="info"><div class="lbl">TIME LEFT</div><div class="val" id="mineTime">--:--</div></div></div>
@@ -304,11 +361,11 @@
   </div>
 
   <div class="nav" id="mainNav">
-    <div class="nav-item active" data-page="home"><span class="ic">🏠</span>Home</div>
-    <div class="nav-item" data-page="tasks"><span class="ic">📋</span>Tasks</div>
-    <div class="nav-item" data-page="mining"><span class="ic">⛏️</span>Mining</div>
-    <div class="nav-item" data-page="withdraw"><span class="ic">💸</span>Withdraw</div>
-    <div class="nav-item" data-page="referral"><span class="ic">👥</span>Referral</div>
+    <div class="nav-item active" data-page="home"><span class="ic" data-icon="home"></span>Home</div>
+    <div class="nav-item" data-page="tasks"><span class="ic" data-icon="tasks"></span>Tasks</div>
+    <div class="nav-item" data-page="mining"><span class="ic" data-icon="mining"></span>Mining</div>
+    <div class="nav-item" data-page="withdraw"><span class="ic" data-icon="withdraw"></span>Withdraw</div>
+    <div class="nav-item" data-page="referral"><span class="ic" data-icon="referral"></span>Referral</div>
     <div class="nav-item hidden" id="adminNav" data-page="admin"><span class="ic">⚙️</span>Admin</div>
   </div>
 </div>
@@ -320,7 +377,7 @@ const API_URL = "https://ggxcsxwvfntynersipax.supabase.co/functions/v1/nova-api"
 const BOT_USERNAME = "NovaAirdropEarn_bot";
 const tg = window.Telegram?.WebApp;
 
-// ✅ CHANGED: 1 NOVA per ad
+// The displayed reward must match AD_REWARD in the deployed API.
 const AD_REWARD_DISPLAY = "100";
 
 function getDeviceId() {
@@ -341,6 +398,21 @@ function getDeviceId() {
   return "dev_" + Math.abs(hash).toString(36) + "_" + scr.width + "x" + scr.height;
 }
 const DEVICE_ID = getDeviceId();
+
+function novaIcon(name) {
+  const shapes = {
+    home: '<path d="m4 11 8-7 8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>',
+    tasks: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M8.5 10h7M8.5 14h7M8.5 18h4"/>',
+    mining: '<path d="m4 7 6-4 4 4-5 5zM10 12l10 10M16 18l3-3M18 20l3-3"/>',
+    withdraw: '<path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/>',
+    referral: '<circle cx="9" cy="8" r="3"/><path d="M3.5 20v-1.5a5.5 5.5 0 0 1 11 0V20z"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 14a5 5 0 0 1 3.5 4.8V20"/>',
+    profile: '<circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0z"/>',
+    about: '<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5m0-8h.01"/>',
+    leaderboard: '<path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v5m-4 3h8m-4-3H8m4 0h4M8 6H5v2a4 4 0 0 0 4 4m7-6h3v2a4 4 0 0 1-4 4"/>'
+  };
+  return `<svg viewBox="0 0 24 24" aria-hidden="true">${shapes[name] || shapes.about}</svg>`;
+}
+document.querySelectorAll("[data-icon]").forEach(el => { el.innerHTML = novaIcon(el.dataset.icon); });
 
 const ADSGRAM_BLOCK_ID = "53039";
 let adController = null;
@@ -541,6 +613,9 @@ let mTimer = null;
 async function loadMining() { try { renderMining(await api("mining_status")); } catch (e) { toast(e.message, true); } }
 function renderMining(d) {
   const s = document.getElementById("mineStatus"), t = document.getElementById("mineTime"), b = document.getElementById("mineBtn");
+  const visual = document.getElementById("miningVisual");
+  visual.classList.toggle("is-mining", !d.canStart && !d.canCollect);
+  visual.classList.toggle("is-ready", Boolean(d.canCollect));
   clearInterval(mTimer);
   if (d.canCollect) {
     s.textContent = "Ready to collect"; t.textContent = "00:00";
