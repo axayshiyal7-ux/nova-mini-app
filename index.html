@@ -7,192 +7,1156 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Inter', 'SF Pro Display', -apple-system, 'Segoe UI', Roboto, sans-serif; }
+/* ═══════════════════════════════════════════════════════════════
+   NOVA EARN — ULTRA PREMIUM ORIGINAL UI SYSTEM
+   Deep-Space Glassmorphism · Custom SVG Icons · Full Admin Center
+   ═══════════════════════════════════════════════════════════════ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: -apple-system, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
 :root {
-  --void: #02040a; --deep: #070f1e; --crust: #0b1526; --ridge: #101d33; --crest: #16263f;
-  --pri: #0066ff; --pri-lite: #2b8cff; --pri-hot: #00b4ff; --acc: #00e5ff; --gold: #ffb340;
-  --lime: #00e08a; --coral: #ff3d5e; --ink: #eef4ff; --mute: #7a8fb0; --faint: #485c7a;
-  --line: rgba(0, 102, 255, 0.12); --line-hot: rgba(0, 102, 255, 0.42);
-  --r-sm: 14px; --r-md: 18px; --r-lg: 24px; --r-xl: 30px; --r-pill: 99px;
-  --shadow-card: 0 22px 60px rgba(0, 0, 0, 0.6); --shadow-btn: 0 14px 42px rgba(0, 102, 255, 0.42);
+  --void: #02050c;
+  --abyss: #040915;
+  --deep: #071224;
+  --crust: #0b1933;
+  --ridge: #102347;
+  --crest: #17305e;
+  --pri: #0066ff;
+  --pri-lite: #2b8cff;
+  --pri-hot: #00b4ff;
+  --acc: #00e5ff;
+  --gold: #ffb340;
+  --lime: #00e08a;
+  --coral: #ff3d5e;
+  --ink: #eef4ff;
+  --mute: #8298ba;
+  --faint: #4e6485;
+  --line: rgba(0, 102, 255, 0.15);
+  --line-hot: rgba(0, 180, 255, 0.45);
+  --line-soft: rgba(255, 255, 255, 0.06);
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 26px;
+  --r-xl: 32px;
+  --r-pill: 99px;
+  --shadow-card: 0 24px 60px rgba(0, 0, 0, 0.7);
+  --shadow-btn: 0 14px 40px rgba(0, 102, 255, 0.45);
   --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
 html { background: var(--void); }
-body { background: var(--void); color: var(--ink); min-height: 100vh; overflow-x: hidden; padding-bottom: 96px; -webkit-font-smoothing: antialiased; position: relative; }
-body::before {
-  content: ''; position: fixed; inset: 0; z-index: -3;
-  background: radial-gradient(ellipse 110% 62% at 50% -18%, rgba(0, 102, 255, 0.28), transparent 58%), radial-gradient(ellipse 72% 46% at 112% 72%, rgba(0, 229, 255, 0.08), transparent 54%), radial-gradient(ellipse 62% 42% at -12% 92%, rgba(123, 97, 255, 0.07), transparent 50%);
-  animation: nebulaBreath 22s ease-in-out infinite alternate;
+body {
+  background: var(--void);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-bottom: 105px;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
 }
-@keyframes nebulaBreath { 0% { opacity: 0.82; transform: scale(1) rotate(0deg); } 100% { opacity: 1; transform: scale(1.08) rotate(1.5deg); } }
-body::after { content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: 0.22; background-image: radial-gradient(rgba(140, 190, 255, 0.75) 0.55px, transparent 0.9px); background-size: 44px 44px; -webkit-mask-image: linear-gradient(to bottom, #000 8%, transparent 92%); mask-image: linear-gradient(to bottom, #000 8%, transparent 92%); }
-.shell { max-width: 480px; margin: 0 auto; padding: 0 16px; }
-.connect-box { text-align: center; padding: 80px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-.connect-logo { width: 96px; height: 96px; margin: 0 auto 22px; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--pri), var(--acc)); box-shadow: 0 0 36px rgba(0, 102, 255, 0.45); animation: logoFloat 3.2s ease-in-out infinite; }
-.connect-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; background: var(--deep); }
-@keyframes logoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-.connect-box h1 { font-size: 28px; font-weight: 900; background: linear-gradient(180deg, #fff 30%, var(--acc) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
-.connect-box p { font-size: 13.5px; color: var(--mute); line-height: 1.6; margin-bottom: 22px; }
-.retry-btn { padding: 13px 28px; border-radius: var(--r-pill); border: 1px solid var(--line-hot); background: linear-gradient(135deg, var(--pri), var(--pri-hot)); color: #fff; font-size: 13.5px; font-weight: 800; cursor: pointer; box-shadow: var(--shadow-btn); }
-.hud { display: flex; justify-content: space-between; align-items: center; padding: max(18px, env(safe-area-inset-top)) 0 10px; }
-.hud-id { display: flex; align-items: center; gap: 12px; }
-.hud-avatar { position: relative; width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--pri), var(--acc)); padding: 2.2px; box-shadow: 0 0 24px rgba(0, 102, 255, 0.4); }
-.hud-avatar-core { width: 100%; height: 100%; border-radius: 50%; background: var(--deep); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: var(--acc); overflow: hidden; }
-.hud-avatar-core img { width: 100%; height: 100%; object-fit: cover; }
-.hud-pulse { position: absolute; bottom: -1px; right: -1px; width: 12px; height: 12px; border-radius: 50%; background: var(--lime); border: 2px solid var(--void); box-shadow: 0 0 10px var(--lime); animation: beat 2.2s ease-in-out infinite; }
-@keyframes beat { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } }
+
+/* ── COSMIC BACKGROUND CANVAS ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(ellipse 110% 65% at 50% -18%, rgba(0, 102, 255, 0.32), transparent 58%),
+    radial-gradient(ellipse 75% 50% at 115% 70%, rgba(0, 229, 255, 0.1), transparent 52%),
+    radial-gradient(ellipse 65% 45% at -15% 90%, rgba(123, 97, 255, 0.08), transparent 50%);
+  animation: nebulaBreath 20s ease-in-out infinite alternate;
+}
+@keyframes nebulaBreath {
+  0% { opacity: 0.82; transform: scale(1) rotate(0deg); }
+  100% { opacity: 1; transform: scale(1.08) rotate(1.5deg); }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image: radial-gradient(rgba(140, 190, 255, 0.75) 0.55px, transparent 0.9px);
+  background-size: 42px 42px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 8%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 8%, transparent 92%);
+}
+
+.shell {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* ── CONNECT / LOADING ── */
+.connect-box {
+  text-align: center;
+  padding: 90px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.connect-logo {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  padding: 4.5px;
+  background: linear-gradient(135deg, var(--pri), var(--acc));
+  box-shadow: 0 0 40px rgba(0, 102, 255, 0.5);
+  animation: logoFloat 3.2s ease-in-out infinite;
+}
+.connect-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background: var(--deep);
+}
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.connect-box h1 {
+  font-size: 30px;
+  font-weight: 900;
+  background: linear-gradient(180deg, #fff 30%, var(--acc) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.connect-box p {
+  font-size: 14px;
+  color: var(--mute);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.retry-btn {
+  padding: 14px 30px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-hot);
+  background: linear-gradient(135deg, var(--pri), var(--pri-hot));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+}
+
+/* ── TOP HUD BAR ── */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: max(18px, env(safe-area-inset-top)) 0 12px;
+}
+.hud-id {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.hud-avatar {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pri), var(--acc));
+  padding: 2.2px;
+  box-shadow: 0 0 24px rgba(0, 102, 255, 0.45);
+}
+.hud-avatar-core {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--acc);
+  overflow: hidden;
+}
+.hud-avatar-core img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hud-pulse {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--lime);
+  border: 2px solid var(--void);
+  box-shadow: 0 0 10px var(--lime);
+  animation: beat 2.2s ease-in-out infinite;
+}
+@keyframes beat {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
 .hud-txt { min-width: 0; }
-.hud-eyebrow { font-size: 9.5px; color: var(--faint); letter-spacing: 1.4px; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
-.hud-name { font-size: 15px; font-weight: 800; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
-.hud-tag { font-size: 10.5px; color: var(--mute); font-weight: 500; margin-top: 1px; }
-.hud-action { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--deep); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s; flex-shrink: 0; }
-.hud-action:active { background: var(--crest); transform: scale(0.92); }
-.hud-action svg { width: 18px; height: 18px; stroke: var(--mute); fill: none; stroke-width: 1.8; }
-.orb { margin: 16px 0 20px; padding: 24px 20px 22px; background: linear-gradient(165deg, rgba(0, 102, 255, 0.14) 0%, rgba(0, 229, 255, 0.04) 48%, transparent 100%), var(--deep); border: 1px solid var(--line-hot); border-radius: var(--r-xl); text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-card), 0 0 0 1px rgba(0, 102, 255, 0.07) inset, 0 1px 0 rgba(255, 255, 255, 0.04) inset; }
-.orb::before { content: ''; position: absolute; top: -135%; left: -42%; width: 184%; height: 224%; background: conic-gradient(from 210deg, transparent, rgba(0, 102, 255, 0.12), transparent 28%); animation: orbSpin 11s linear infinite; z-index: 0; }
+.hud-eyebrow {
+  font-size: 9.5px;
+  color: var(--faint);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.hud-name {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 190px;
+}
+.hud-tag {
+  font-size: 11px;
+  color: var(--mute);
+  font-weight: 500;
+  margin-top: 1px;
+}
+.hud-action {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  border: 1px solid var(--line);
+  background: var(--deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+.hud-action:active {
+  background: var(--crest);
+  transform: scale(0.92);
+}
+.hud-action svg {
+  width: 19px;
+  height: 19px;
+  stroke: var(--mute);
+  fill: none;
+  stroke-width: 1.8;
+  transition: stroke 0.25s;
+}
+.hud-action:active svg { stroke: var(--acc); }
+
+/* ── BALANCE ORB ── */
+.orb {
+  margin: 16px 0 22px;
+  padding: 26px 22px 24px;
+  background:
+    linear-gradient(165deg, rgba(0, 102, 255, 0.14) 0%, rgba(0, 229, 255, 0.04) 48%, transparent 100%),
+    var(--deep);
+  border: 1px solid var(--line-hot);
+  border-radius: var(--r-xl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(0, 102, 255, 0.07) inset, 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+}
+.orb::before {
+  content: '';
+  position: absolute;
+  top: -135%;
+  left: -42%;
+  width: 184%;
+  height: 224%;
+  background: conic-gradient(from 210deg, transparent, rgba(0, 102, 255, 0.12), transparent 28%);
+  animation: orbSpin 11s linear infinite;
+  z-index: 0;
+}
 @keyframes orbSpin { to { transform: rotate(360deg); } }
 .orb > * { position: relative; z-index: 1; }
-.orb-brand { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.orb-brand-left { display: flex; align-items: center; gap: 8px; }
-.orb-brand-left img { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(0, 229, 255, 0.4); }
-.orb-brand-left span { font-size: 11.5px; font-weight: 800; letter-spacing: 1.5px; color: var(--ink); }
-.orb-brand-right { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: 1.2px; color: var(--acc); background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.22); padding: 4px 10px; border-radius: var(--r-pill); }
-.orb-cap { font-size: 9.5px; color: var(--faint); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
-.orb-value { font-size: clamp(48px, 14vw, 62px); font-weight: 900; line-height: 1; letter-spacing: -2px; background: linear-gradient(180deg, #fff 28%, var(--acc) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 6px 26px rgba(0, 180, 255, 0.42)); margin-bottom: 4px; }
-.orb-code { font-size: 10.5px; letter-spacing: 6px; color: var(--mute); font-weight: 800; margin-bottom: 14px; }
-.orb-price { display: inline-flex; align-items: center; gap: 7px; font-size: 10.5px; font-weight: 700; color: var(--acc); background: rgba(0, 229, 255, 0.07); border: 1px solid rgba(0, 229, 255, 0.2); padding: 5px 14px; border-radius: var(--r-pill); }
-.orb-live { width: 5px; height: 5px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); animation: beat 1.5s ease-in-out infinite; }
-.earn-wrap { margin-bottom: 20px; }
-.earn-cta { width: 100%; padding: 19px 20px; border: none; border-radius: var(--r-lg); background: linear-gradient(135deg, var(--pri) 0%, var(--pri-hot) 100%); color: #fff; font-size: 15px; font-weight: 800; letter-spacing: 0.4px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 9px; box-shadow: var(--shadow-btn), 0 2px 0 rgba(255, 255, 255, 0.15) inset; transition: all 0.28s var(--ease); position: relative; overflow: hidden; }
-.earn-cta::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent); animation: ctaShine 4s infinite; }
-@keyframes ctaShine { 0% { left: -100%; } 55%, 100% { left: 200%; } }
-.earn-cta:active { transform: scale(0.97); }
-.earn-cta:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: none; transform: none; }
+
+.orb-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.orb-brand-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.orb-brand-left img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+}
+.orb-brand-left span {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--ink);
+}
+.orb-brand-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: var(--acc);
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.22);
+  padding: 4px 11px;
+  border-radius: var(--r-pill);
+}
+
+.orb-cap {
+  font-size: 10px;
+  color: var(--faint);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.orb-value {
+  font-size: clamp(48px, 14vw, 64px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  background: linear-gradient(180deg, #fff 28%, var(--acc) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 26px rgba(0, 180, 255, 0.45));
+  margin-bottom: 4px;
+}
+.orb-code {
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--mute);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.orb-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--acc);
+  background: rgba(0, 229, 255, 0.07);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  padding: 5px 15px;
+  border-radius: var(--r-pill);
+}
+.orb-live {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--acc);
+  box-shadow: 0 0 10px var(--acc);
+  animation: beat 1.5s ease-in-out infinite;
+}
+
+/* ── EARN CTA ── */
+.earn-wrap { margin-bottom: 22px; }
+.earn-cta {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--pri) 0%, var(--pri-hot) 100%);
+  color: #fff;
+  font-size: 15.5px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--shadow-btn), 0 2px 0 rgba(255, 255, 255, 0.16) inset;
+  transition: all 0.28s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.earn-cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  animation: ctaShine 4s infinite;
+}
+@keyframes ctaShine {
+  0% { left: -100%; }
+  55%, 100% { left: 200%; }
+}
+.earn-cta:active {
+  transform: scale(0.97);
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3);
+}
+.earn-cta:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
 .earn-cta:disabled::after { display: none; }
-.earn-cta .play { width: 22px; height: 22px; border-radius: 50%; background: rgba(255, 255, 255, 0.22); display: flex; align-items: center; justify-content: center; font-size: 9px; }
-.earn-cta .remain { font-size: 11px; font-weight: 700; background: rgba(255, 255, 255, 0.18); padding: 3px 9px; border-radius: var(--r-pill); }
+.earn-cta .play {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+.earn-cta .remain {
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+}
+
 .earn-meter { margin-top: 14px; }
-.meter-head { display: flex; justify-content: space-between; padding: 0 4px; font-size: 11px; color: var(--mute); font-weight: 600; margin-bottom: 7px; }
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  font-size: 11px;
+  color: var(--mute);
+  font-weight: 600;
+  margin-bottom: 7px;
+}
 .meter-head b { color: var(--acc); font-weight: 800; }
-.meter-track { height: 6px; background: rgba(255, 255, 255, 0.05); border-radius: var(--r-pill); overflow: hidden; }
-.meter-fill { height: 100%; width: 0%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--pri), var(--acc)); transition: width 0.7s var(--ease); box-shadow: 0 0 14px rgba(0, 180, 255, 0.6); }
-.meter-note { display: block; min-height: 14px; margin: 7px 4px 0; font-size: 10.5px; color: var(--faint); font-weight: 600; }
-.quick-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; margin-bottom: 20px; }
-.quick-cell { background: var(--deep); border: 1px solid var(--line); border-radius: 16px; padding: 12px 8px; text-align: center; }
-.quick-cell .qv { font-size: 16px; font-weight: 900; color: var(--ink); }
+.meter-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.meter-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg, var(--pri), var(--acc));
+  transition: width 0.7s var(--ease);
+  box-shadow: 0 0 14px rgba(0, 180, 255, 0.6);
+}
+.meter-note {
+  display: block;
+  min-height: 14px;
+  margin: 7px 4px 0;
+  font-size: 10.5px;
+  color: var(--faint);
+  font-weight: 600;
+}
+
+/* ── QUICK STATS ── */
+.quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.quick-cell {
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 13px 8px;
+  text-align: center;
+}
+.quick-cell .qv {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--ink);
+}
 .quick-cell .qv.hot { color: var(--acc); }
-.quick-cell .ql { font-size: 8.5px; color: var(--faint); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-top: 2px; }
-.nav-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; }
-.nav-row { display: flex; align-items: center; gap: 13px; padding: 14px 16px; background: var(--deep); border: 1px solid var(--line); border-radius: var(--r-md); cursor: pointer; transition: all 0.25s var(--ease); }
-.nav-row:active { background: var(--crest); transform: translateX(3px); border-color: var(--line-hot); }
-.nav-glyph { width: 42px; height: 42px; border-radius: 13px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 102, 255, 0.08); border: 1px solid rgba(0, 102, 255, 0.18); }
-.nav-glyph svg { width: 20px; height: 20px; stroke: var(--pri-lite); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.nav-glyph.cyan { background: rgba(0, 229, 255, 0.08); border-color: rgba(0, 229, 255, 0.2); }
+.quick-cell .ql {
+  font-size: 9px;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ── NAVIGATION LIST (HOME) ── */
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.nav-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 17px;
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+.nav-row:active {
+  background: var(--crest);
+  transform: translateX(3px);
+  border-color: var(--line-hot);
+}
+.nav-glyph {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 102, 255, 0.08);
+  border: 1px solid rgba(0, 102, 255, 0.18);
+}
+.nav-glyph svg {
+  width: 21px;
+  height: 21px;
+  stroke: var(--pri-lite);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.nav-glyph.cyan {
+  background: rgba(0, 229, 255, 0.08);
+  border-color: rgba(0, 229, 255, 0.2);
+}
 .nav-glyph.cyan svg { stroke: var(--acc); }
-.nav-glyph.gold { background: rgba(255, 179, 64, 0.08); border-color: rgba(255, 179, 64, 0.2); }
+.nav-glyph.gold {
+  background: rgba(255, 179, 64, 0.08);
+  border-color: rgba(255, 179, 64, 0.2);
+}
 .nav-glyph.gold svg { stroke: var(--gold); }
-.nav-glyph.lime { background: rgba(0, 224, 138, 0.08); border-color: rgba(0, 224, 138, 0.2); }
+.nav-glyph.lime {
+  background: rgba(0, 224, 138, 0.08);
+  border-color: rgba(0, 224, 138, 0.2);
+}
 .nav-glyph.lime svg { stroke: var(--lime); }
-.nav-body { flex: 1; min-width: 0; }
-.nav-body .nt { font-size: 13.5px; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
-.nav-body .ns { font-size: 11px; color: var(--mute); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.nav-go { color: var(--faint); flex-shrink: 0; }
-.nav-go svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+.nav-glyph.purple {
+  background: rgba(123, 97, 255, 0.08);
+  border-color: rgba(123, 97, 255, 0.2);
+}
+.nav-glyph.purple svg { stroke: #a78bfa; }
+.nav-body {
+  flex: 1;
+  min-width: 0;
+}
+.nav-body .nt {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.nav-body .ns {
+  font-size: 11.5px;
+  color: var(--mute);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-go {
+  color: var(--faint);
+  flex-shrink: 0;
+}
+.nav-go svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── SUBPAGES ── */
 .page { display: none; }
-.page.active { display: block; animation: pageIn 0.25s ease-out; }
-@keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.page.active {
+  display: block;
+  animation: pageIn 0.25s ease-out;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .sec-head { margin: 20px 0 14px; }
-.sec-title { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
-.sec-sub { font-size: 12px; color: var(--mute); margin-top: 4px; line-height: 1.5; font-weight: 500; }
-.card-cell { background: var(--deep); border: 1px solid var(--line); border-radius: var(--r-md); padding: 16px; margin-bottom: 12px; }
-.stat-cell-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-.stat-pill { background: var(--deep); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 14px; }
-.stat-pill .lbl { font-size: 9.5px; color: var(--faint); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
-.stat-pill .val { font-size: 20px; font-weight: 900; color: var(--ink); }
+.sec-title {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-sub {
+  font-size: 12.5px;
+  color: var(--mute);
+  margin-top: 4px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ── CARDS & STAT PODS ── */
+.card-cell {
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 17px;
+  margin-bottom: 12px;
+}
+.stat-cell-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.stat-pill {
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 14px;
+}
+.stat-pill .lbl {
+  font-size: 9.5px;
+  color: var(--faint);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.stat-pill .val {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--ink);
+}
 .stat-pill .val.acc { color: var(--acc); }
 .stat-pill .val.lime { color: var(--lime); }
 .stat-pill .val.coral { color: var(--coral); }
-.stat-row { display: flex; align-items: center; gap: 12px; background: var(--deep); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 14px; margin-bottom: 10px; }
-.stat-row .ic { width: 38px; height: 38px; border-radius: 11px; background: rgba(0, 102, 255, 0.08); border: 1px solid rgba(0, 102, 255, 0.18); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.stat-row .ic {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(0, 102, 255, 0.08);
+  border: 1px solid rgba(0, 102, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
 .stat-row .info { flex: 1; min-width: 0; }
-.stat-row .info .lbl { font-size: 9.5px; color: var(--faint); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px; }
-.stat-row .info .val { font-size: 13.5px; font-weight: 800; color: var(--ink); word-break: break-all; }
+.stat-row .info .lbl {
+  font-size: 9.5px;
+  color: var(--faint);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.stat-row .info .val {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+  word-break: break-all;
+}
 .stat-row .info .val.acc { color: var(--acc); }
-.task-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 15px; background: var(--deep); border: 1px solid var(--line); border-radius: var(--r-md); margin-bottom: 10px; gap: 12px; }
-.task-row .tt { font-size: 13.5px; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
-.task-row .tr { font-size: 11.5px; color: var(--acc); font-weight: 800; }
-.task-btn { padding: 10px 18px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--pri), var(--pri-hot)); color: #fff; font-weight: 800; font-size: 11.5px; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 15px rgba(0, 102, 255, 0.35); transition: all 0.2s; }
+
+/* ── TASKS LIST ── */
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 16px;
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  margin-bottom: 10px;
+  gap: 12px;
+}
+.task-row .tt {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.task-row .tr {
+  font-size: 12px;
+  color: var(--acc);
+  font-weight: 800;
+}
+.task-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--pri), var(--pri-hot));
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.35);
+  transition: all 0.2s;
+}
 .task-btn:active { transform: scale(0.95); }
-.task-btn.done { background: rgba(0, 229, 255, 0.1); color: var(--acc); cursor: not-allowed; box-shadow: none; border: 1px solid rgba(0, 229, 255, 0.25); }
-.mining-visual { width: 200px; height: 200px; margin: 20px auto 24px; position: relative; display: grid; place-items: center; }
-.mining-ring { position: absolute; inset: 8px; border: 1px solid rgba(0, 102, 255, 0.22); border-radius: 50%; box-shadow: 0 0 35px rgba(0, 102, 255, 0.12), inset 0 0 25px rgba(0, 102, 255, 0.08); }
-.mining-ring.r2 { inset: 24px; border-style: dashed; border-color: rgba(0, 229, 255, 0.35); animation: orbit 18s linear infinite; }
-.mining-ring.r3 { inset: 44px; border-color: rgba(0, 102, 255, 0.3); animation: orbit 12s linear infinite reverse; }
-.mining-core { width: 96px; height: 96px; display: grid; place-items: center; border-radius: 28px; color: var(--acc); background: radial-gradient(circle at 35% 25%, rgba(0, 102, 255, 0.35), rgba(4, 8, 18, 0.95) 75%); border: 1px solid rgba(0, 229, 255, 0.4); box-shadow: 0 0 35px rgba(0, 102, 255, 0.3), inset 0 0 20px rgba(0, 229, 255, 0.15); animation: coreFloat 3.2s ease-in-out infinite; }
-.mining-core svg { width: 46px; height: 46px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6)); }
+.task-btn.done {
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--acc);
+  cursor: not-allowed;
+  box-shadow: none;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+}
+
+/* ── MINING VISUAL ── */
+.mining-visual {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto 24px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.mining-ring {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(0, 102, 255, 0.22);
+  border-radius: 50%;
+  box-shadow: 0 0 35px rgba(0, 102, 255, 0.12), inset 0 0 25px rgba(0, 102, 255, 0.08);
+}
+.mining-ring.r2 {
+  inset: 24px;
+  border-style: dashed;
+  border-color: rgba(0, 229, 255, 0.35);
+  animation: orbit 18s linear infinite;
+}
+.mining-ring.r3 {
+  inset: 44px;
+  border-color: rgba(0, 102, 255, 0.3);
+  animation: orbit 12s linear infinite reverse;
+}
+.mining-core {
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  border-radius: 28px;
+  color: var(--acc);
+  background: radial-gradient(circle at 35% 25%, rgba(0, 102, 255, 0.35), rgba(4, 8, 18, 0.95) 75%);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 35px rgba(0, 102, 255, 0.3), inset 0 0 20px rgba(0, 229, 255, 0.15);
+  animation: coreFloat 3.2s ease-in-out infinite;
+}
+.mining-core svg {
+  width: 46px;
+  height: 46px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6));
+}
 .mining-visual.is-mining .mining-ring.r2 { animation-duration: 4s; }
 .mining-visual.is-mining .mining-ring.r3 { animation-duration: 3s; }
-.mining-visual.is-mining .mining-core { animation-duration: 1s; box-shadow: 0 0 50px rgba(0, 229, 255, 0.5), inset 0 0 25px rgba(0, 229, 255, 0.25); }
-.mining-visual.is-ready .mining-core { color: #fff; box-shadow: 0 0 60px rgba(0, 229, 255, 0.7); }
+.mining-visual.is-mining .mining-core {
+  animation-duration: 1s;
+  box-shadow: 0 0 50px rgba(0, 229, 255, 0.5), inset 0 0 25px rgba(0, 229, 255, 0.25);
+}
+.mining-visual.is-ready .mining-core {
+  color: #fff;
+  box-shadow: 0 0 60px rgba(0, 229, 255, 0.7);
+}
 @keyframes orbit { to { transform: rotate(360deg); } }
-@keyframes coreFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.04); } }
-.my-rank-card { padding: 16px; background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 229, 255, 0.1)); border: 1.5px solid var(--line-hot); border-radius: var(--r-md); margin-bottom: 16px; text-align: center; }
-.my-rank-card .lbl { font-size: 10px; color: var(--faint); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-.my-rank-card .val { font-size: 26px; font-weight: 900; color: #fff; }
-.rank-row { display: flex; align-items: center; gap: 12px; padding: 13px 15px; background: var(--deep); border: 1px solid var(--line); border-radius: var(--r-sm); margin-bottom: 8px; }
+@keyframes coreFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.04); }
+}
+
+/* ── LEADERBOARD ── */
+.my-rank-card {
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 229, 255, 0.1));
+  border: 1.5px solid var(--line-hot);
+  border-radius: var(--r-md);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.my-rank-card .lbl {
+  font-size: 10px;
+  color: var(--faint);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.my-rank-card .val {
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+}
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  margin-bottom: 8px;
+}
 .rank-row.gold { border-color: rgba(255, 179, 64, 0.5); background: linear-gradient(135deg, rgba(255, 179, 64, 0.1), transparent); }
 .rank-row.silver { border-color: rgba(203, 213, 225, 0.5); background: linear-gradient(135deg, rgba(203, 213, 225, 0.08), transparent); }
 .rank-row.bronze { border-color: rgba(217, 119, 6, 0.5); background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), transparent); }
-.rank-pos { width: 28px; text-align: center; font-size: 14px; font-weight: 900; color: var(--mute); }
+.rank-pos {
+  width: 28px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--mute);
+}
 .rank-row.gold .rank-pos { color: var(--gold); }
 .rank-row.silver .rank-pos { color: #cbd5e1; }
 .rank-row.bronze .rank-pos { color: #d97706; }
 .rank-body { flex: 1; min-width: 0; }
-.rank-body .rn { font-size: 13px; font-weight: 800; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rank-body .rn {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .rank-body .ru { font-size: 11px; color: var(--mute); }
 .rank-amt { font-size: 13px; font-weight: 900; color: var(--acc); }
-.inp { width: 100%; padding: 15px 16px; border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--crust); color: var(--ink); font-size: 13.5px; font-family: inherit; font-weight: 500; margin-bottom: 12px; }
-.inp:focus { outline: none; border-color: var(--pri); background: var(--ridge); box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15); }
+
+/* ── INPUTS & ACTION BUTTONS ── */
+.inp {
+  width: 100%;
+  padding: 15px 16px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
+  background: var(--crust);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-family: inherit;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.inp:focus {
+  outline: none;
+  border-color: var(--pri);
+  background: var(--ridge);
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+}
 .inp::placeholder { color: var(--faint); }
-.btn-sub { width: 100%; padding: 15px; border-radius: var(--r-sm); border: 1px solid var(--line-hot); background: rgba(0, 102, 255, 0.12); color: var(--pri-hot); font-size: 13.5px; font-weight: 800; cursor: pointer; letter-spacing: 0.3px; transition: all 0.2s; }
-.btn-sub:active { background: rgba(0, 102, 255, 0.22); transform: scale(0.98); }
-.wd-item { padding: 15px; background: var(--deep); border: 1px solid var(--line); border-radius: var(--r-md); margin-bottom: 10px; }
-.wd-item .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.wd-item .amount { font-size: 16px; font-weight: 900; color: var(--acc); }
-.wd-item .meta { font-size: 11px; color: var(--mute); margin-bottom: 4px; word-break: break-all; }
-.wd-badge { padding: 4px 11px; border-radius: var(--r-pill); font-size: 9.5px; font-weight: 800; text-transform: uppercase; }
+.btn-sub {
+  width: 100%;
+  padding: 15px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-hot);
+  background: rgba(0, 102, 255, 0.12);
+  color: var(--pri-hot);
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+}
+.btn-sub:active {
+  background: rgba(0, 102, 255, 0.22);
+  transform: scale(0.98);
+}
+
+/* ── WITHDRAW ITEMS ── */
+.wd-item {
+  padding: 15px;
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  margin-bottom: 10px;
+}
+.wd-item .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.wd-item .amount {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--acc);
+}
+.wd-item .meta {
+  font-size: 11px;
+  color: var(--mute);
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+.wd-badge {
+  padding: 4px 11px;
+  border-radius: var(--r-pill);
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
 .wd-badge.pending { background: rgba(255, 179, 64, 0.15); color: var(--gold); }
 .wd-badge.paid { background: rgba(0, 224, 138, 0.15); color: var(--lime); }
 .wd-badge.rejected { background: rgba(255, 61, 94, 0.15); color: var(--coral); }
-.dock { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: rgba(4, 8, 18, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--line); padding: 6px 12px max(8px, env(safe-area-inset-bottom)); display: flex; justify-content: space-around; align-items: center; max-width: 480px; margin: 0 auto; }
-.dock-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 10px; border-radius: 12px; cursor: pointer; color: var(--mute); font-size: 10px; font-weight: 700; transition: all 0.2s; text-decoration: none; flex: 1; }
-.dock-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.wd-badge.flagged { background: rgba(255, 61, 94, 0.2); color: var(--coral); margin-left: 6px; }
+.wd-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.wd-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn-approve {
+  background: linear-gradient(135deg, var(--lime), #059669);
+  color: #032014;
+}
+.btn-reject {
+  background: linear-gradient(135deg, var(--coral), #b91c1c);
+  color: #fff;
+}
+
+/* ── ADMIN PANEL FULL STYLING ── */
+.admin-card {
+  padding: 18px;
+  background: linear-gradient(145deg, rgba(0, 102, 255, 0.12), rgba(0, 229, 255, 0.05));
+  border: 1px solid var(--line-hot);
+  border-radius: var(--r-md);
+  margin-bottom: 16px;
+}
+.admin-tabs-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.admin-tabs-nav button {
+  flex: 1;
+  min-width: 80px;
+  padding: 11px 14px;
+  font-size: 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.chart-box {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px;
+  height: 125px;
+  padding: 12px 0;
+  margin-bottom: 24px;
+}
+.chart-col {
+  flex: 1;
+  background: linear-gradient(180deg, var(--pri), var(--acc));
+  border-radius: 6px 6px 0 0;
+  min-height: 4px;
+  position: relative;
+}
+.chart-col .val {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: #fff;
+  font-weight: 800;
+}
+.chart-col .lbl {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8.5px;
+  color: var(--mute);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── BOTTOM DOCK ── */
+.dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: rgba(4, 9, 21, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid var(--line);
+  padding: 7px 10px max(10px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--mute);
+  font-size: 10px;
+  font-weight: 700;
+  transition: all 0.2s;
+  text-decoration: none;
+  flex: 1;
+}
+.dock-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: all 0.2s;
+}
 .dock-item.active { color: var(--acc); }
-.dock-item.active svg { stroke: var(--acc); filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.5)); }
+.dock-item.active svg {
+  stroke: var(--acc);
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.5));
+}
 .dock-item.hidden { display: none; }
-.toast { position: fixed; top: 18px; left: 50%; transform: translateX(-50%) translateY(-140px); background: linear-gradient(135deg, rgba(0, 102, 255, 0.96), rgba(0, 229, 255, 0.96)); color: #fff; padding: 13px 22px; border-radius: 16px; font-size: 13px; font-weight: 700; z-index: 999; transition: transform 0.35s var(--ease); max-width: 90vw; text-align: center; box-shadow: 0 15px 40px rgba(0, 102, 255, 0.45); pointer-events: none; }
+
+/* ── TOAST & UTILITIES ── */
+.toast {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-140px);
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.96), rgba(0, 229, 255, 0.96));
+  color: #fff;
+  padding: 13px 22px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 999;
+  transition: transform 0.35s var(--ease);
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 102, 255, 0.45);
+  pointer-events: none;
+}
 .toast.show { transform: translateX(-50%) translateY(0); }
-.toast.error { background: linear-gradient(135deg, var(--coral), #dc2626); box-shadow: 0 15px 40px rgba(255, 61, 94, 0.45); }
-.empty { text-align: center; padding: 40px 16px; color: var(--mute); font-size: 13px; }
-.empty .big-ic { font-size: 40px; display: block; margin-bottom: 10px; opacity: 0.5; }
-.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(0, 229, 255, 0.25); border-top-color: var(--acc); border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 8px; vertical-align: middle; }
+.toast.error {
+  background: linear-gradient(135deg, var(--coral), #dc2626);
+  box-shadow: 0 15px 40px rgba(255, 61, 94, 0.45);
+}
+.empty {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--mute);
+  font-size: 13px;
+  font-weight: 500;
+}
+.empty .big-ic {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 229, 255, 0.25);
+  border-top-color: var(--acc);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
 @keyframes spin { to { transform: rotate(360deg); } }
-.flag-banner { padding: 14px; background: rgba(255, 61, 94, 0.12); border: 1px solid rgba(255, 61, 94, 0.35); border-radius: var(--r-md); margin-bottom: 16px; }
-.flag-banner .ft { font-size: 13px; font-weight: 800; color: var(--coral); margin-bottom: 4px; }
-.flag-banner .fd { font-size: 11.5px; color: var(--mute); }
+.flag-banner {
+  padding: 14px;
+  background: rgba(255, 61, 94, 0.12);
+  border: 1px solid rgba(255, 61, 94, 0.35);
+  border-radius: var(--r-md);
+  margin-bottom: 16px;
+}
+.flag-banner .ft {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--coral);
+  margin-bottom: 4px;
+}
+.flag-banner .fd {
+  font-size: 11.5px;
+  color: var(--mute);
+}
 </style>
 </head>
 <body>
 
+<!-- ── INITIAL CONNECT SCREEN ── -->
 <div id="connectBox" class="connect-box">
   <div class="connect-logo"><img src="logo.png" alt="NOVA"></div>
   <h1>NOVA · Earn</h1>
   <p id="connectMsg">Connecting to Telegram...</p>
-  <button class="retry-btn" id="retryBtn" style="display:none;" onclick="connect()">🔄 Retry Connection</button>
+  <button class="retry-btn" id="retryBtn" style="display:none;" onclick="connect()">🔄 Retry</button>
 </div>
 
+<!-- ── MAIN APP SHELL ── -->
 <div id="mainApp" style="display:none;" class="shell">
-  <!-- ════ HOME VIEW ════ -->
+
+  <!-- ════ 1. HOME VIEW ════ -->
   <div id="page-home" class="page active">
     <div class="hud">
       <div class="hud-id">
@@ -206,7 +1170,7 @@ body::after { content: ''; position: fixed; inset: 0; z-index: -2; pointer-event
           <div class="hud-tag" id="userHandle"></div>
         </div>
       </div>
-      <div class="hud-action" onclick="loadDash()" title="Sync">
+      <div class="hud-action" onclick="loadDash()" title="Sync Dashboard">
         <svg viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
       </div>
     </div>
@@ -214,8 +1178,13 @@ body::after { content: ''; position: fixed; inset: 0; z-index: -2; pointer-event
     <!-- Balance Orb -->
     <div class="orb">
       <div class="orb-brand">
-        <div class="orb-brand-left"><img src="logo.png" alt="NOVA"><span>NOVA</span></div>
-        <div class="orb-brand-right"><span class="orb-live"></span>ACTIVE</div>
+        <div class="orb-brand-left">
+          <img src="logo.png" alt="NOVA">
+          <span>NOVA</span>
+        </div>
+        <div class="orb-brand-right">
+          <span class="orb-live"></span>ACTIVE
+        </div>
       </div>
       <div class="orb-cap">Total Balance</div>
       <div class="orb-value" id="balanceBig">0.00</div>
@@ -240,145 +1209,348 @@ body::after { content: ''; position: fixed; inset: 0; z-index: -2; pointer-event
       </div>
     </div>
 
-    <!-- Quick Stats -->
+    <!-- Quick Stats Grid (3 Columns) -->
     <div class="quick-grid">
-      <div class="quick-cell"><div class="qv hot" id="statEarned">0.00</div><div class="ql">Total Earned</div></div>
-      <div class="quick-cell"><div class="qv" id="statAds">0</div><div class="ql">Ads Watched</div></div>
-      <div class="quick-cell"><div class="qv" id="statRefs">0</div><div class="ql">Referrals</div></div>
+      <div class="quick-cell">
+        <div class="qv hot" id="statEarned">0.00</div>
+        <div class="ql">Total Earned</div>
+      </div>
+      <div class="quick-cell">
+        <div class="qv" id="statAds">0</div>
+        <div class="ql">Ads Watched</div>
+      </div>
+      <div class="quick-cell">
+        <div class="qv" id="statRefs">0</div>
+        <div class="ql">Referrals</div>
+      </div>
     </div>
 
-    <!-- Menu List -->
+    <!-- Menu List (Requested Order: Leaderboard -> Referral -> About NOVA right after referral -> Tasks -> Mining -> Profile) -->
     <div class="nav-list">
       <div class="nav-row" onclick="go('leaderboard')">
-        <div class="nav-glyph gold"><svg viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v5m-4 3h8m-4-3H8m4 0h4M8 6H5v2a4 4 0 0 0 4 4m7-6h3v2a4 4 0 0 1-4 4"/></svg></div>
-        <div class="nav-body"><div class="nt">Leaderboard</div><div class="ns">Top earners this week</div></div>
+        <div class="nav-glyph gold">
+          <svg viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v5m-4 3h8m-4-3H8m4 0h4M8 6H5v2a4 4 0 0 0 4 4m7-6h3v2a4 4 0 0 1-4 4"/></svg>
+        </div>
+        <div class="nav-body">
+          <div class="nt">Leaderboard</div>
+          <div class="ns">Top earners this week</div>
+        </div>
         <div class="nav-go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div>
       </div>
+
       <div class="nav-row" onclick="go('referral')">
-        <div class="nav-glyph gold"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20v-1.5a5.5 5.5 0 0 1 11 0V20z"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 14a5 5 0 0 1 3.5 4.8V20"/></svg></div>
-        <div class="nav-body"><div class="nt">Referral</div><div class="ns">Invite friends · Earn 1,000 NOVA each</div></div>
+        <div class="nav-glyph gold">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20v-1.5a5.5 5.5 0 0 1 11 0V20z"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 14a5 5 0 0 1 3.5 4.8V20"/></svg>
+        </div>
+        <div class="nav-body">
+          <div class="nt">Referral</div>
+          <div class="ns">Invite friends · Earn 1,000 NOVA each</div>
+        </div>
         <div class="nav-go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div>
       </div>
+
       <!-- About NOVA Directly After Referral -->
       <div class="nav-row" onclick="go('about')">
-        <div class="nav-glyph cyan"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5m0-8h.01"/></svg></div>
-        <div class="nav-body"><div class="nt">About NOVA</div><div class="ns">Token contract · Total supply</div></div>
+        <div class="nav-glyph cyan">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5m0-8h.01"/></svg>
+        </div>
+        <div class="nav-body">
+          <div class="nt">About NOVA</div>
+          <div class="ns">Token contract · Total supply</div>
+        </div>
         <div class="nav-go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div>
       </div>
+
       <div class="nav-row" onclick="go('tasks')">
-        <div class="nav-glyph cyan"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M8.5 10h7M8.5 14h7M8.5 18h4"/></svg></div>
-        <div class="nav-body"><div class="nt">Tasks</div><div class="ns">Complete tasks & earn 50+ NOVA</div></div>
+        <div class="nav-glyph cyan">
+          <svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M8.5 10h7M8.5 14h7M8.5 18h4"/></svg>
+        </div>
+        <div class="nav-body">
+          <div class="nt">Tasks</div>
+          <div class="ns">Complete tasks & earn 50+ NOVA</div>
+        </div>
         <div class="nav-go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div>
       </div>
+
       <div class="nav-row" onclick="go('mining')">
-        <div class="nav-glyph"><svg viewBox="0 0 24 24"><path d="m4 7 6-4 4 4-5 5zM10 12l10 10M16 18l3-3M18 20l3-3"/></svg></div>
-        <div class="nav-body"><div class="nt">Mining</div><div class="ns">Mine 250 NOVA every hour</div></div>
+        <div class="nav-glyph">
+          <svg viewBox="0 0 24 24"><path d="m4 7 6-4 4 4-5 5zM10 12l10 10M16 18l3-3M18 20l3-3"/></svg>
+        </div>
+        <div class="nav-body">
+          <div class="nt">Mining</div>
+          <div class="ns">Mine 250 NOVA every hour</div>
+        </div>
         <div class="nav-go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div>
       </div>
+
       <div class="nav-row" onclick="go('profile')">
-        <div class="nav-glyph lime"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0z"/></svg></div>
-        <div class="nav-body"><div class="nt">My Profile</div><div class="ns">View your stats and history</div></div>
+        <div class="nav-glyph lime">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0z"/></svg>
+        </div>
+        <div class="nav-body">
+          <div class="nt">My Profile</div>
+          <div class="ns">View your stats and history</div>
+        </div>
+        <div class="nav-go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div>
+      </div>
+
+      <!-- Admin Menu Option (visible to Admin) -->
+      <div class="nav-row hidden" id="adminMenuRow" onclick="go('admin')">
+        <div class="nav-glyph purple">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <div class="nav-body">
+          <div class="nt">Admin Control Center</div>
+          <div class="ns">Manage stats, withdrawals, users & logs</div>
+        </div>
         <div class="nav-go"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div>
       </div>
     </div>
   </div>
 
-  <!-- ════ LEADERBOARD ════ -->
+  <!-- ════ 2. LEADERBOARD VIEW ════ -->
   <div id="page-leaderboard" class="page">
-    <div class="sec-head"><div class="sec-title">🏆 Leaderboard</div><div class="sec-sub">Top 20 earners of all time.</div></div>
-    <div class="my-rank-card"><div class="lbl">Your Rank</div><div class="val" id="myRankVal">#--</div></div>
+    <div class="sec-head">
+      <div class="sec-title">🏆 Leaderboard</div>
+      <div class="sec-sub">Top 20 earners of all time. Keep earning to climb higher!</div>
+    </div>
+    <div class="my-rank-card">
+      <div class="lbl">Your Rank</div>
+      <div class="val" id="myRankVal">#--</div>
+    </div>
     <div id="leaderboardList"><div class="empty"><span class="spinner"></span> Loading leaderboard...</div></div>
   </div>
 
-  <!-- ════ REFERRAL ════ -->
+  <!-- ════ 3. REFERRAL VIEW ════ -->
   <div id="page-referral" class="page">
-    <div class="sec-head"><div class="sec-title">👥 Invite Friends</div><div class="sec-sub">Earn 1,000 NOVA reward for every friend you refer.</div></div>
+    <div class="sec-head">
+      <div class="sec-title">👥 Invite Friends</div>
+      <div class="sec-sub">Earn 1,000 NOVA reward for every friend you refer.</div>
+    </div>
     <div class="card-cell">
       <div class="sec-title" style="font-size:16px; color:var(--acc); margin-bottom:6px;">🎁 Referral Rule</div>
       <div class="sec-sub" style="margin-top:0; font-size:12.5px; color:var(--ink);">When your invited friend watches <b>10 ads</b>, you instantly receive <b>1,000 NOVA</b>!</div>
     </div>
     <div class="stat-row">
       <div class="ic">🏆</div>
-      <div class="info"><div class="lbl">TOTAL REFERRALS</div><div class="val acc" id="refCount" style="font-size:22px;">0</div></div>
+      <div class="info">
+        <div class="lbl">TOTAL REFERRALS</div>
+        <div class="val acc" id="refCount" style="font-size:22px;">0</div>
+      </div>
     </div>
-    <div class="sec-head" style="margin:20px 0 10px;"><div class="sec-title" style="font-size:15px;">🔗 Your Referral Link</div></div>
+    <div class="sec-head" style="margin:20px 0 10px;">
+      <div class="sec-title" style="font-size:15px;">🔗 Your Referral Link</div>
+    </div>
     <input class="inp" id="refLink" readonly placeholder="Loading referral link...">
     <button class="btn-sub" id="copyRefBtn">📋 Copy Referral Link</button>
   </div>
 
-  <!-- ════ ABOUT NOVA ════ -->
+  <!-- ════ 4. ABOUT NOVA VIEW ════ -->
   <div id="page-about" class="page">
-    <div class="sec-head"><div class="sec-title">🔷 About NOVA</div><div class="sec-sub">Official NOVA token metrics and contract information.</div></div>
-    <div class="stat-row"><div class="ic">🪙</div><div class="info"><div class="lbl">TOTAL SUPPLY</div><div class="val acc">1,000,000,000 NOVA</div></div></div>
-    <div class="stat-row"><div class="ic">🌐</div><div class="info"><div class="lbl">NETWORK</div><div class="val">TON Blockchain (The Open Network)</div></div></div>
-    <div class="sec-head" style="margin:20px 0 10px;"><div class="sec-title" style="font-size:15px;">📄 Token Contract Address</div></div>
+    <div class="sec-head">
+      <div class="sec-title">🔷 About NOVA</div>
+      <div class="sec-sub">Official NOVA token metrics and contract information.</div>
+    </div>
+    <div class="stat-row">
+      <div class="ic">🪙</div>
+      <div class="info">
+        <div class="lbl">TOTAL SUPPLY</div>
+        <div class="val acc">1,000,000,000 NOVA</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="ic">🌐</div>
+      <div class="info">
+        <div class="lbl">NETWORK</div>
+        <div class="val">TON Blockchain (The Open Network)</div>
+      </div>
+    </div>
+    <div class="sec-head" style="margin:20px 0 10px;">
+      <div class="sec-title" style="font-size:15px;">📄 Token Contract Address</div>
+    </div>
     <div class="card-cell" style="cursor:pointer;" onclick="copyContract()">
       <div class="sec-sub" style="margin:0 0 6px; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--faint);">Tap to copy</div>
-      <div id="contractTxt" style="font-size:12px; font-weight:800; color:var(--ink); word-break:break-all; line-height:1.6;">EQD5tjWQWjP80qDTSywy_V1lz4s0tFD5AulSgrocUipP3j2x</div>
+      <div id="contractTxt" style="font-size:12.5px; font-weight:800; color:var(--ink); word-break:break-all; line-height:1.6;">EQD5tjWQWjP80qDTSywy_V1lz4s0tFD5AulSgrocUipP3j2x</div>
     </div>
   </div>
 
-  <!-- ════ TASKS ════ -->
+  <!-- ════ 5. TASKS VIEW ════ -->
   <div id="page-tasks" class="page">
-    <div class="sec-head"><div class="sec-title">📋 Tasks</div><div class="sec-sub">Complete each community task once and earn at least 50 NOVA.</div></div>
-    <div id="adminTaskBox" class="card-cell" style="display:none;">
+    <div class="sec-head">
+      <div class="sec-title">📋 Tasks</div>
+      <div class="sec-sub">Complete each community task once and earn at least 50 NOVA.</div>
+    </div>
+
+    <!-- Admin: Add Task (Only visible to admin) -->
+    <div id="adminTaskBox" class="admin-card" style="display:none;">
       <div class="sec-title" style="font-size:15px; margin-bottom:12px; color:var(--acc);">⚙️ Admin: Publish Task</div>
-      <input class="inp" id="taskTitle" placeholder="Task title">
+      <input class="inp" id="taskTitle" placeholder="Task title (e.g. Join Telegram News)">
       <input class="inp" id="taskLink" placeholder="https://t.me/yourchannel">
-      <input class="inp" id="taskReward" type="number" min="50" step="1" value="50">
+      <input class="inp" id="taskReward" type="number" min="50" step="1" placeholder="Reward in NOVA" value="50">
       <button class="btn-sub" id="addTaskBtn">➕ Publish Task</button>
     </div>
+
     <div id="tasksList"><div class="empty"><span class="spinner"></span> Loading tasks...</div></div>
   </div>
 
-  <!-- ════ MINING ════ -->
+  <!-- ════ 6. MINING VIEW ════ -->
   <div id="page-mining" class="page">
-    <div class="sec-head"><div class="sec-title">⛏️ NOVA Mining Core</div><div class="sec-sub">60 min mining session → 250 NOVA. Complete ad to collect.</div></div>
-    <div class="mining-visual" id="miningVisual" aria-hidden="true">
-      <span class="mining-ring"></span><span class="mining-ring r2"></span><span class="mining-ring r3"></span>
-      <div class="mining-core"><svg viewBox="0 0 48 48"><path d="M8 15 19 8l6 6-8 8-9-7Z"/><path d="m18 22 18 18M30 34l5-5M34 38l5-5"/><path d="M21 11 29 5l8 8-6 6"/></svg></div>
+    <div class="sec-head">
+      <div class="sec-title">⛏️ NOVA Mining Core</div>
+      <div class="sec-sub">60 min mining session → 250 NOVA. Complete ad to collect.</div>
     </div>
-    <div class="stat-row"><div class="ic">⚡</div><div class="info"><div class="lbl">MINING STATUS</div><div class="val acc" id="mineStatus">Idle</div></div></div>
-    <div class="stat-row"><div class="ic">⏱️</div><div class="info"><div class="lbl">TIME REMAINING</div><div class="val" id="mineTime">60:00</div></div></div>
+
+    <!-- High-Tech Animated Mining Core -->
+    <div class="mining-visual" id="miningVisual" aria-hidden="true">
+      <span class="mining-ring"></span>
+      <span class="mining-ring r2"></span>
+      <span class="mining-ring r3"></span>
+      <div class="mining-core">
+        <svg viewBox="0 0 48 48">
+          <path d="M8 15 19 8l6 6-8 8-9-7Z"/>
+          <path d="m18 22 18 18M30 34l5-5M34 38l5-5"/>
+          <path d="M21 11 29 5l8 8-6 6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="ic">⚡</div>
+      <div class="info">
+        <div class="lbl">MINING STATUS</div>
+        <div class="val acc" id="mineStatus">Idle</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="ic">⏱️</div>
+      <div class="info">
+        <div class="lbl">TIME REMAINING</div>
+        <div class="val" id="mineTime">60:00</div>
+      </div>
+    </div>
+
     <button class="earn-cta" id="mineBtn" style="margin-top:16px;">⛏️ Start Mining (60 min)</button>
   </div>
 
-  <!-- ════ WITHDRAW ════ -->
+  <!-- ════ 7. WITHDRAW VIEW ════ -->
   <div id="page-withdraw" class="page">
-    <div class="sec-head"><div class="sec-title">💸 Withdraw</div><div class="sec-sub">Minimum 5,000 NOVA · TON Blockchain Network</div></div>
-    <div class="stat-row"><div class="ic">💰</div><div class="info"><div class="lbl">WITHDRAWABLE BALANCE</div><div class="val acc"><span id="wBalance">0.0000</span> NOVA</div></div></div>
-    <div class="sec-head" style="margin:20px 0 10px;"><div class="sec-title" style="font-size:15px;">👛 TON Wallet Address</div></div>
-    <input class="inp" id="walletInput" placeholder="Enter TON address (EQ… or UQ…)">
+    <div class="sec-head">
+      <div class="sec-title">💸 Withdraw</div>
+      <div class="sec-sub">Minimum 5,000 NOVA · TON Blockchain Network</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="ic">💰</div>
+      <div class="info">
+        <div class="lbl">WITHDRAWABLE BALANCE</div>
+        <div class="val acc"><span id="wBalance">0.0000</span> NOVA</div>
+      </div>
+    </div>
+
+    <div class="sec-head" style="margin:20px 0 10px;">
+      <div class="sec-title" style="font-size:15px;">👛 TON Wallet Address</div>
+    </div>
+    <input class="inp" id="walletInput" placeholder="Enter TON address (EQ… or UQ…)" autocomplete="off" autocapitalize="off" spellcheck="false">
     <button class="btn-sub" id="saveWalletBtn" style="margin-bottom:12px;">💾 Save Wallet Address</button>
     <button class="earn-cta" id="withdrawBtn">📤 Submit Withdraw Request</button>
-    <div class="sec-head" style="margin:24px 0 10px;"><div class="sec-title" style="font-size:15px;">📜 Withdrawal History</div></div>
+
+    <div class="sec-head" style="margin:24px 0 10px;">
+      <div class="sec-title" style="font-size:15px;">📜 Withdrawal History</div>
+    </div>
     <div id="withdrawHistory"><div class="empty">No withdrawals yet</div></div>
   </div>
 
-  <!-- ════ PROFILE ════ -->
+  <!-- ════ 8. PROFILE VIEW ════ -->
   <div id="page-profile" class="page">
-    <div class="sec-head"><div class="sec-title">👤 My Profile</div><div class="sec-sub">Account credentials and referrals.</div></div>
+    <div class="sec-head">
+      <div class="sec-title">👤 My Profile</div>
+      <div class="sec-sub">Account credentials, statistics and invite list.</div>
+    </div>
+
     <div id="flaggedWarning" class="flag-banner" style="display:none;">
       <div class="ft">⚠️ Account Flagged</div>
-      <div class="fd" id="flagReasonText">Under review.</div>
+      <div class="fd" id="flagReasonText">Your account is under review. Please contact support.</div>
     </div>
+
     <div id="profileStats"><div class="empty"><span class="spinner"></span> Loading profile...</div></div>
-    <div class="sec-head" style="margin:24px 0 10px;"><div class="sec-title" style="font-size:15px;">👥 Your Referrals</div></div>
+
+    <div class="sec-head" style="margin:24px 0 10px;">
+      <div class="sec-title" style="font-size:15px;">👥 Your Referrals</div>
+    </div>
     <div id="referralsList"><div class="empty"><span class="spinner"></span> Loading referrals...</div></div>
   </div>
 
-  <!-- ── FLOATING BOTTOM DOCK ── -->
-  <div class="dock" id="mainDock">
-    <div class="dock-item active" data-page="home"><svg viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg><span>Home</span></div>
-    <div class="dock-item" data-page="tasks"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M8.5 10h7M8.5 14h7M8.5 18h4"/></svg><span>Tasks</span></div>
-    <div class="dock-item" data-page="mining"><svg viewBox="0 0 24 24"><path d="m4 7 6-4 4 4-5 5zM10 12l10 10M16 18l3-3M18 20l3-3"/></svg><span>Mining</span></div>
-    <div class="dock-item" data-page="withdraw"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span>Withdraw</span></div>
-    <div class="dock-item" data-page="referral"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20v-1.5a5.5 5.5 0 0 1 11 0V20z"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 14a5 5 0 0 1 3.5 4.8V20"/></svg><span>Referral</span></div>
+  <!-- ════ 9. ADMIN PANEL VIEW (100% PRESERVED & STYLED) ════ -->
+  <div id="page-admin" class="page">
+    <div class="sec-head">
+      <div class="sec-title">⚙️ Admin Center</div>
+      <div class="sec-sub">Full control center: stats, withdrawals, flagged users, and security logs</div>
+    </div>
+
+    <div class="admin-tabs-nav">
+      <button class="btn-sub" onclick="adminTab('stats')">📊 Stats</button>
+      <button class="btn-sub" onclick="adminTab('withdrawals')">💸 Withdrawals</button>
+      <button class="btn-sub" onclick="adminTab('flagged')">🚩 Flagged</button>
+      <button class="btn-sub" onclick="adminTab('logs')">📜 Logs</button>
+    </div>
+
+    <!-- Admin Tab: Stats -->
+    <div id="adminTab-stats" class="admin-tab">
+      <div id="adminStatsBox"><div class="empty"><span class="spinner"></span> Loading admin stats...</div></div>
+    </div>
+
+    <!-- Admin Tab: Withdrawals -->
+    <div id="adminTab-withdrawals" class="admin-tab" style="display:none;">
+      <button class="btn-sub" id="refreshWdBtn" style="margin-bottom:14px;">🔄 Refresh Withdrawal Requests</button>
+      <div id="wdList"><div class="empty"><span class="spinner"></span> Loading...</div></div>
+    </div>
+
+    <!-- Admin Tab: Flagged Users -->
+    <div id="adminTab-flagged" class="admin-tab" style="display:none;">
+      <div id="flaggedList"><div class="empty"><span class="spinner"></span> Loading...</div></div>
+    </div>
+
+    <!-- Admin Tab: Security Logs -->
+    <div id="adminTab-logs" class="admin-tab" style="display:none;">
+      <div id="logsList"><div class="empty"><span class="spinner"></span> Loading...</div></div>
+    </div>
   </div>
+
+  <!-- ── FLOATING BOTTOM DOCK ── -->
+  <div class="dock" id="mainNav">
+    <div class="dock-item active" data-page="home">
+      <svg viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg>
+      <span>Home</span>
+    </div>
+    <div class="dock-item" data-page="tasks">
+      <svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M8.5 10h7M8.5 14h7M8.5 18h4"/></svg>
+      <span>Tasks</span>
+    </div>
+    <div class="dock-item" data-page="mining">
+      <svg viewBox="0 0 24 24"><path d="m4 7 6-4 4 4-5 5zM10 12l10 10M16 18l3-3M18 20l3-3"/></svg>
+      <span>Mining</span>
+    </div>
+    <div class="dock-item" data-page="withdraw">
+      <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+      <span>Withdraw</span>
+    </div>
+    <div class="dock-item" data-page="referral">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20v-1.5a5.5 5.5 0 0 1 11 0V20z"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 14a5 5 0 0 1 3.5 4.8V20"/></svg>
+      <span>Referral</span>
+    </div>
+    <!-- Admin Dock item: Unhidden for Admin -->
+    <div class="dock-item hidden" id="adminNav" data-page="admin">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Admin</span>
+    </div>
+  </div>
+
 </div>
 
+<!-- ── FLOATING TOAST ── -->
 <div class="toast" id="toast"></div>
 
+<!-- ── SCRIPT LOGIC ── -->
 <script>
 const API_URL = "https://ggxcsxwvfntynersipax.supabase.co/functions/v1/nova-api";
 const BOT_USERNAME = "NovaAirdropEarn_bot";
@@ -393,19 +1565,34 @@ let adController = null;
 let isAdmin = false;
 const isDesktop = !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
+// Device Fingerprinting for anti-cheat
 function getDeviceId() {
-  const nav = window.navigator, scr = window.screen;
-  const raw = [nav.userAgent, nav.language, nav.platform, scr.width, scr.height, scr.colorDepth, nav.hardwareConcurrency || 0, Intl.DateTimeFormat().resolvedOptions().timeZone].join("|");
+  const nav = window.navigator;
+  const scr = window.screen;
+  const raw = [
+    nav.userAgent, nav.language, nav.platform,
+    scr.width, scr.height, scr.colorDepth,
+    nav.hardwareConcurrency || 0,
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  ].join("|");
   let hash = 0;
-  for (let i = 0; i < raw.length; i++) { hash = ((hash << 5) - hash) + raw.charCodeAt(i); hash |= 0; }
+  for (let i = 0; i < raw.length; i++) {
+    const c = raw.charCodeAt(i);
+    hash = ((hash << 5) - hash) + c;
+    hash |= 0;
+  }
   return "dev_" + Math.abs(hash).toString(36) + "_" + scr.width + "x" + scr.height;
 }
 const DEVICE_ID = getDeviceId();
 
+// AdsGram Initializer
 window.addEventListener("load", () => {
   if (window.Adsgram) {
-    try { adController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID }); }
-    catch (e) { console.error("AdsGram init error:", e); }
+    try {
+      adController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
+    } catch (e) {
+      console.error("AdsGram init error:", e);
+    }
   }
 });
 
@@ -415,17 +1602,23 @@ async function showRewardedAd() {
   return Boolean(result && result.done === true);
 }
 
+// API Fetch helper
 async function api(action, payload = {}) {
   const r = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ initData: tg?.initData || "", action, payload: { device_id: DEVICE_ID, ...payload } })
+    body: JSON.stringify({
+      initData: tg?.initData || "",
+      action,
+      payload: { device_id: DEVICE_ID, ...payload }
+    })
   });
   const d = await r.json().catch(() => ({ ok: false, error: "Network error" }));
-  if (!d.ok) throw new Error(d.error || "Failed");
+  if (!d.ok) throw new Error(d.error || "Request failed");
   return d;
 }
 
+// Toast Alert
 function toast(m, isErr = false) {
   const t = document.getElementById("toast");
   t.textContent = m;
@@ -434,12 +1627,16 @@ function toast(m, isErr = false) {
   window._tt = setTimeout(() => { t.className = "toast"; }, 2800);
 }
 
+// View Routing
 function go(page) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.querySelectorAll(".dock-item").forEach(d => d.classList.remove("active"));
-  document.getElementById("page-" + page)?.classList.add("active");
-  document.querySelector(`.dock-item[data-page="${page}"]`)?.classList.add("active");
+  const targetPage = document.getElementById("page-" + page);
+  if (targetPage) targetPage.classList.add("active");
+  const targetDock = document.querySelector(`.dock-item[data-page="${page}"]`);
+  if (targetDock) targetDock.classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
+
   if (page === "home") loadDash();
   if (page === "tasks") loadTasks();
   if (page === "mining") loadMining();
@@ -447,42 +1644,68 @@ function go(page) {
   if (page === "referral") loadReferral();
   if (page === "profile") loadProfile();
   if (page === "leaderboard") loadLeaderboard();
+  if (page === "admin") { adminTab('stats'); loadWithdrawals(); }
 }
-document.querySelectorAll(".dock-item").forEach(el => { el.onclick = () => go(el.dataset.page); });
+document.querySelectorAll(".dock-item").forEach(el => {
+  el.onclick = () => go(el.dataset.page);
+});
 
+// Copy Contract helper
 function copyContract() {
   const text = document.getElementById("contractTxt").textContent;
-  try { navigator.clipboard.writeText(text); toast("📋 Contract copied!"); } catch { toast("📋 Contract: " + text); }
+  try {
+    navigator.clipboard.writeText(text);
+    toast("📋 Contract copied to clipboard!");
+  } catch {
+    toast("📋 Contract: " + text);
+  }
 }
 
+// Connect to Telegram
 async function connect() {
   const msg = document.getElementById("connectMsg");
   const retry = document.getElementById("retryBtn");
   retry.style.display = "none";
+
   if (!tg || !tg.initData) {
-    msg.innerHTML = "⚠️ Open inside Telegram<br><small style='font-size:11px; color:#ef4444;'>Open via Telegram Bot menu button.</small>";
+    msg.innerHTML = "⚠️ Open inside Telegram<br><small style='font-size:11px; color:#ef4444;'>Launch this app via your Telegram Bot menu button.</small>";
     retry.style.display = "inline-block";
     return;
   }
-  try { tg.ready(); tg.expand(); } catch (e) {}
+
+  try {
+    tg.ready();
+    tg.expand();
+  } catch (e) {}
+
   const u = tg.initDataUnsafe?.user;
   if (u) {
     const fullName = [u.first_name, u.last_name].filter(Boolean).join(" ") || "User";
     document.getElementById("userName").textContent = fullName;
     document.getElementById("userHandle").textContent = u.username ? "@" + u.username : "";
     const av = document.getElementById("avatar");
-    if (u.photo_url) av.innerHTML = `<img src="${u.photo_url}" alt="">`;
+    if (u.photo_url) av.innerHTML = `<img src="${u.photo_url}" alt="${fullName}">`;
     else av.textContent = (u.first_name || "U")[0].toUpperCase();
   }
+
   try {
     msg.textContent = "Syncing account...";
     const d = await api("dashboard");
     msg.textContent = "✅ Connected!";
     document.getElementById("connectBox").style.display = "none";
     document.getElementById("mainApp").style.display = "block";
+
     isAdmin = Boolean(d.is_admin);
-    if (isAdmin) document.getElementById("adminTaskBox").style.display = "block";
-    if (isDesktop) setTimeout(() => toast("ℹ️ Ads work only on mobile Telegram"), 1400);
+    if (isAdmin) {
+      document.getElementById("adminNav").classList.remove("hidden");
+      document.getElementById("adminMenuRow").classList.remove("hidden");
+      document.getElementById("adminTaskBox").style.display = "block";
+    }
+
+    if (isDesktop) {
+      setTimeout(() => toast("ℹ️ Note: Ad rewards work best on mobile Telegram"), 1400);
+    }
+
     renderDash(d);
   } catch (e) {
     msg.innerHTML = "❌ Connection failed<br><small style='color:#ef4444;font-size:11.5px;'>" + e.message + "</small>";
@@ -490,6 +1713,7 @@ async function connect() {
   }
 }
 
+// Dashboard Renderer
 function renderDash(d) {
   const b = Number(d.user.balance || 0);
   const adCount = Number(d.user.ads_watched_today || 0);
@@ -498,8 +1722,9 @@ function renderDash(d) {
 
   document.getElementById("balanceBig").textContent = b.toFixed(2);
   document.getElementById("adsToday").textContent = adCount;
-  document.getElementById("adBadge").textContent = Math.max(0, 20 - adCount) + " left";
+  document.getElementById("adBadge").textContent = (Math.max(0, 20 - adCount)) + " left";
   document.getElementById("progFill").style.width = Math.min(100, (adCount / 20) * 100) + "%";
+
   document.getElementById("statEarned").textContent = Number(d.user.total_earned || 0).toFixed(2);
   document.getElementById("statAds").textContent = d.user.ads_watched_total || adCount;
   document.getElementById("statRefs").textContent = d.user.referral_count || 0;
@@ -536,86 +1761,142 @@ function renderDash(d) {
   };
 
   updateCooldown();
-  if (adCount >= 20 && resetAt > Date.now()) adResetTimer = setInterval(updateCooldown, 60000);
+  if (adCount >= 20 && resetAt > Date.now()) {
+    adResetTimer = setInterval(updateCooldown, 60000);
+  }
 }
 
-async function loadDash() { try { renderDash(await api("dashboard")); } catch (e) { toast(e.message, true); } }
+async function loadDash() {
+  try {
+    renderDash(await api("dashboard"));
+  } catch (e) {
+    toast(e.message, true);
+  }
+}
 
+// Watch Ad Handler
 document.getElementById("watchBtn").onclick = async () => {
-  if (isDesktop) { toast("⚠️ Ads work only on mobile Telegram", true); return; }
+  if (isDesktop) {
+    toast("⚠️ Ads work only on mobile Telegram", true);
+    return;
+  }
   const btn = document.getElementById("watchBtn");
   btn.disabled = true;
   btn.innerHTML = `<span class="spinner"></span> <span>Loading ad...</span>`;
   try {
     const rewarded = await showRewardedAd();
-    if (!rewarded) { toast("Ad was skipped or not completed", true); return; }
+    if (!rewarded) {
+      toast("Ad was skipped or not completed", true);
+      return;
+    }
     const r = await api("ad_reward", { ad_token: "tkn_" + Date.now() });
     toast(`✅ +${AD_REWARD_DISPLAY} NOVA added!`);
-    if (r.referral_bonus_paid) toast("🎉 Your referrer was awarded 1,000 NOVA!");
+    if (r.referral_bonus_paid) {
+      toast("🎉 Your referrer was awarded 1,000 NOVA!");
+    }
     loadDash();
-  } catch (e) { toast(e.message || "Ad unavailable", true); }
-  finally { loadDash(); }
+  } catch (e) {
+    toast(e.message || "Ad currently unavailable", true);
+  } finally {
+    loadDash();
+  }
 };
 
+// Leaderboard
 async function loadLeaderboard() {
   const list = document.getElementById("leaderboardList");
   list.innerHTML = `<div class="empty"><span class="spinner"></span> Loading leaderboard...</div>`;
   try {
     const d = await api("top_earners");
     document.getElementById("myRankVal").textContent = d.my_rank > 0 ? `#${d.my_rank}` : "Unranked";
-    if (!d.top || !d.top.length) { list.innerHTML = `<div class="empty"><span class="big-ic">🏆</span>No rankings yet</div>`; return; }
+    if (!d.top || !d.top.length) {
+      list.innerHTML = `<div class="empty"><span class="big-ic">🏆</span>No rankings recorded yet</div>`;
+      return;
+    }
     list.innerHTML = "";
     d.top.forEach((u, i) => {
       const pos = i + 1;
       const cls = pos === 1 ? "gold" : pos === 2 ? "silver" : pos === 3 ? "bronze" : "";
       const medal = pos === 1 ? "🥇" : pos === 2 ? "🥈" : pos === 3 ? "🥉" : `#${pos}`;
-      const name = [u.first_name, u.username ? "@" + u.username : ""].filter(Boolean).join(" ") || "Member";
+      const name = [u.first_name, u.username ? "@" + u.username : ""].filter(Boolean).join(" ") || "Community Member";
       const el = document.createElement("div");
       el.className = "rank-row " + cls;
-      el.innerHTML = `<div class="rank-pos">${medal}</div><div class="rank-body"><div class="rn">${name}</div><div class="ru">${u.ads_watched_total || 0} ads watched</div></div><div class="rank-amt">${Number(u.total_earned || 0).toFixed(2)}</div>`;
+      el.innerHTML = `
+        <div class="rank-pos">${medal}</div>
+        <div class="rank-body">
+          <div class="rn">${name}</div>
+          <div class="ru">${u.ads_watched_total || 0} ads watched</div>
+        </div>
+        <div class="rank-amt">${Number(u.total_earned || 0).toFixed(2)}</div>
+      `;
       list.appendChild(el);
     });
-  } catch (e) { list.innerHTML = `<div class="empty">${e.message}</div>`; }
+  } catch (e) {
+    list.innerHTML = `<div class="empty">${e.message}</div>`;
+  }
 }
 
+// Tasks
 async function loadTasks() {
   const list = document.getElementById("tasksList");
   list.innerHTML = `<div class="empty"><span class="spinner"></span> Loading tasks...</div>`;
   try {
     const d = await api("tasks_list");
-    if (!d.tasks || !d.tasks.length) { list.innerHTML = `<div class="empty"><span class="big-ic">📭</span>No active tasks</div>`; return; }
+    if (!d.tasks || !d.tasks.length) {
+      list.innerHTML = `<div class="empty"><span class="big-ic">📭</span>No active tasks. Check back soon!</div>`;
+      return;
+    }
     list.innerHTML = "";
     d.tasks.forEach(t => {
       const done = d.completed?.includes(t.id);
       const row = document.createElement("div");
       row.className = "task-row";
-      row.innerHTML = `<div><div class="tt">${t.title}</div><div class="tr">💰 +${t.reward} NOVA</div></div><button class="task-btn ${done ? 'done' : ''}">${done ? '✅ Done' : 'Go & Claim'}</button>`;
+      row.innerHTML = `
+        <div>
+          <div class="tt">${t.title}</div>
+          <div class="tr">💰 +${t.reward} NOVA</div>
+        </div>
+        <button class="task-btn ${done ? 'done' : ''}">${done ? '✅ Done' : 'Go & Claim'}</button>
+      `;
       list.appendChild(row);
+
       row.querySelector("button").onclick = async (ev) => {
         if (done) return;
         const btn = ev.target;
-        if (tg) tg.openTelegramLink(t.link); else window.open(t.link, "_blank");
-        btn.textContent = "Verifying..."; btn.disabled = true;
+        if (tg) tg.openTelegramLink(t.link);
+        else window.open(t.link, "_blank");
+        btn.textContent = "Verifying...";
+        btn.disabled = true;
         setTimeout(async () => {
           try {
             const r = await api("task_complete", { task_id: t.id });
             toast(`✅ +${r.reward} NOVA earned!`);
-            loadTasks(); loadDash();
-          } catch (e) { toast(e.message, true); btn.textContent = "Go & Claim"; btn.disabled = false; }
+            loadTasks();
+            loadDash();
+          } catch (e) {
+            toast(e.message, true);
+            btn.textContent = "Go & Claim";
+            btn.disabled = false;
+          }
         }, 4000);
       };
     });
-  } catch (e) { list.innerHTML = `<div class="empty">${e.message}</div>`; }
+  } catch (e) {
+    list.innerHTML = `<div class="empty">${e.message}</div>`;
+  }
 }
 
+// Admin: Publish Task
 document.getElementById("addTaskBtn").onclick = async () => {
   const title = document.getElementById("taskTitle").value.trim();
   const link = document.getElementById("taskLink").value.trim();
   const reward = Math.max(parseFloat(document.getElementById("taskReward").value) || 50, 50);
   if (!title) return toast("Enter task title", true);
-  if (!/^https:\/\/t\.me\//i.test(link)) return toast("Enter valid Telegram link", true);
+  if (!/^https:\/\/t\.me\//i.test(link)) return toast("Enter a valid Telegram t.me link", true);
+
   const btn = document.getElementById("addTaskBtn");
-  btn.disabled = true; btn.textContent = "Publishing...";
+  btn.disabled = true;
+  btn.textContent = "Publishing...";
   try {
     await api("task_create", { title, link, reward });
     toast("✅ Task published!");
@@ -623,52 +1904,103 @@ document.getElementById("addTaskBtn").onclick = async () => {
     document.getElementById("taskLink").value = "";
     document.getElementById("taskReward").value = "50";
     loadTasks();
-  } catch (e) { toast(e.message, true); }
-  finally { btn.disabled = false; btn.textContent = "➕ Publish Task"; }
+  } catch (e) {
+    toast(e.message, true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "➕ Publish Task";
+  }
 };
 
+// Mining
 let mTimer = null;
-async function loadMining() { try { renderMining(await api("mining_status")); } catch (e) { toast(e.message, true); } }
+async function loadMining() {
+  try {
+    renderMining(await api("mining_status"));
+  } catch (e) {
+    toast(e.message, true);
+  }
+}
+
 function renderMining(d) {
-  const s = document.getElementById("mineStatus"), t = document.getElementById("mineTime"), b = document.getElementById("mineBtn");
+  const s = document.getElementById("mineStatus");
+  const t = document.getElementById("mineTime");
+  const b = document.getElementById("mineBtn");
   const visual = document.getElementById("miningVisual");
+
   visual.classList.toggle("is-mining", !d.canStart && !d.canCollect);
   visual.classList.toggle("is-ready", Boolean(d.canCollect));
   clearInterval(mTimer);
+
   if (d.canCollect) {
-    s.textContent = "Ready to collect"; t.textContent = "00:00";
-    b.textContent = "💎 Collect 250 NOVA"; b.disabled = false; b.onclick = collectMining;
+    s.textContent = "Ready to collect";
+    t.textContent = "00:00";
+    b.textContent = "💎 Collect 250 NOVA";
+    b.disabled = false;
+    b.onclick = collectMining;
   } else if (!d.canStart && d.remaining > 0) {
-    s.textContent = "Mining in progress..."; b.textContent = "⛏️ Mining in progress..."; b.disabled = true;
+    s.textContent = "Mining in progress...";
+    b.textContent = "⛏️ Mining in progress...";
+    b.disabled = true;
     let left = d.remaining;
     const tick = () => {
       if (left <= 0) { loadMining(); return; }
       t.textContent = String(Math.floor(left / 60)).padStart(2, "0") + ":" + String(left % 60).padStart(2, "0");
       left--;
     };
-    tick(); mTimer = setInterval(tick, 1000);
+    tick();
+    mTimer = setInterval(tick, 1000);
   } else {
-    s.textContent = "Idle"; t.textContent = "60:00";
-    b.textContent = "⛏️ Start Mining (60 min)"; b.disabled = false; b.onclick = startMining;
+    s.textContent = "Idle";
+    t.textContent = "60:00";
+    b.textContent = "⛏️ Start Mining (60 min)";
+    b.disabled = false;
+    b.onclick = startMining;
   }
 }
+
 async function startMining() {
-  const b = document.getElementById("mineBtn"); b.disabled = true; b.textContent = "Starting...";
-  try { await api("mining_start"); toast("⛏️ 60-min mining started!"); loadMining(); }
-  catch (e) { toast(e.message, true); loadMining(); }
-}
-async function collectMining() {
-  if (isDesktop) { toast("⚠️ Ads work only on mobile Telegram", true); return; }
-  const b = document.getElementById("mineBtn"); b.disabled = true; b.textContent = "Loading ad...";
+  const b = document.getElementById("mineBtn");
+  b.disabled = true;
+  b.textContent = "Starting...";
   try {
-    const rewarded = await showRewardedAd();
-    if (!rewarded) { toast("Ad not completed", true); return loadMining(); }
-    const r = await api("mining_collect", { ad_token: "m_" + Date.now() });
-    toast(`💎 +${r.reward} NOVA collected!`); loadMining(); loadDash();
-  } catch (e) { toast(e.message, true); loadMining(); }
+    await api("mining_start");
+    toast("⛏️ 60-minute mining started!");
+    loadMining();
+  } catch (e) {
+    toast(e.message, true);
+    loadMining();
+  }
 }
 
-function isTonAddress(addr) { return /^(?:(?:EQ|UQ)[A-Za-z0-9_-]{46}|0:[A-Fa-f0-9]{64})$/.test(addr); }
+async function collectMining() {
+  if (isDesktop) {
+    toast("⚠️ Ads work only on mobile Telegram", true);
+    return;
+  }
+  const b = document.getElementById("mineBtn");
+  b.disabled = true;
+  b.textContent = "Loading ad...";
+  try {
+    const rewarded = await showRewardedAd();
+    if (!rewarded) {
+      toast("Ad not completed", true);
+      return loadMining();
+    }
+    const r = await api("mining_collect", { ad_token: "m_" + Date.now() });
+    toast(`💎 +${r.reward} NOVA collected!`);
+    loadMining();
+    loadDash();
+  } catch (e) {
+    toast(e.message, true);
+    loadMining();
+  }
+}
+
+// Withdrawals
+function isTonAddress(addr) {
+  return /^(?:(?:EQ|UQ)[A-Za-z0-9_-]{46}|0:[A-Fa-f0-9]{64})$/.test(addr);
+}
 
 async function loadWithdraw() {
   try {
@@ -676,38 +2008,74 @@ async function loadWithdraw() {
     document.getElementById("wBalance").textContent = Number(d.balance).toFixed(4);
     if (d.wallet) document.getElementById("walletInput").value = d.wallet;
     const h = document.getElementById("withdrawHistory");
-    if (!d.history || !d.history.length) { h.innerHTML = `<div class="empty"><span class="big-ic">📜</span>No withdrawals yet</div>`; return; }
-    h.innerHTML = d.history.map(w => `<div class="wd-item"><div class="row"><span class="amount">${Number(w.amount).toFixed(2)} NOVA</span><span class="wd-badge ${w.status}">${w.status}</span></div><div class="meta">Wallet: ${w.wallet}</div><div class="meta">${new Date(w.created_at).toLocaleString()}</div></div>`).join("");
-  } catch (e) { toast(e.message, true); }
+    if (!d.history || !d.history.length) {
+      h.innerHTML = `<div class="empty"><span class="big-ic">📜</span>No withdrawals yet</div>`;
+      return;
+    }
+    h.innerHTML = d.history.map(w => `
+      <div class="wd-item">
+        <div class="row">
+          <span class="amount">${Number(w.amount).toFixed(2)} NOVA</span>
+          <span class="wd-badge ${w.status}">${w.status}</span>
+        </div>
+        <div class="meta">Wallet: ${w.wallet}</div>
+        <div class="meta">${new Date(w.created_at).toLocaleString()}</div>
+      </div>
+    `).join("");
+  } catch (e) {
+    toast(e.message, true);
+  }
 }
 
 document.getElementById("saveWalletBtn").onclick = async () => {
   const w = document.getElementById("walletInput").value.trim();
   if (!isTonAddress(w)) return toast("Enter a valid TON address (EQ… or UQ…)", true);
-  try { await api("set_wallet", { wallet: w }); toast("✅ TON wallet saved!"); } catch (e) { toast(e.message, true); }
+  try {
+    await api("set_wallet", { wallet: w });
+    toast("✅ TON wallet saved!");
+  } catch (e) {
+    toast(e.message, true);
+  }
 };
 
 document.getElementById("withdrawBtn").onclick = async () => {
   const w = document.getElementById("walletInput").value.trim();
   if (!isTonAddress(w)) return toast("Please enter and save a valid TON wallet first", true);
-  try { await api("withdraw_request", { wallet: w }); toast("✅ Withdrawal request submitted!"); loadWithdraw(); loadDash(); } catch (e) { toast(e.message, true); }
+  try {
+    await api("withdraw_request", { wallet: w });
+    toast("✅ Withdrawal request submitted!");
+    loadWithdraw();
+    loadDash();
+  } catch (e) {
+    toast(e.message, true);
+  }
 };
 
+// Referral
 async function loadReferral() {
   try {
     const d = await api("referral_info");
     document.getElementById("refLink").value = d.link || `https://t.me/${BOT_USERNAME}?startapp=ref_${tg?.initDataUnsafe?.user?.id || ''}`;
     document.getElementById("refCount").textContent = d.count || 0;
-  } catch (e) { toast(e.message, true); }
+  } catch (e) {
+    toast(e.message, true);
+  }
 }
 
 document.getElementById("copyRefBtn").onclick = async () => {
   const i = document.getElementById("refLink");
   if (!i.value) return;
-  try { await navigator.clipboard.writeText(i.value); toast("📋 Link copied!"); }
-  catch { i.select(); document.execCommand("copy"); toast("📋 Link copied!"); }
+  try {
+    await navigator.clipboard.writeText(i.value);
+    toast("📋 Referral link copied!");
+  } catch {
+    i.select();
+    document.execCommand("copy");
+    toast("📋 Referral link copied!");
+  }
 };
 
+// Profile
 async function loadProfile() {
   const stats = document.getElementById("profileStats");
   const refList = document.getElementById("referralsList");
@@ -715,6 +2083,13 @@ async function loadProfile() {
   try {
     const d = await api("user_profile");
     const p = d.profile;
+    if (p.flagged) {
+      document.getElementById("flaggedWarning").style.display = "block";
+      document.getElementById("flagReasonText").textContent = p.flag_reason || "Account flagged for review.";
+    } else {
+      document.getElementById("flaggedWarning").style.display = "none";
+    }
+
     const joinedDate = new Date(p.joined_at).toLocaleDateString();
     stats.innerHTML = `
       <div class="stat-cell-grid">
@@ -726,17 +2101,218 @@ async function loadProfile() {
       <div class="stat-row"><div class="ic">📅</div><div class="info"><div class="lbl">MEMBER SINCE</div><div class="val">${joinedDate}</div></div></div>
       <div class="stat-row"><div class="ic">🆔</div><div class="info"><div class="lbl">TELEGRAM ID</div><div class="val">${p.telegram_id}</div></div></div>
     `;
+
     if (!d.referrals || !d.referrals.length) {
-      refList.innerHTML = `<div class="empty"><span class="big-ic">👥</span>No referrals yet</div>`;
+      refList.innerHTML = `<div class="empty"><span class="big-ic">👥</span>No referrals yet. Share your invite link!</div>`;
     } else {
       refList.innerHTML = d.referrals.map(r => {
         const name = [r.first_name, r.username ? "@" + r.username : ""].filter(Boolean).join(" ") || "Friend";
-        return `<div class="stat-row"><div class="ic">👤</div><div class="info"><div class="lbl">${name}</div><div class="val">${r.ads_watched_total || 0} ads watched ${r.ads_watched_total >= 10 ? '· <span style="color:var(--lime);">✅ 1,000 NOVA Claimed</span>' : '· (' + (10 - (r.ads_watched_total || 0)) + ' ads left)'}</div></div></div>`;
+        return `
+          <div class="stat-row">
+            <div class="ic">👤</div>
+            <div class="info">
+              <div class="lbl">${name}</div>
+              <div class="val">${r.ads_watched_total || 0} ads watched ${r.ads_watched_total >= 10 ? '· <span style="color:var(--lime);">✅ 1,000 NOVA Claimed</span>' : '· (' + (10 - (r.ads_watched_total || 0)) + ' ads left)'}</div>
+            </div>
+          </div>
+        `;
       }).join("");
     }
-  } catch (e) { stats.innerHTML = `<div class="empty">${e.message}</div>`; }
+  } catch (e) {
+    stats.innerHTML = `<div class="empty">${e.message}</div>`;
+    refList.innerHTML = "";
+  }
 }
 
+// ════ ADMIN PANEL TABS & FUNCTIONS (100% PRESERVED & WORKING) ════
+function adminTab(tab) {
+  document.querySelectorAll(".admin-tab").forEach(t => t.style.display = "none");
+  const target = document.getElementById("adminTab-" + tab);
+  if (target) target.style.display = "block";
+  if (tab === "stats") loadAdminStats();
+  if (tab === "withdrawals") loadWithdrawals();
+  if (tab === "flagged") loadFlagged();
+  if (tab === "logs") loadLogs();
+}
+
+async function loadAdminStats() {
+  const box = document.getElementById("adminStatsBox");
+  box.innerHTML = `<div class="empty"><span class="spinner"></span> Loading stats...</div>`;
+  try {
+    const d = await api("admin_stats");
+    const s = d.stats;
+    let chartHtml = "";
+    if (d.daily && d.daily.length) {
+      const maxVal = Math.max(...d.daily.map(x => x.new_users || 0), 1);
+      chartHtml = `<div class="chart-box">`;
+      d.daily.forEach(day => {
+        const h = Math.max(4, ((day.new_users || 0) / maxVal) * 100);
+        const dateLabel = new Date(day.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+        chartHtml += `<div class="chart-col" style="height:${h}%"><span class="val">${day.new_users || 0}</span><span class="lbl">${dateLabel}</span></div>`;
+      });
+      chartHtml += `</div><div style="font-size:11px; color:var(--mute); text-align:center; margin-bottom:18px;">New registrations · past 7 days</div>`;
+    }
+    box.innerHTML = `
+      ${chartHtml}
+      <div class="stat-cell-grid">
+        <div class="stat-pill"><div class="lbl">Total Users</div><div class="val">${s.total_users}</div></div>
+        <div class="stat-pill"><div class="lbl">Active 24h</div><div class="val lime">${s.dau}</div></div>
+        <div class="stat-pill"><div class="lbl">Total Ads</div><div class="val">${s.total_ads}</div></div>
+        <div class="stat-pill"><div class="lbl">Flagged</div><div class="val coral">${s.flagged_users}</div></div>
+        <div class="stat-pill"><div class="lbl">Pending WDs</div><div class="val coral">${s.pending_withdrawals}</div></div>
+        <div class="stat-pill"><div class="lbl">Total Paid</div><div class="val lime">${Number(s.total_paid).toFixed(2)}</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="ic">💰</div>
+        <div class="info">
+          <div class="lbl">TOTAL USER BALANCES</div>
+          <div class="val acc">${Number(s.total_balance).toFixed(2)} NOVA</div>
+        </div>
+      </div>
+    `;
+  } catch (e) {
+    box.innerHTML = `<div class="empty">${e.message}</div>`;
+  }
+}
+
+async function loadWithdrawals() {
+  const box = document.getElementById("wdList");
+  box.innerHTML = `<div class="empty"><span class="spinner"></span> Loading withdrawals...</div>`;
+  try {
+    const d = await api("admin_list_withdrawals");
+    const list = d.withdrawals || [];
+    if (!list.length) {
+      box.innerHTML = `<div class="empty"><span class="big-ic">📭</span>No withdrawal requests</div>`;
+      return;
+    }
+    box.innerHTML = "";
+    list.forEach(w => {
+      const el = document.createElement("div");
+      el.className = "wd-item";
+      el.innerHTML = `
+        <div class="row">
+          <span class="amount">${Number(w.amount).toFixed(2)} NOVA</span>
+          <span>
+            <span class="wd-badge ${w.status}">${w.status}</span>
+            ${w.flagged ? `<span class="wd-badge flagged">🚩 FLAGGED</span>` : ''}
+          </span>
+        </div>
+        <div class="meta">User: ${w.telegram_id}${w.username ? ' (@' + w.username + ')' : ''}</div>
+        <div class="meta">Wallet: ${w.wallet}</div>
+        <div class="meta">${new Date(w.created_at).toLocaleString()}</div>
+        ${w.flag_reason ? `<div class="meta" style="color:var(--coral);">⚠️ ${w.flag_reason}</div>` : ''}
+      `;
+      if (w.status === "pending") {
+        const act = document.createElement("div");
+        act.className = "wd-actions";
+        const btnApprove = document.createElement("button");
+        btnApprove.className = "btn-approve";
+        btnApprove.textContent = "✅ Mark Paid";
+        btnApprove.onclick = async () => {
+          try {
+            await api("admin_mark_withdrawal", { id: w.id, status: "paid" });
+            toast("Withdrawal marked paid");
+            loadWithdrawals();
+          } catch (e) { toast(e.message, true); }
+        };
+        const btnReject = document.createElement("button");
+        btnReject.className = "btn-reject";
+        btnReject.textContent = "❌ Reject & Refund";
+        btnReject.onclick = async () => {
+          try {
+            await api("admin_mark_withdrawal", { id: w.id, status: "rejected" });
+            toast("Withdrawal rejected & balance refunded");
+            loadWithdrawals();
+          } catch (e) { toast(e.message, true); }
+        };
+        act.append(btnApprove, btnReject);
+        el.append(act);
+      }
+      box.append(el);
+    });
+  } catch (e) {
+    box.innerHTML = `<div class="empty">${e.message}</div>`;
+  }
+}
+document.getElementById("refreshWdBtn").onclick = loadWithdrawals;
+
+async function loadFlagged() {
+  const box = document.getElementById("flaggedList");
+  box.innerHTML = `<div class="empty"><span class="spinner"></span> Loading flagged accounts...</div>`;
+  try {
+    const d = await api("admin_flagged_users");
+    const list = d.flagged || [];
+    if (!list.length) {
+      box.innerHTML = `<div class="empty"><span class="big-ic">✅</span>No flagged users. Clean!</div>`;
+      return;
+    }
+    box.innerHTML = "";
+    list.forEach(u => {
+      const name = [u.first_name, u.username ? "@" + u.username : ""].filter(Boolean).join(" ") || "User";
+      const el = document.createElement("div");
+      el.className = "wd-item";
+      el.innerHTML = `
+        <div class="row">
+          <span class="amount" style="font-size:14px;">${name}</span>
+          <span class="wd-badge flagged">🚩 FLAGGED</span>
+        </div>
+        <div class="meta">Telegram ID: ${u.telegram_id}</div>
+        <div class="meta">Balance: ${Number(u.balance || 0).toFixed(2)} NOVA</div>
+        <div class="meta">Device: ${(u.device_id || "unknown").slice(0, 32)}</div>
+        <div class="meta">IP: ${u.register_ip || "unknown"}</div>
+        <div class="meta" style="color:var(--coral);">⚠️ ${u.flag_reason || "Suspicious device activity"}</div>
+      `;
+      const act = document.createElement("div");
+      act.className = "wd-actions";
+      const unflagBtn = document.createElement("button");
+      unflagBtn.className = "btn-approve";
+      unflagBtn.textContent = "✅ Remove Flag";
+      unflagBtn.onclick = async () => {
+        try {
+          await api("admin_unflag_user", { telegram_id: u.telegram_id });
+          toast("User flag removed");
+          loadFlagged();
+        } catch (e) { toast(e.message, true); }
+      };
+      act.append(unflagBtn);
+      el.append(act);
+      box.append(el);
+    });
+  } catch (e) {
+    box.innerHTML = `<div class="empty">${e.message}</div>`;
+  }
+}
+
+async function loadLogs() {
+  const box = document.getElementById("logsList");
+  box.innerHTML = `<div class="empty"><span class="spinner"></span> Loading security logs...</div>`;
+  try {
+    const d = await api("admin_security_logs");
+    const logs = d.logs || [];
+    if (!logs.length) {
+      box.innerHTML = `<div class="empty"><span class="big-ic">📜</span>No security events recorded</div>`;
+      return;
+    }
+    box.innerHTML = "";
+    logs.forEach(l => {
+      const el = document.createElement("div");
+      el.className = "stat-row";
+      el.innerHTML = `
+        <div class="ic" style="font-size:15px;">${l.event_type === "MULTI_ACCOUNT_FLAG" ? "🚩" : "📌"}</div>
+        <div class="info">
+          <div class="lbl">${l.event_type}</div>
+          <div class="val" style="font-size:12px;">User ${l.telegram_id} · ${new Date(l.created_at).toLocaleString()}</div>
+          <div class="lbl" style="text-transform:none; letter-spacing:0; margin-top:4px;">${l.details || ''}</div>
+        </div>
+      `;
+      box.appendChild(el);
+    });
+  } catch (e) {
+    box.innerHTML = `<div class="empty">${e.message}</div>`;
+  }
+}
+
+// Start connection on load
 connect();
 </script>
 </body>
