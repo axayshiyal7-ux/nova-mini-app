@@ -1623,6 +1623,7 @@ async function api(action, payload = {}) {
 // Toast Alert
 function toast(m, isErr = false) {
   const t = document.getElementById("toast");
+  if (!t) return;
   t.textContent = m;
   t.className = "toast show" + (isErr ? " error" : "");
   clearTimeout(window._tt);
@@ -1691,11 +1692,16 @@ async function connect() {
   const u = tg.initDataUnsafe?.user;
   if (u) {
     const fullName = [u.first_name, u.last_name].filter(Boolean).join(" ") || "User";
-    document.getElementById("userName").textContent = fullName;
-    document.getElementById("userHandle").textContent = u.username ? "@" + u.username : "";
-    const av = document.getElementById("avatar");
-    if (u.photo_url) av.innerHTML = `<img src="${u.photo_url}" alt="${fullName}">`;
-    else av.textContent = (u.first_name || "U")[0].toUpperCase();
+    const userNameEl = document.getElementById("userName");
+    const userHandleEl = document.getElementById("userHandle");
+    const avatarEl = document.getElementById("avatar");
+    
+    if (userNameEl) userNameEl.textContent = fullName;
+    if (userHandleEl) userHandleEl.textContent = u.username ? "@" + u.username : "";
+    if (avatarEl) {
+      if (u.photo_url) avatarEl.innerHTML = `<img src="${u.photo_url}" alt="${fullName}">`;
+      else avatarEl.textContent = (u.first_name || "U")[0].toUpperCase();
+    }
   }
 
   try {
@@ -1740,17 +1746,26 @@ function renderDash(d) {
   const resetAt = d.user.ads_reset_at ? Date.parse(d.user.ads_reset_at) : 0;
   adsCoolingDown = adCount >= 20 && resetAt > Date.now();
 
-  document.getElementById("balanceBig").textContent = b.toFixed(2);
-  document.getElementById("adsToday").textContent = adCount;
-  document.getElementById("adBadge").textContent = (Math.max(0, 20 - adCount)) + " left";
-  document.getElementById("progFill").style.width = Math.min(100, (adCount / 20) * 100) + "%";
-
-  document.getElementById("statEarned").textContent = Number(d.user.total_earned || 0).toFixed(2);
-  document.getElementById("statAds").textContent = d.user.ads_watched_total || adCount;
-  document.getElementById("statRefs").textContent = d.user.referral_count || 0;
-
+  const elBalance = document.getElementById("balanceBig");
+  const elAdsToday = document.getElementById("adsToday");
+  const elAdBadge = document.getElementById("adBadge");
+  const elProgFill = document.getElementById("progFill");
+  const elStatEarned = document.getElementById("statEarned");
+  const elStatAds = document.getElementById("statAds");
+  const elStatRefs = document.getElementById("statRefs");
   const btn = document.getElementById("watchBtn");
   const hint = document.getElementById("adsResetHint");
+
+  if (elBalance) elBalance.textContent = b.toFixed(2);
+  if (elAdsToday) elAdsToday.textContent = adCount;
+  if (elAdBadge) elAdBadge.textContent = (Math.max(0, 20 - adCount)) + " left";
+  if (elProgFill) elProgFill.style.width = Math.min(100, (adCount / 20) * 100) + "%";
+  if (elStatEarned) elStatEarned.textContent = Number(d.user.total_earned || 0).toFixed(2);
+  if (elStatAds) elStatAds.textContent = d.user.ads_watched_total || adCount;
+  if (elStatRefs) elStatRefs.textContent = d.user.referral_count || 0;
+
+  if (!btn || !hint) return;
+  
   clearInterval(adResetTimer);
 
   const updateCooldown = () => {
@@ -1947,6 +1962,8 @@ function renderMining(d) {
   const t = document.getElementById("mineTime");
   const b = document.getElementById("mineBtn");
   const visual = document.getElementById("miningVisual");
+
+  if (!s || !t || !b || !visual) return;
 
   visual.classList.toggle("is-mining", !d.canStart && !d.canCollect);
   visual.classList.toggle("is-ready", Boolean(d.canCollect));
@@ -2333,8 +2350,12 @@ async function loadLogs() {
   }
 }
 
-// Start connection on load
-connect();
+// Start connection on load (Fixed DOM readiness issue)
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", connect);
+} else {
+  connect();
+}
 </script>
 </body>
 </html>
