@@ -966,7 +966,9 @@ body::after {
   color: #fff;
 }
 
-/* ── ADMIN PANEL FULL STYLING ── */
+/* ── ADMIN PANEL FULL STYLING (STRICT OWNER ONLY) ── */
+#page-admin { display: none !important; }
+body.is-owner-admin #page-admin.active { display: block !important; }
 .admin-card {
   padding: 18px;
   background: linear-gradient(145deg, rgba(0, 102, 255, 0.12), rgba(0, 229, 255, 0.05));
@@ -1629,6 +1631,10 @@ function toast(m, isErr = false) {
 
 // View Routing
 function go(page) {
+  if (page === "admin" && !isAdmin) {
+    toast("⛔ Access Denied: Owner Only!", true);
+    return;
+  }
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.querySelectorAll(".dock-item").forEach(d => d.classList.remove("active"));
   const targetPage = document.getElementById("page-" + page);
@@ -1644,7 +1650,11 @@ function go(page) {
   if (page === "referral") loadReferral();
   if (page === "profile") loadProfile();
   if (page === "leaderboard") loadLeaderboard();
-  if (page === "admin") { adminTab('stats'); loadWithdrawals(); }
+  if (page === "admin") {
+    if (!isAdmin) { go("home"); return; }
+    adminTab('stats');
+    loadWithdrawals();
+  }
 }
 document.querySelectorAll(".dock-item").forEach(el => {
   el.onclick = () => go(el.dataset.page);
@@ -1697,9 +1707,19 @@ async function connect() {
 
     isAdmin = Boolean(d.is_admin);
     if (isAdmin) {
-      document.getElementById("adminNav").classList.remove("hidden");
-      document.getElementById("adminMenuRow").classList.remove("hidden");
-      document.getElementById("adminTaskBox").style.display = "block";
+      document.body.classList.add("is-owner-admin");
+      document.getElementById("adminNav")?.classList.remove("hidden");
+      document.getElementById("adminMenuRow")?.classList.remove("hidden");
+      const atb = document.getElementById("adminTaskBox");
+      if (atb) atb.style.display = "block";
+    } else {
+      document.body.classList.remove("is-owner-admin");
+      document.getElementById("adminNav")?.classList.add("hidden");
+      document.getElementById("adminMenuRow")?.classList.add("hidden");
+      const atb = document.getElementById("adminTaskBox");
+      if (atb) atb.style.display = "none";
+      const pAdmin = document.getElementById("page-admin");
+      if (pAdmin) { pAdmin.classList.remove("active"); }
     }
 
     if (isDesktop) {
@@ -2126,6 +2146,7 @@ async function loadProfile() {
 
 // ════ ADMIN PANEL TABS & FUNCTIONS (100% PRESERVED & WORKING) ════
 function adminTab(tab) {
+  if (!isAdmin) { toast("⛔ Access Denied: Owner Only!", true); return; }
   document.querySelectorAll(".admin-tab").forEach(t => t.style.display = "none");
   const target = document.getElementById("adminTab-" + tab);
   if (target) target.style.display = "block";
