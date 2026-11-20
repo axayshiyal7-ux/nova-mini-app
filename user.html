@@ -611,12 +611,15 @@ async function connect() {
   const msg = document.getElementById("connectMsg");
   const retry = document.getElementById("retryBtn");
   retry.style.display = "none";
+  
   if (!tg || !tg.initData) {
     msg.innerHTML = "⚠️ Open inside Telegram<br><small style='font-size:11px;color:#ef4444;'>Launch this app via your Telegram Bot menu button.</small>";
     retry.style.display = "inline-block";
     return;
   }
+  
   try { tg.ready(); tg.expand(); } catch (e) {}
+  
   const u = tg.initDataUnsafe?.user;
   if (u) {
     const fullName = [u.first_name, u.last_name].filter(Boolean).join(" ") || "User";
@@ -626,12 +629,14 @@ async function connect() {
     if (u.photo_url) av.innerHTML = `<img src="${u.photo_url}" alt="${fullName}">`;
     else av.textContent = (u.first_name || "U")[0].toUpperCase();
   }
+  
   try {
     msg.textContent = "Syncing account...";
     const d = await api("dashboard");
     msg.textContent = "✅ Connected!";
     document.getElementById("connectBox").style.display = "none";
     document.getElementById("mainApp").style.display = "block";
+    
     isAdmin = Boolean(d.is_admin);
     if (isAdmin) {
       document.body.classList.add("is-owner-admin");
@@ -640,6 +645,7 @@ async function connect() {
       const atb = document.getElementById("adminTaskBox");
       if (atb) atb.style.display = "block";
     }
+    
     if (detectDesktop()) setTimeout(() => toast("ℹ️ Note: Ad rewards work best on mobile Telegram"), 1400);
     renderDash(d);
   } catch (e) {
