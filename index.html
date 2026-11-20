@@ -1216,7 +1216,7 @@ body.is-owner-admin #page-admin.active { display: block !important; }
       <!-- Button 2: AdsBitvex Watch Ad (Placed right below Adsgram button) -->
       <button class="earn-cta" id="adsbitvexWatchBtn" onclick="watchAdsBitvex()" style="margin-top: 10px; background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%); box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);">
         <span class="play">▶</span>
-        <span>Watch Ad (AdsBitvex) &nbsp;·&nbsp; +100 NOVA</span>
+        <span>Watch Ad (AdsBitvex) &nbsp;·&nbsp; +50 NOVA</span>
         <span class="remain" id="adsbitvexBadge" style="background: rgba(255,255,255,0.2);">High CPM</span>
       </button>
 
@@ -1577,7 +1577,8 @@ const API_URL = "https://ggxcsxwvfntynersipax.supabase.co/functions/v1/nova-api"
 const BOT_USERNAME = "NovaAirdropEarn_bot";
 const ADSGRAM_BLOCK_ID = "53039";
 const ADSBITVEX_APP_ID = "000471";
-const AD_REWARD_DISPLAY = "100";
+const AD_REWARD_DISPLAY = "100";       // Adsgram
+const ADSBITVEX_REWARD_DISPLAY = "50"; // AdsBitvex
 const tg = window.Telegram?.WebApp;
 
 let adsCoolingDown = false;
