@@ -6,6 +6,7 @@
 <title>NOVA · Earn</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+<script src="https://sdk.adsbitvex.com/functions/v1/ad-script?appid=000471" async></script>
 <style>
 /* ═══════════════════════════════════════════════════════════════
    NOVA EARN — ULTRA PREMIUM ORIGINAL UI SYSTEM
@@ -1536,34 +1537,6 @@ body.is-owner-admin #page-admin.active { display: block !important; }
     </div>
   </div>
 
-  <!-- Built-in Sponsor / Partner Ad Modal -->
-  <div id="sponsorAdModal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(2,5,12,0.96); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center;">
-    <div style="max-width:380px; width:100%; background:linear-gradient(145deg, #0b1933, #071224); border:1px solid rgba(0,229,255,0.3); border-radius:28px; padding:32px 24px; box-shadow:0 20px 60px rgba(0,0,0,0.85);">
-      <div id="adNetworkLogo" style="font-size:38px; margin-bottom:12px;">⚡</div>
-      <div id="adNetworkTitle" style="font-size:18px; font-weight:800; color:#fff; margin-bottom:6px;">AdsBitvex Sponsored Ad</div>
-      <div style="font-size:12.5px; color:var(--mute); margin-bottom:24px;">Watch the sponsor ad to claim your +100 NOVA reward.</div>
-      
-      <!-- Animated Ad Showcase Box -->
-      <div style="background:linear-gradient(135deg, rgba(0,102,255,0.2), rgba(124,58,237,0.25)); border:1px solid var(--line-hot); border-radius:18px; padding:28px 16px; margin-bottom:24px; position:relative; overflow:hidden;">
-        <div style="font-size:15px; font-weight:800; color:var(--acc); margin-bottom:6px;">NOVA Partner Ad Network</div>
-        <div style="font-size:12px; color:#c084fc;">AdsBitvex & Adsgram High-CPM Engine</div>
-        <div style="margin-top:12px; font-size:10.5px; opacity:0.65; letter-spacing:0.5px;">Publisher App ID: 000471</div>
-      </div>
-
-      <!-- Countdown Bar & Status -->
-      <div style="margin-bottom:20px;">
-        <div id="adCountdownText" style="font-size:15px; font-weight:800; color:var(--acc); letter-spacing:0.5px;">Reward in 10s...</div>
-        <div style="width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:99px; margin-top:10px; overflow:hidden;">
-          <div id="adCountdownBar" style="width:100%; height:100%; background:linear-gradient(90deg, #00e5ff, #8b5cf6); transition:width 1s linear;"></div>
-        </div>
-      </div>
-
-      <button id="closeAdModalBtn" disabled style="width:100%; padding:14px; border-radius:99px; border:none; background:rgba(255,255,255,0.1); color:var(--mute); font-size:13.5px; font-weight:700; cursor:not-allowed;">
-        Wait for countdown...
-      </button>
-    </div>
-  </div>
-
   <!-- ── FLOATING BOTTOM DOCK ── -->
   <div class="dock" id="mainNav">
     <div class="dock-item active" data-page="home">
@@ -1645,59 +1618,8 @@ window.addEventListener("load", () => {
   }
 });
 
-function playPartnerAd(networkName = "AdsBitvex") {
-  return new Promise((resolve) => {
-    const modal = document.getElementById("sponsorAdModal");
-    const logo = document.getElementById("adNetworkLogo");
-    const title = document.getElementById("adNetworkTitle");
-    const countText = document.getElementById("adCountdownText");
-    const countBar = document.getElementById("adCountdownBar");
-    const closeBtn = document.getElementById("closeAdModalBtn");
-
-    if (!modal) return resolve(true);
-
-    modal.style.display = "flex";
-    if (logo) logo.textContent = networkName.includes("Bitvex") ? "⚡" : "▶️";
-    if (title) title.textContent = networkName + " Sponsored Ad";
-
-    let sec = 10;
-    if (countText) countText.textContent = `Reward in ${sec}s...`;
-    if (countBar) countBar.style.width = "100%";
-    if (closeBtn) {
-      closeBtn.disabled = true;
-      closeBtn.textContent = `Wait for countdown (${sec}s)...`;
-      closeBtn.style.background = "rgba(255,255,255,0.1)";
-      closeBtn.style.color = "var(--mute)";
-      closeBtn.style.cursor = "not-allowed";
-    }
-
-    const timer = setInterval(() => {
-      sec--;
-      if (countText) countText.textContent = `Reward in ${sec}s...`;
-      if (countBar) countBar.style.width = (sec * 10) + "%";
-      if (closeBtn) closeBtn.textContent = `Wait for countdown (${sec}s)...`;
-
-      if (sec <= 0) {
-        clearInterval(timer);
-        if (countText) countText.textContent = "✅ Ad Completed!";
-        if (closeBtn) {
-          closeBtn.disabled = false;
-          closeBtn.textContent = "Claim +100 NOVA";
-          closeBtn.style.background = "linear-gradient(135deg, #0066ff, #00e5ff)";
-          closeBtn.style.color = "#fff";
-          closeBtn.style.cursor = "pointer";
-          closeBtn.onclick = () => {
-            modal.style.display = "none";
-            resolve(true);
-          };
-        }
-      }
-    }, 1000);
-  });
-}
-
 async function showRewardedAd() {
-  // 1. Primary: Adsgram (53039)
+  // 1. Primary: Adsgram (Block ID: 53039)
   if (adController) {
     try {
       const result = await adController.show();
@@ -1707,24 +1629,19 @@ async function showRewardedAd() {
     }
   }
 
-  // 2. Secondary: AdsBitvex (000471)
-  if (window.AdsBitvex && typeof window.AdsBitvex.showRewarded === "function") {
+  // 2. Secondary: AdsBitvex real SDK (App ID: 000471)
+  if (typeof window.showadsbitvex === "function") {
     try {
-      const res = await new Promise((resolve) => {
-        window.AdsBitvex.showRewarded({
-          onSuccess: () => resolve(true),
-          onClose: () => resolve(false),
-          onError: () => resolve(false)
-        });
-      });
-      if (res) return true;
+      const res = await window.showadsbitvex();
+      // showadsbitvex resolves when ad completes/closes
+      return true;
     } catch (e) {
       console.warn("AdsBitvex error:", e);
     }
   }
 
-  // 3. Fallback: Partner Countdown Player
-  return await playPartnerAd("Adsgram Partner");
+  // No ad available
+  return false;
 }
 
 // API Fetch helper
@@ -1985,28 +1902,19 @@ async function watchAdsBitvex() {
   }
   try {
     let completed = false;
-    // 1. Direct AdsBitvex SDK if present
-    if (window.AdsBitvex && typeof window.AdsBitvex.showRewarded === "function") {
+
+    // Real AdsBitvex SDK: window.showadsbitvex() (App ID: 000471)
+    if (typeof window.showadsbitvex === "function") {
       try {
-        completed = await new Promise((resolve) => {
-          window.AdsBitvex.showRewarded({
-            appId: "000471",
-            onSuccess: () => resolve(true),
-            onClose: () => resolve(true),
-            onError: () => resolve(false)
-          });
-        });
+        await window.showadsbitvex();
+        completed = true; // resolves when ad finishes or is closed
       } catch (err) {
         console.warn("AdsBitvex SDK error:", err);
+        completed = false;
       }
-    } else if (window.AdsBitvex && typeof window.AdsBitvex.show === "function") {
-      const res = await window.AdsBitvex.show();
-      completed = Boolean(res !== false);
-    }
-
-    // 2. Guaranteed fallback player if SDK not loaded or no fill
-    if (!completed) {
-      completed = await playPartnerAd("AdsBitvex");
+    } else {
+      toast("⚠️ AdsBitvex ad not available right now", true);
+      return;
     }
 
     if (!completed) {
